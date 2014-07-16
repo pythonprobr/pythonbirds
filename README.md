@@ -21,3 +21,8 @@ Método que recebe o tempo (float) como parâmetro e retorna uma tupla com 3 ele
 vertical (y) e sinal a ser exibido em tela (caracter).
 
 x e y devem ser números inteiros. Devem ser aproximados utilizando lógica de arredondamento.
+
+### Status
+
+O ator possui os status Ativo e Destruido. Quando destruido, o caracter the apresentação quando for calculada a posição 
+deve ser "✝"
