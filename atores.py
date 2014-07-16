@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+import math
 
 DESTRUIDO = 'Destruido'
 ATIVO = 'Ativo'
@@ -55,10 +56,28 @@ class Obstaculo(Ator):
 class Porco(Ator):
     _caracter_ativo = '☺'
 
+
 class Passaro(Ator):
-    _tempo_de_lancamento=None
+    _velocidade_scalar = None
+
+    def __init__(self, x=0, y=0):
+        super().__init__(x, y)
+        self._x_inicial = x
+        self._y_inicial = y
+        self._tempo_de_lancamento = None
+        self._angulo_de_lancamento = None  # radianos
+
+    def calcular_posicao(self, tempo):
+        if self._tempo_de_lancamento is None or tempo < self._tempo_de_lancamento:
+            return self.arredondar_posicao()
+
+    def lancar(self, angulo, tempo):
+        self._tempo_de_lancamento = tempo
+        self._angulo_de_lancamento = math.radians(angulo)
+
 
 class PassaroAmarelo(Passaro):
+    _velocidade_scalar = 10  # m/s
     _caracter_ativo = '>'
 
 

@@ -112,9 +112,11 @@ class PassaroAmareloTests(TestCase):
         passaro_amarelo = PassaroAmarelo(1, 1)
         passaro_amarelo.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
         #
-        for t in range(21):
-            self.assertEqual((1, 1), passaro_amarelo.calcular_posicao(t / 10),
-                             'Não deveria se mover até tempo %s < 2 segundtos')
+        for t in range(20):
+            t /= 10
+            self.assertEqual((1, 1), passaro_amarelo.calcular_posicao(t),
+                             'Não deveria se mover no tempo %s < 2 segundtos' % t)
+        self.assertNotEqual((1, 1), passaro_amarelo.calcular_posicao(3), 'Deveria ter subido')
 
 
 
