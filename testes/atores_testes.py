@@ -94,15 +94,12 @@ class AtorTestes(TestCase):
 class ObstaculoTestes(TestCase):
     def teste_status(self):
         obstaculo = Obstaculo()
-        self.assertEqual(ATIVO, obstaculo.status(0))
-        self.assertEqual('O', obstaculo.caracter(0))
-        obstaculo.colidir(obstaculo, 3.2)
-        self.assertEqual(ATIVO, obstaculo.status(3.1))
-        self.assertEqual('O', obstaculo.caracter(3.1))
-        self.assertEqual(DESTRUIDO, obstaculo.status(3.2))
-        self.assertEqual(' ', obstaculo.caracter(3.2))
-        self.assertEqual(DESTRUIDO, obstaculo.status(4))
-        self.assertEqual(' ', obstaculo.caracter(4))
+        assert_ator_status(self, obstaculo, 'O', ' ')
+
+class PorcoTestes(TestCase):
+    def teste_status(self):
+        porco = Porco()
+        assert_ator_status(self, porco, '☺', '✝')
 
 
 
