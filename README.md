@@ -37,12 +37,38 @@ em pixels vizinhos
 
 ## Classe Obstaculo
 
-Classe que representa objstaculos na fase e que podem ser destruidos por pássaros. Herda de ator. Seu caracter de 
+Classe que representa obstáculos na fase e que podem ser destruidos por pássaros. Herda de ator. Seu caracter de 
 representação é a letra "O"
 
 ### Status
 
 Um obstáculo ao ter seu status alterado para DESTRUIDO deve ter seu caracter de apresentação alterado para " " (vazio).
 Assim ele vai "sumir" da tela
+
+## Classe Porco
+
+Classe que representa porcos na fase e que podem ser destruidos por pássaros. Herda de ator. Seu caracter de 
+representação é a letra "☺"
+
+## Passaro
+
+Classe base de todos os passáros. Cada tipo possui uma velocidade de lançamento (v). No lançamento o jogador escolhe o 
+ângulo (teta), em graus, no qual o passáro deve ser lançado. O lançamento respeita as regras de lançamento oblìquo com 
+gravidade (G) constante e igual a 10 m/s^2.
+
+### Método Lancar
+
+O método lançar recebe o ângulo, em graus, que será feito o lançamento. Cada pássaro deve armazenar esse valor e tempo
+de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t=Tfinal-Tinicial
+
+### Método posicao_horizontal
+
+Fórmula X=X0+v*cos(teta)*delta_t.
+
+### Método posicao_vertical
+
+Fórmula Y=Y0+v*sen(teta)delta_t+(G*delta_t^2)/2.
+    
+
 
 

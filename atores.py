@@ -55,6 +55,14 @@ class Obstaculo(Ator):
 class Porco(Ator):
     _caracter_ativo = '☺'
 
+class Passaro(Ator):
+    _tempo_de_lancamento=None
+
+class PassaroAmarelo(Passaro):
+    _caracter_ativo = '>'
+
+
+
 
 
 

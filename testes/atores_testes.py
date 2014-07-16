@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 from unittest.case import TestCase
-from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco
+from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo
 
 
 def assert_ator_status(test_case, ator, caracter_status_ativo, carater_status_destruido):
@@ -101,6 +101,21 @@ class PorcoTestes(TestCase):
     def teste_status(self):
         porco = Porco()
         assert_ator_status(self, porco, '☺', '✝')
+
+
+class PassaroAmareloTests(TestCase):
+    def teste_status(self):
+        passaro_amarelo = PassaroAmarelo(1, 1)
+        assert_ator_status(self, passaro_amarelo, '>', '✝')
+
+    def teste_posicao_antes_do_lancamento(self):
+        passaro_amarelo = PassaroAmarelo(1, 1)
+        passaro_amarelo.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
+        #
+        for t in range(21):
+            self.assertEqual((1, 1), passaro_amarelo.calcular_posicao(t / 10),
+                             'Não deveria se mover até tempo %s < 2 segundtos')
+
 
 
 
