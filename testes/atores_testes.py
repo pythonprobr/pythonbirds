@@ -25,7 +25,7 @@ class AtorTestes(TestCase):
     def assert_colisao_atores_ativos(self, ator, ator2):
         self.assertEqual(ator.status, ATIVO)
         self.assertEqual(ator2.status, ATIVO)
-        self.assertTrue(ator.colidiu(ator2))
+        self.assertTrue(ator.colidir(ator2))
         self.assertEqual(ator2.status, DESTRUIDO)
         self.assertEqual(ator.status, DESTRUIDO)
 
