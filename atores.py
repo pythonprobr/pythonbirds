@@ -23,6 +23,8 @@ class Ator():
         return x, y, caracter
 
     def colidir(self, outro_ator):
+        if self.status == DESTRUIDO or outro_ator.status == DESTRUIDO:
+            return False
         x1, y1 = self.ponto_cartesiano_inteiro()
         x2, y2 = outro_ator.ponto_cartesiano_inteiro()
 
@@ -34,5 +36,6 @@ class Ator():
             self.status = DESTRUIDO
             outro_ator.status = DESTRUIDO
             return True
+        return False
 
 
