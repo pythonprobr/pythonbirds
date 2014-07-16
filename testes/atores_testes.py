@@ -5,6 +5,18 @@ from unittest.case import TestCase
 from atores import Ator, DESTRUIDO, ATIVO, Obstaculo
 
 
+def assert_ator_status(test_case, ator, caracter_status_ativo, carater_status_destruido):
+    test_case.assertEqual(ATIVO, ator.status(0))
+    test_case.assertEqual(caracter_status_ativo, ator.caracter(0))
+    ator.colidir(ator, 3.2)
+    test_case.assertEqual(ATIVO, ator.status(3.1))
+    test_case.assertEqual(caracter_status_ativo, ator.caracter(3.1))
+    test_case.assertEqual(DESTRUIDO, ator.status(3.2))
+    test_case.assertEqual(carater_status_destruido, ator.caracter(3.2))
+    test_case.assertEqual(DESTRUIDO, ator.status(4))
+    test_case.assertEqual(carater_status_destruido, ator.caracter(4))
+
+
 class AtorTestes(TestCase):
     def teste_ator_posicao(self):
         ator = Ator()
@@ -14,25 +26,19 @@ class AtorTestes(TestCase):
         ator = Ator(0.6, 2.1)
         self.assertTupleEqual((1, 2), ator.calcular_posicao(3.14))
 
-    def teste_status(self):
-        ator = Ator()
-        self.assertEqual(ATIVO, ator.status)
-        self.assertEqual('A', ator.calcular_posicao(0)[2])
-        ator.status = DESTRUIDO
-        self.assertEqual('✝', ator.calcular_posicao(0)[2])
-        self.assertEqual(ATIVO, Ator().status)
-
     def assert_colisao_atores_ativos(self, ator, ator2):
-        self.assertEqual(ator.status, ATIVO)
-        self.assertEqual(ator2.status, ATIVO)
-        self.assertTrue(ator.colidir(ator2))
-        self.assertEqual(ator2.status, DESTRUIDO)
-        self.assertEqual(ator.status, DESTRUIDO)
+        tempo_da_colisao = 2
+        self.assertEqual(ator.status(tempo_da_colisao), ATIVO)
+        self.assertEqual(ator2.status(tempo_da_colisao), ATIVO)
+        ator.colidir(ator2, tempo_da_colisao)
+        self.assertEqual(ator2.status(tempo_da_colisao), DESTRUIDO)
+        self.assertEqual(ator.status(tempo_da_colisao), DESTRUIDO)
 
     def assert_nao_colisao(self, ator, ator2):
-        status_iniciais = [ator.status, ator2.status]
-        self.assertFalse(ator.colidir(ator2))
-        self.assertListEqual(status_iniciais, [ator.status, ator2.status])
+        tempo_da_colisao = 2
+        status_iniciais = [ator.status(tempo_da_colisao), ator2.status(tempo_da_colisao)]
+        ator.colidir(ator2, tempo_da_colisao)
+        self.assertListEqual(status_iniciais, [ator.status(tempo_da_colisao), ator2.status(tempo_da_colisao)])
 
     def teste_colisao_entre_atores_ativos(self):
         ator = Ator(2, 2)
@@ -59,7 +65,7 @@ class AtorTestes(TestCase):
 
     def teste_colisao_somente_um_ator_destruido(self):
         ator = Ator(2, 2)
-        ator.status = DESTRUIDO
+        ator.colidir(ator,0)
         ator2 = Ator(2, 2)
         self.assert_nao_colisao(ator, ator2)
         self.assert_nao_colisao(Ator(2, 3), ator)
@@ -80,28 +86,23 @@ class AtorTestes(TestCase):
         self.assert_nao_colisao(Ator(1, 2), ator)
         self.assert_nao_colisao(Ator(1, 3), ator)
 
-    def teste_status_dependete_de_tempo(self):
+    def teste_status(self):
         ator = Ator()
-        ator2 = Ator()
-
-        self.assertEqual(ATIVO, ator.status)
-        ator.colidir(ator2, 3.2)
-        self.assertEqual('A', ator.calcular_posicao(0)[2])
-        self.assertEqual(ATIVO,ator.status)
-        self.assertEqual('A', ator.calcular_posicao(3.1)[2])
-        self.assertEqual(ATIVO,ator.status)
-        self.assertEqual('✝', ator.calcular_posicao(3.2)[2])
-        self.assertEqual(ATIVO, Ator().status)
+        assert_ator_status(self, ator, 'A', '✝')
 
 
 class ObstaculoTestes(TestCase):
     def teste_status(self):
         obstaculo = Obstaculo()
-        self.assertEqual(ATIVO, obstaculo.status)
-        self.assertEqual('O', obstaculo.calcular_posicao(0)[2])
-        obstaculo.status = DESTRUIDO
-        self.assertEqual(' ', obstaculo.calcular_posicao(0)[2])
-        self.assertEqual(ATIVO, Ator().status)
+        self.assertEqual(ATIVO, obstaculo.status(0))
+        self.assertEqual('O', obstaculo.caracter(0))
+        obstaculo.colidir(obstaculo, 3.2)
+        self.assertEqual(ATIVO, obstaculo.status(3.1))
+        self.assertEqual('O', obstaculo.caracter(3.1))
+        self.assertEqual(DESTRUIDO, obstaculo.status(3.2))
+        self.assertEqual(' ', obstaculo.caracter(3.2))
+        self.assertEqual(DESTRUIDO, obstaculo.status(4))
+        self.assertEqual(' ', obstaculo.caracter(4))
 
 
 

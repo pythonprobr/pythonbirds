@@ -17,18 +17,18 @@ Classe base para todos os atores do jogo.
 
 ### Método calcular_posicao
 
-Método que recebe o tempo (float) como parâmetro e retorna uma tupla com 3 elementos, posição horizontal (x), posição
-vertical (y) e sinal a ser exibido em tela (caracter).
+Método que recebe o tempo (float) como parâmetro e retorna uma tupla com 2 elementos, posição horizontal (x) como 
+primeiro elemento e posição vertical (y) como segundo
 
-x e y devem ser números inteiros. Devem ser aproximados utilizando lógica de arredondamento.
+### Método Status
 
-### Status
+O ator possui os status Ativo e Destruido. Além disso o status deve ser dependente do tempo. Ou seja, se o ator foi 
+destruido no tempo t, ele deve possuir status ativo antes desse tempo e Destruido após esse tempo.
+ 
 
-O ator possui os status Ativo e Destruido. Quando destruido, o caracter the apresentação quando for calculada a posição 
-deve ser "✝".
+## Método sinal
 
-Além disso o status deve ser dependente do tempo. Ou seja, se o ator foi destruido no tempo t, ele deve possuir status
-ativo antes desse tempo e Destruido após esse tempo.
+O método sinal retorna 'A' quando o ator tem status Ativo e '✝' caso contrário.
 
 ### Método colidir
 
