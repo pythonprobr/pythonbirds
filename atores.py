@@ -38,7 +38,15 @@ class Ator():
             return True
         return False
 
+
 class Obstaculo(Ator):
-    pass
+    caracter = 'O'
+
+    def calcular_posicao(self, tempo):
+        x, y, caracter = super().calcular_posicao(tempo)
+        return x, y, ' ' if self.status == DESTRUIDO else caracter
+
+
+
 
 

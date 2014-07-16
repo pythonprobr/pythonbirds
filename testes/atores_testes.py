@@ -86,7 +86,7 @@ class ObstaculoTestes(TestCase):
         self.assertEqual(ATIVO, obstaculo.status)
         self.assertEqual('O', obstaculo.calcular_posicao(0)[2])
         obstaculo.status = DESTRUIDO
-        self.assertEqual('', obstaculo.calcular_posicao(0)[2])
+        self.assertEqual(' ', obstaculo.calcular_posicao(0)[2])
         self.assertEqual(ATIVO, Ator().status)
 
 
