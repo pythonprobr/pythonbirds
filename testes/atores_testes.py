@@ -57,4 +57,18 @@ class AtorTestes(TestCase):
         self.assert_nao_colisao(Ator(2, 2), Ator(0, 2))
         self.assert_nao_colisao(Ator(2, 2), Ator(0, 4))
 
+    def teste_colisao_somente_um_ator_destruido(self):
+        ator = Ator(2, 2)
+        ator.status = DESTRUIDO
+        ator2 = Ator(2, 2)
+        self.assert_nao_colisao(ator, ator2)
+        self.assert_nao_colisao(ator, Ator(2, 3))
+        self.assert_nao_colisao(ator, Ator(3, 3))
+        self.assert_nao_colisao(ator, Ator(3, 2))
+        self.assert_nao_colisao(ator, Ator(3, 1))
+        self.assert_nao_colisao(ator, Ator(2, 1))
+        self.assert_nao_colisao(ator, Ator(1, 1))
+        self.assert_nao_colisao(ator, Ator(1, 2))
+        self.assert_nao_colisao(ator, Ator(1, 3))
+
 
