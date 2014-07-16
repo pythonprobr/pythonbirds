@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 from unittest.case import TestCase
-from atores import Ator, DESTRUIDO, ATIVO, Obstaculo
+from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco
 
 
 def assert_ator_status(test_case, ator, caracter_status_ativo, carater_status_destruido):
@@ -65,7 +65,7 @@ class AtorTestes(TestCase):
 
     def teste_colisao_somente_um_ator_destruido(self):
         ator = Ator(2, 2)
-        ator.colidir(ator,0)
+        ator.colidir(ator, 0)
         ator2 = Ator(2, 2)
         self.assert_nao_colisao(ator, ator2)
         self.assert_nao_colisao(Ator(2, 3), ator)
@@ -95,6 +95,7 @@ class ObstaculoTestes(TestCase):
     def teste_status(self):
         obstaculo = Obstaculo()
         assert_ator_status(self, obstaculo, 'O', ' ')
+
 
 class PorcoTestes(TestCase):
     def teste_status(self):

@@ -52,6 +52,10 @@ class Obstaculo(Ator):
     _caracter_destruido = ' '
 
 
+class Porco(Ator):
+    _caracter_ativo = '☺'
+
+
 
 
 
