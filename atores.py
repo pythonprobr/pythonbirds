@@ -38,4 +38,7 @@ class Ator():
             return True
         return False
 
+class Obstaculo(Ator):
+    pass
+
 

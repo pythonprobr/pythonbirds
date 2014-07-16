@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 from unittest.case import TestCase
-from atores import Ator, DESTRUIDO, ATIVO
+from atores import Ator, DESTRUIDO, ATIVO, Obstaculo
 
 
 class AtorTestes(TestCase):
@@ -79,5 +79,15 @@ class AtorTestes(TestCase):
         self.assert_nao_colisao(Ator(1, 1), ator)
         self.assert_nao_colisao(Ator(1, 2), ator)
         self.assert_nao_colisao(Ator(1, 3), ator)
+
+class ObstaculoTestes(TestCase):
+    def teste_status(self):
+        obstaculo = Obstaculo()
+        self.assertEqual(ATIVO, obstaculo.status)
+        self.assertEqual('O', obstaculo.calcular_posicao(0)[2])
+        obstaculo.status = DESTRUIDO
+        self.assertEqual('', obstaculo.calcular_posicao(0)[2])
+        self.assertEqual(ATIVO, Ator().status)
+
 
 

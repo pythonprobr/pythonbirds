@@ -26,3 +26,20 @@ x e y devem ser números inteiros. Devem ser aproximados utilizando lógica de a
 
 O ator possui os status Ativo e Destruido. Quando destruido, o caracter the apresentação quando for calculada a posição 
 deve ser "✝"
+
+### Método colidir
+
+O método colidir deve ser executada para executar a ação de colisão. Colisão só ocorre com atores ativos e que estejam
+em pixels vizinhos
+
+## Classe Obstaculo
+
+Classe que representa objstaculos na fase e que podem ser destruidos por pássaros. Herda de ator. Seu caracter de 
+representação é a letra "O"
+
+### Status
+
+Um obstáculo ao ter seu status alterado para DESTRUIDO deve ter seu caracter de apresentação alterado para " " (vazio).
+Assim ele vai "sumir" da tela
+
+
