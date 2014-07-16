@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 import os
+import platform
 import time
-FIM='''|------------------------------------------------------------------------------|
+
+FIM = '''|------------------------------------------------------------------------------|
 |                                                                              |
 |                                                                              |
 |                   PPPP  Y   Y  TTTTT H   H  OOO  NN   N                      |
@@ -27,27 +29,39 @@ FIM='''|------------------------------------------------------------------------
 LARGURA = 80
 ALTURA = 20
 
-
-def apagar_tela():
-    os.system('clear')
+apagar_tela = lambda: os.system('cls') if platform.system() == 'Windows' else lambda: os.system('clear')
 
 
-try:
+def desenhar_e_esperar(delta_t, fase, passo, tempo, msg):
+    time.sleep(passo)
     apagar_tela()
-except:
-    apagar_tela = lambda: os.system('cls')
+    pontos_cartesianos = fase.calcular_pontos(tempo)
+    print('%s Tempo: %s' % (msg, tempo))
+    print(desenhar(*pontos_cartesianos))
+    tempo += delta_t
+    return tempo
+
+
+def _animar(delta_t, fase, passo, tempo, msg):
+    while not fase.acabou(tempo):
+        tempo = desenhar_e_esperar(delta_t, fase, passo, tempo, msg)
+    return tempo
+
+
+def rebobina(delta_t, fase, passo, tempo, msg):
+    while tempo > 0:
+        tempo = desenhar_e_esperar(-delta_t, fase, passo, tempo, msg)
+    return tempo
 
 
 def animar(fase, passo=0.1, delta_t=0.1):
     tempo = 0
-    while not fase.acabou(tempo):
-        time.sleep(passo)
-        apagar_tela()
-        pontos_cartesianos = fase.calcular_pontos(tempo)
-        print(desenhar(*pontos_cartesianos))
-        tempo += delta_t
-    print(FIM)
+    tempo_final = _animar(delta_t, fase, passo, tempo, 'Play!')
+    rebobina(delta_t, fase, passo / 10, tempo_final, '<< Reboninando')
+    _animar(delta_t, fase, passo / 5, tempo, 'Replay 5 vezes mais rápido!')
+    apagar_tela()
     print(fase.status())
+    print(FIM)
 
 
 def normalizar_coordenadas(x, y):
