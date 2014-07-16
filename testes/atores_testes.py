@@ -29,6 +29,10 @@ class AtorTestes(TestCase):
         self.assertEqual(ator2.status, DESTRUIDO)
         self.assertEqual(ator.status, DESTRUIDO)
 
+    def assert_nao_colisao(self, ator, ator2):
+        status_iniciais = [ator.status, ator2.status]
+        self.assertFalse(ator.colidir(ator2))
+        self.assertListEqual(status_iniciais, [ator.status, ator2.status])
 
     def teste_colisao_entre_atores_ativos(self):
         ator = Ator(2, 2)
@@ -42,5 +46,15 @@ class AtorTestes(TestCase):
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 1))
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 2))
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 3))
+
+    def teste_nao_colisao_entre_atores_ativos(self):
+        self.assert_nao_colisao(Ator(2, 2), Ator(2, 4))
+        self.assert_nao_colisao(Ator(2, 2), Ator(3, 4))
+        self.assert_nao_colisao(Ator(2, 2), Ator(4, 2))
+        self.assert_nao_colisao(Ator(2, 2), Ator(3, 0))
+        self.assert_nao_colisao(Ator(2, 2), Ator(2, 0))
+        self.assert_nao_colisao(Ator(2, 2), Ator(0, 1))
+        self.assert_nao_colisao(Ator(2, 2), Ator(0, 2))
+        self.assert_nao_colisao(Ator(2, 2), Ator(0, 4))
 
 
