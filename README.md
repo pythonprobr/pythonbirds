@@ -25,7 +25,10 @@ x e y devem ser números inteiros. Devem ser aproximados utilizando lógica de a
 ### Status
 
 O ator possui os status Ativo e Destruido. Quando destruido, o caracter the apresentação quando for calculada a posição 
-deve ser "✝"
+deve ser "✝".
+
+Além disso o status deve ser dependente do tempo. Ou seja, se o ator foi destruido no tempo t, ele deve possuir status
+ativo antes desse tempo e Destruido após esse tempo.
 
 ### Método colidir
 

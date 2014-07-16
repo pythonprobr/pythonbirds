@@ -8,11 +8,11 @@ from atores import Ator, DESTRUIDO, ATIVO, Obstaculo
 class AtorTestes(TestCase):
     def teste_ator_posicao(self):
         ator = Ator()
-        self.assertTupleEqual((0, 0, 'A'), ator.calcular_posicao(0))
+        self.assertTupleEqual((0, 0), ator.calcular_posicao(0))
         ator = Ator(0.3, 0.5)
-        self.assertTupleEqual((0, 0, 'A'), ator.calcular_posicao(2.3))
+        self.assertTupleEqual((0, 0), ator.calcular_posicao(2.3))
         ator = Ator(0.6, 2.1)
-        self.assertTupleEqual((1, 2, 'A'), ator.calcular_posicao(3.14))
+        self.assertTupleEqual((1, 2), ator.calcular_posicao(3.14))
 
     def teste_status(self):
         ator = Ator()
@@ -79,6 +79,20 @@ class AtorTestes(TestCase):
         self.assert_nao_colisao(Ator(1, 1), ator)
         self.assert_nao_colisao(Ator(1, 2), ator)
         self.assert_nao_colisao(Ator(1, 3), ator)
+
+    def teste_status_dependete_de_tempo(self):
+        ator = Ator()
+        ator2 = Ator()
+
+        self.assertEqual(ATIVO, ator.status)
+        ator.colidir(ator2, 3.2)
+        self.assertEqual('A', ator.calcular_posicao(0)[2])
+        self.assertEqual(ATIVO,ator.status)
+        self.assertEqual('A', ator.calcular_posicao(3.1)[2])
+        self.assertEqual(ATIVO,ator.status)
+        self.assertEqual('✝', ator.calcular_posicao(3.2)[2])
+        self.assertEqual(ATIVO, Ator().status)
+
 
 class ObstaculoTestes(TestCase):
     def teste_status(self):
