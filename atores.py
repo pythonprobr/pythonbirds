@@ -12,8 +12,10 @@ class Ator():
     def __init__(self, x=0, y=0):
         self.y = y
         self.x = x
+        self.status = ATIVO
 
     def calcular_posicao(self, tempo):
-        return round(self.x), round(self.y), self.caracter
+        caracter = self.caracter if self.status == ATIVO else '✝'
+        return round(self.x), round(self.y), caracter
 
 
