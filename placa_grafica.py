@@ -2,12 +2,17 @@ import os
 import platform
 import time
 import sys
-import msvcrt
+
+try:
+    import msvcrt
+except:
+    pass
 import select
 from templates import FIM
 
 
-apagar_tela = lambda: os.system('cls') if platform.system() == 'Windows' else lambda: os.system('clear')
+eh_windows = platform.system() == 'Windows'
+apagar_tela = lambda: os.system('cls') if eh_windows else lambda: os.system('clear')
 
 # workaround retirado de http://stackoverflow.com/questions/292095/polling-the-keyboard-in-python
 
@@ -19,7 +24,7 @@ def ouvir_teclado():
     return False
 
 
-if platform.system() == 'Windows':
+if eh_windows:
     ouvir_teclado = msvcrt.kbhit
 
 LARGURA = 80
@@ -45,9 +50,12 @@ def _animar(delta_t, fase, passo, tempo, msg):
 def _jogar(delta_t, fase, passo, tempo, msg):
     while not fase.acabou(tempo):
         tempo = desenhar_e_esperar(delta_t, fase, passo, tempo, msg)
-        if ouvir_teclado():
+        entrada = ouvir_teclado()
+        if entrada:
             while True:
                 try:
+                    if not eh_windows:
+                        input()
                     angulo = float(input('Digite o Ângulo de Lançamento: '))
                     fase.lancar(angulo, tempo)
                     break
