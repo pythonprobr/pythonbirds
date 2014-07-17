@@ -1,13 +1,28 @@
 import os
 import platform
 import time
+import sys
+import msvcrt
+import select
 from templates import FIM
 
 
+apagar_tela = lambda: os.system('cls') if platform.system() == 'Windows' else lambda: os.system('clear')
+
+
+def ouvir_teclado():
+    i, o, e = select.select([sys.stdin], [], [], 0.0001)
+    for s in i:
+        if s == sys.stdin:
+            return True
+    return False
+
+
+if platform.system() == 'Windows':
+    ouvir_teclado = msvcrt.kbhit
+
 LARGURA = 80
 ALTURA = 20
-
-apagar_tela = lambda: os.system('cls') if platform.system() == 'Windows' else lambda: os.system('clear')
 
 
 def desenhar_e_esperar(delta_t, fase, passo, tempo, msg):
@@ -26,6 +41,16 @@ def _animar(delta_t, fase, passo, tempo, msg):
     return tempo
 
 
+def _jogar(delta_t, fase, passo, tempo, msg):
+    while not fase.acabou(tempo):
+        tempo = desenhar_e_esperar(delta_t, fase, passo, tempo, msg)
+        if ouvir_teclado():
+            input()
+            angulo = float(input('Digite o Ângulo de Lançamento: '))
+            fase.lancar(angulo, tempo)
+    return tempo
+
+
 def rebobina(delta_t, fase, passo, tempo, msg):
     while tempo > 0:
         tempo = desenhar_e_esperar(-delta_t, fase, passo, tempo, msg)
@@ -34,7 +59,7 @@ def rebobina(delta_t, fase, passo, tempo, msg):
 
 def animar(fase, passo=0.1, delta_t=0.1):
     tempo = 0
-    tempo_final = _animar(delta_t, fase, passo, tempo, 'Play!')
+    tempo_final = _jogar(delta_t, fase, passo, tempo, 'Play!')
     if input('Deseja ver o Replay? (s para sim): ').lower() == 's':
         velocidade_rebobina = 10
         rebobina(delta_t, fase, passo / velocidade_rebobina, tempo_final,

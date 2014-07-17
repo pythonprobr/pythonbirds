@@ -12,9 +12,10 @@ fase_exemplo.adicionar_passaro(*passaros)
 fase_exemplo.adicionar_porco(*porcos)
 fase_exemplo.adicionar_obstaculo(*obstaculos)
 
-fase_exemplo.lancar(45, 1)
-fase_exemplo.lancar(63, 3)
-fase_exemplo.lancar(23, 4)
+# Solução para ganhar
+# fase_exemplo.lancar(45, 1)
+# fase_exemplo.lancar(63, 3)
+# fase_exemplo.lancar(23, 4)
 
 if __name__ == '__main__':
     placa_grafica.animar(fase_exemplo)
