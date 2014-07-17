@@ -75,14 +75,18 @@ class Passaro(Ator):
         if self.y <= 0:
             self._tempo_de_colisao = tempo
 
-    def _calcular_posicao_vertical(self, tempo):
-        delta_t = tempo - self._tempo_de_lancamento
+    def _calcular_posicao_horizontal(self, delta_t):
+        self.x = self._x_inicial + self._velocidade_scalar * delta_t * math.cos(self._angulo_de_lancamento)
+
+    def _calcular_posicao_vertical(self, delta_t):
         self.y = self._y_inicial + \
                  self._velocidade_scalar * delta_t * math.sin(self._angulo_de_lancamento) - \
                  (GRAVIDADE / 2) * delta_t ** 2
 
     def _calcular_posicao(self, tempo):
-        self._calcular_posicao_vertical(tempo)
+        delta_t = tempo - self._tempo_de_lancamento
+        self._calcular_posicao_vertical(delta_t)
+        self._calcular_posicao_horizontal(delta_t)
 
     def calcular_posicao(self, tempo):
         if self._tempo_de_lancamento is None or tempo < self._tempo_de_lancamento:
