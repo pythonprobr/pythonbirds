@@ -36,6 +36,12 @@ class Fase():
             return 'Jogo em encerrado. Você perdeu!'
         return 'Jogo em encerrado. Você ganhou!'
 
+    def lancar(self, angulo, tempo):
+        for passaro in self._passaros:
+            if ATIVO == passaro.status(tempo):
+                passaro.lancar(angulo, tempo)
+                return
+
     def _existe_porco_ativo(self, tempo):
         return self._verificar_se_existe_ator_ativo(self._porcos, tempo)
 

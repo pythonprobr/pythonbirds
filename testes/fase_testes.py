@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 from unittest.case import TestCase
+import math
 from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo
 from fase import Fase
 
@@ -106,16 +107,18 @@ class FaseTestes(TestCase):
 
     def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
         passaro_vermelho, passaro_amarelo = PassaroVermelho(1, 1), PassaroAmarelo(1, 1)
-        fase = Fase(passaro_vermelho, passaro_amarelo)
+        fase = Fase()
+        fase.adicionar_passaro(passaro_vermelho, passaro_amarelo)
+
         fase.lancar(90, 1)
-        fase.lancar(45, 3)
-        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
-        self.assertEqual(90, passaro_vermelho._angulo_de_lancamento)
+        self.assertEqual(math.radians(90), passaro_vermelho._angulo_de_lancamento)
         self.assertEqual(1, passaro_vermelho._tempo_de_lancamento)
 
-        self.assertEqual(45, passaro_amarelo._angulo_de_lancamento)
+        fase.lancar(45, 3)
+        self.assertEqual(math.radians(45), passaro_amarelo._angulo_de_lancamento)
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
 
+        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
 
         # def teste_calcular_pontos(self):
         # fase=Fase()

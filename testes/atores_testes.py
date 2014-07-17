@@ -113,13 +113,19 @@ class PassaroBaseTests(TestCase):
 
 
 class PassaroVermelhoTests(PassaroBaseTests):
+    def teste_foi_lancado(self):
+        passaro_vermelho = PassaroVermelho(1, 1)
+        self.assertFalse(passaro_vermelho.foi_lancado())
+        passaro_vermelho.lancar(0, 0)
+        self.assertTrue(passaro_vermelho.foi_lancado())
+
     def teste_posicao_antes_do_lancamento(self):
-        passaro_amarelo = PassaroVermelho(1, 1)
-        passaro_amarelo.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
+        passaro_vermelho = PassaroVermelho(1, 1)
+        passaro_vermelho.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
         #
         for t in range(20):
             t /= 10
-            self.assertEqual((1, 1), passaro_amarelo.calcular_posicao(t),
+            self.assertEqual((1, 1), passaro_vermelho.calcular_posicao(t),
                              'Não deveria se mover no tempo %s < 2 segundtos' % t)
 
     def teste_status(self):

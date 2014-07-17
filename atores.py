@@ -71,6 +71,9 @@ class Passaro(Ator):
         self._tempo_de_lancamento = None
         self._angulo_de_lancamento = None  # radianos
 
+    def foi_lancado(self):
+        return self._tempo_de_lancamento is not None
+
     def colidir_com_chao(self, tempo):
         if self.y <= 0:
             self._tempo_de_colisao = tempo
@@ -106,6 +109,7 @@ class Passaro(Ator):
 class PassaroAmarelo(Passaro):
     _velocidade_scalar = 30  # m/s
     _caracter_ativo = '>'
+
 
 class PassaroVermelho(Passaro):
     _velocidade_scalar = 20  # m/s
