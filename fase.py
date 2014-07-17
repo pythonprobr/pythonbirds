@@ -1,6 +1,16 @@
 from atores import ATIVO
 
 
+class Ponto():
+    def __init__(self, x, y, caracter):
+        self.caracter = caracter
+        self.x = x
+        self.y = y
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y and self.caracter == other.caracter
+
+
 class Fase():
     def __init__(self):
         self._passaros = []
@@ -19,7 +29,7 @@ class Fase():
     def acabou(self, tempo):
         return not self._existe_porco_ativo(tempo) or not self._existe_passaro_ativo(tempo)
 
-    def status(self,tempo):
+    def status(self, tempo):
         if self._existe_passaro_ativo(tempo):
             return 'Jogo em andamento.'
         if self._existe_porco_ativo(tempo):
@@ -36,6 +46,6 @@ class Fase():
         return False
 
     def _existe_passaro_ativo(self, tempo):
-        return self._verificar_se_existe_ator_ativo(self._passaros,tempo)
+        return self._verificar_se_existe_ator_ativo(self._passaros, tempo)
 
 

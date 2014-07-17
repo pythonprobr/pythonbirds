@@ -100,4 +100,25 @@ class FaseTestes(TestCase):
         self.assertEqual('Jogo em andamento.', fase.status(3),
                          'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
+    def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
+        fase = Fase()
+        fase.lancar(90, 0)
+
+    def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
+        passaro_vermelho, passaro_amarelo = PassaroVermelho(1, 1), PassaroAmarelo(1, 1)
+        fase = Fase(passaro_vermelho, passaro_amarelo)
+        fase.lancar(90, 1)
+        fase.lancar(45, 3)
+        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
+        self.assertEqual(90, passaro_vermelho._angulo_de_lancamento)
+        self.assertEqual(1, passaro_vermelho._tempo_de_lancamento)
+
+        self.assertEqual(45, passaro_amarelo._angulo_de_lancamento)
+        self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
+
+
+        # def teste_calcular_pontos(self):
+        # fase=Fase()
+        # self.assertListEqual([],fase.calcular)
+
 
