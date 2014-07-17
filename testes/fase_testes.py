@@ -1,3 +1,4 @@
+
 import os
 from unittest.case import TestCase
 import math
@@ -168,6 +169,7 @@ for i in range(86):
 
 if __name__ == '__main__':
     placa_grafica.animar(fase_exemplo)
+
 
 
 
