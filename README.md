@@ -170,3 +170,7 @@ Ele deve:
 
 1. Calcular a posição de cada pássaro, verificando se ele colidiu com algum obstáculo, porco ou chão.
 2. Retornar instâncias da classe Ponto, informando x,y e caracter respectivo a cada ator.
+
+### Divirta-se!!!!
+
+Powered by [Python Pro](http://adm.python.pro.br)
