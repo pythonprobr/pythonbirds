@@ -33,7 +33,7 @@ Após o desenvolvimento é possível emular um jogo que termina em vitória roda
 Para jogar, aperte enter, digite o ângulo de lançamento e aperte enter novamente.
 Demonstração no vídeo:
 
-[Python Birds](https:youtube.com)
+[Python Birds](https://youtube.com)
 
 ## script atores.py
 
