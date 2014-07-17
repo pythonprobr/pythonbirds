@@ -89,7 +89,7 @@ class AtorTestes(TestCase):
 
     def teste_status(self):
         ator = Ator()
-        assert_ator_status(self, ator, 'A', '✝')
+        assert_ator_status(self, ator, 'A', '+')
 
 
 class ObstaculoTestes(TestCase):
@@ -101,7 +101,7 @@ class ObstaculoTestes(TestCase):
 class PorcoTestes(TestCase):
     def teste_status(self):
         porco = Porco()
-        assert_ator_status(self, porco, '☺', '✝')
+        assert_ator_status(self, porco, '@', '+')
 
 
 class PassaroBaseTests(TestCase):
@@ -130,7 +130,7 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
     def teste_status(self):
         passaro_amarelo = PassaroVermelho(1, 1)
-        assert_ator_status(self, passaro_amarelo, '»', '✝')
+        assert_ator_status(self, passaro_amarelo, 'D', '+')
 
     def teste_colisao_com_chao(self):
         for i in range(30):
@@ -165,7 +165,7 @@ class PassaroAmareloTests(PassaroBaseTests):
 
     def teste_status(self):
         passaro_amarelo = PassaroAmarelo(1, 1)
-        assert_ator_status(self, passaro_amarelo, '>', '✝')
+        assert_ator_status(self, passaro_amarelo, '>', '+')
 
     def teste_colisao_com_chao(self):
         for i in range(30):

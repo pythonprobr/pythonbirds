@@ -14,7 +14,7 @@ def desenhar_e_esperar(delta_t, fase, passo, tempo, msg):
     time.sleep(passo)
     apagar_tela()
     pontos_cartesianos = fase.calcular_pontos(tempo)
-    print('%s Tempo: %s' % (msg, tempo))
+    print('%s Tempo: %.2f' % (msg, tempo))
     print(desenhar(*pontos_cartesianos))
     tempo += delta_t
     return tempo
@@ -35,10 +35,14 @@ def rebobina(delta_t, fase, passo, tempo, msg):
 def animar(fase, passo=0.1, delta_t=0.1):
     tempo = 0
     tempo_final = _animar(delta_t, fase, passo, tempo, 'Play!')
-    rebobina(delta_t, fase, passo / 50, tempo_final, 'Rebobinando 50 vezes mais rápido!')
-    _animar(delta_t, fase, passo / 20, tempo, 'Replay 20 vezes mais rápido!')
+    if input('Deseja ver o Replay? (s para sim): ').lower() == 's':
+        velocidade_rebobina = 10
+        rebobina(delta_t, fase, passo / velocidade_rebobina, tempo_final,
+                 'Rebobinando %s vezes mais rápido!' % velocidade_rebobina)
+        velocidade_replay = 3
+        _animar(delta_t, fase, passo / velocidade_replay, tempo, 'Replay %s vezes mais rápido!' % velocidade_replay)
     apagar_tela()
-    print(fase.status())
+    print(fase.status(tempo_final))
     print(FIM)
 
 

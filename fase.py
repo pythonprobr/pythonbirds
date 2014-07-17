@@ -1,3 +1,4 @@
+from itertools import chain
 from atores import ATIVO
 
 
@@ -9,6 +10,9 @@ class Ponto():
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.caracter == other.caracter
+
+    def __repr__(self, *args, **kwargs):
+        return "Ponto(%s,%s,'%s')" % (self.x, self.y, self.caracter)
 
 
 class Fase():
@@ -41,6 +45,25 @@ class Fase():
             if not passaro.foi_lancado():
                 passaro.lancar(angulo, tempo)
                 return
+
+    def calcular_pontos(self, tempo):
+        pontos = [self._calcular_ponto_de_passaro(p, tempo) for p in self._passaros]
+        obstaculos_e_porcos = chain(self._obstaculos, self._porcos)
+        pontos.extend([self._transformar_em_ponto(ator, tempo) for ator in obstaculos_e_porcos])
+        return pontos
+
+    def _transformar_em_ponto(self, ator, tempo):
+        return Ponto(ator.x, ator.y, ator.caracter(tempo))
+
+    def _calcular_ponto_de_passaro(self, passaro, tempo, ):
+        passaro.calcular_posicao(tempo)
+        for ator in chain(self._obstaculos, self._porcos):
+            if ATIVO == passaro.status(tempo):
+                passaro.colidir(ator, tempo)
+                passaro.colidir_com_chao(tempo)
+            else:
+                break
+        return self._transformar_em_ponto(passaro, tempo)
 
     def _existe_porco_ativo(self, tempo):
         return self._verificar_se_existe_ator_ativo(self._porcos, tempo)

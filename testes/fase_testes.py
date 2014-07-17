@@ -1,10 +1,15 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
+import os
 from unittest.case import TestCase
 import math
+import sys
+
+project_dir = os.path.join(os.path.dirname(__file__), '..')
+project_dir = os.path.normpath(project_dir)
+sys.path.append(project_dir)
+
 from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo
-from fase import Fase
+from fase import Fase, Ponto
+import placa_grafica
 
 
 class FaseTestes(TestCase):
@@ -124,8 +129,47 @@ class FaseTestes(TestCase):
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
 
 
-        # def teste_calcular_pontos(self):
-        # fase=Fase()
-        # self.assertListEqual([],fase.calcular)
+    def teste_calcular_pontos(self):
+        expected = [Ponto(3, 3, 'D'), Ponto(3, 3, '>'), Ponto(3, 3, '>'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
+                    Ponto(70, 1, '@')]
+        self.assertListEqual(expected, fase_exemplo.calcular_pontos(0))
+
+        expected = [Ponto(31, 11, '+'), Ponto(17, 25, '>'), Ponto(3, 3, '>'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+                    Ponto(70, 1, '@')]
+        self.assertListEqual(expected, fase_exemplo.calcular_pontos(4))
+
+        expected = [Ponto(31, 11, '+'), Ponto(57, 30, '>'), Ponto(69, 2, '+'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+                    Ponto(70, 1, '+')]
+        self.assertListEqual(expected, fase_exemplo.calcular_pontos(7))
+
+        expected = [Ponto(31, 11, '+'), Ponto(77, 2, '+'), Ponto(69, 2, '+'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
+                    Ponto(70, 1, '+')]
+        self.assertListEqual(expected, fase_exemplo.calcular_pontos(8.5))
+
+        self.assertFalse(fase_exemplo.acabou(8.3))
+        self.assertTrue(fase_exemplo.acabou(8.5))
+
+
+fase_exemplo = Fase()
+passaros = [PassaroVermelho(3, 3), PassaroAmarelo(3, 3), PassaroAmarelo(3, 3)]
+porcos = [Porco(78, 1), Porco(70, 1)]
+obstaculos = [Obstaculo(31, 10)]
+
+fase_exemplo.adicionar_passaro(*passaros)
+fase_exemplo.adicionar_porco(*porcos)
+fase_exemplo.adicionar_obstaculo(*obstaculos)
+
+fase_exemplo.lancar(45, 1)
+fase_exemplo.lancar(63, 3)
+fase_exemplo.lancar(23, 4)
+
+for i in range(86):
+    fase_exemplo.calcular_pontos(i / 10)
+
+if __name__ == '__main__':
+    placa_grafica.animar(fase_exemplo)
+
+
+
 
 
