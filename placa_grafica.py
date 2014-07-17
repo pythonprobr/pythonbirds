@@ -1,5 +1,4 @@
-
-
+# -*- coding: utf-8 -*-
 import os
 import platform
 import time
@@ -18,7 +17,8 @@ apagar_tela = lambda: os.system('cls') if eh_windows else lambda: os.system('cle
 
 # workaround retirado de http://stackoverflow.com/questions/292095/polling-the-keyboard-in-python
 
-def ouvir_teclado():
+
+def ouvir_teclado_fn():
     i, o, e = select.select([sys.stdin], [], [], 0.0001)
     for s in i:
         if s == sys.stdin:
@@ -28,6 +28,8 @@ def ouvir_teclado():
 
 if eh_windows:
     ouvir_teclado = msvcrt.kbhit
+else:
+    ouvir_teclado = ouvir_teclado_fn
 
 LARGURA = 80
 ALTURA = 20
@@ -153,4 +155,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -86,7 +86,6 @@ class AtorTestes(TestCase):
         self.assert_nao_colisao(Ator(1, 2), ator)
         self.assert_nao_colisao(Ator(1, 3), ator)
 
-
     def teste_status(self):
         ator = Ator()
         assert_ator_status(self, ator, 'A', '+')
@@ -142,7 +141,6 @@ class PassaroVermelhoTests(PassaroBaseTests):
         passaro_vermelho = PassaroVermelho(1, 1)
         passaro_vermelho.lancar(45, 2)  # passaro lancado a 45 graus no tempo 2 segundos
         # Código de geração de testes
-
 
         porco = Porco(14, 10)
         passaro_vermelho.calcular_posicao(2.89)  # tempo exato quanto o passário chega em 14,10
@@ -666,12 +664,9 @@ class PassaroAmareloTests(PassaroBaseTests):
         self.assert_passaro_posicao(91, 1, ATIVO, passaro_amarelo, 6.26)
         self.assert_passaro_posicao(92, 0, DESTRUIDO, passaro_amarelo, 6.27)
 
-
-
         # Código de geração de testes
 
         # for delta_t in range(0, 550):
         # t = 2 + (delta_t / 100)
         # x, y = passaro_amarelo.calcular_posicao(t)
         # print('        self.assert_passaro_posicao(%s, %s, ATIVO, passaro_amarelo, %s)' % (x, y, t))
-
