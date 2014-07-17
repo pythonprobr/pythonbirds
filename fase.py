@@ -38,7 +38,7 @@ class Fase():
 
     def lancar(self, angulo, tempo):
         for passaro in self._passaros:
-            if ATIVO == passaro.status(tempo):
+            if not passaro.foi_lancado():
                 passaro.lancar(angulo, tempo)
                 return
 

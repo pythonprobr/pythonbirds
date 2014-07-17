@@ -109,16 +109,20 @@ class FaseTestes(TestCase):
         passaro_vermelho, passaro_amarelo = PassaroVermelho(1, 1), PassaroAmarelo(1, 1)
         fase = Fase()
         fase.adicionar_passaro(passaro_vermelho, passaro_amarelo)
-
+        self.assertFalse(passaro_vermelho.foi_lancado())
+        self.assertFalse(passaro_amarelo.foi_lancado())
         fase.lancar(90, 1)
+        fase.lancar(45, 3)
+        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
+
+        self.assertTrue(passaro_vermelho.foi_lancado())
         self.assertEqual(math.radians(90), passaro_vermelho._angulo_de_lancamento)
         self.assertEqual(1, passaro_vermelho._tempo_de_lancamento)
 
-        fase.lancar(45, 3)
+        self.assertTrue(passaro_amarelo.foi_lancado())
         self.assertEqual(math.radians(45), passaro_amarelo._angulo_de_lancamento)
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
 
-        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
 
         # def teste_calcular_pontos(self):
         # fase=Fase()
