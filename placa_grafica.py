@@ -9,6 +9,7 @@ from templates import FIM
 
 apagar_tela = lambda: os.system('cls') if platform.system() == 'Windows' else lambda: os.system('clear')
 
+# workaround retirado de http://stackoverflow.com/questions/292095/polling-the-keyboard-in-python
 
 def ouvir_teclado():
     i, o, e = select.select([sys.stdin], [], [], 0.0001)
@@ -45,9 +46,13 @@ def _jogar(delta_t, fase, passo, tempo, msg):
     while not fase.acabou(tempo):
         tempo = desenhar_e_esperar(delta_t, fase, passo, tempo, msg)
         if ouvir_teclado():
-            input()
-            angulo = float(input('Digite o Ângulo de Lançamento: '))
-            fase.lancar(angulo, tempo)
+            while True:
+                try:
+                    angulo = float(input('Digite o Ângulo de Lançamento: '))
+                    fase.lancar(angulo, tempo)
+                    break
+                except:
+                    print('Erro: valor tem que ser númerico!')
     return tempo
 
 
