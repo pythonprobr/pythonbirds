@@ -47,7 +47,7 @@ Contém classes respectivas a fase e ponto do plano cartesiano
 
 Contém lógica para rodar jogo e exibir no console.
 
-# Simplificação do Jogo [simplificacao] #
+# (Simplificação do Jogo)[simplificacao] #
 
 1. Atores são pontos (um caracter) no plano cartesiano. 
 2. A velocidade dos pontos e pequena, de tal forma que a cada passo os pontos se movam apenas para pontos vizinhos.
