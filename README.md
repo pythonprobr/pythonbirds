@@ -59,7 +59,7 @@ gravidade (G) constante e igual a 10 m/s^2.
 ### Método Lancar
 
 O método lançar recebe o ângulo, em graus, que será feito o lançamento. Cada pássaro deve armazenar esse valor e tempo
-de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t=Tfinal-Tinicial
+de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t=Tfinal-Tinicialself
 
 ### Método posicao_horizontal
 
@@ -67,7 +67,7 @@ Fórmula X=X0+v*cos(teta)*delta_t.
 
 ### Método posicao_vertical
 
-Fórmula Y=Y0+v*sen(teta)delta_t+(G*delta_t^2)/2.
+Fórmula Y=Y0+v*sen(teta)delta_t-(G*delta_t^2)/2.
     
 
 

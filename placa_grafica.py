@@ -57,8 +57,8 @@ def rebobina(delta_t, fase, passo, tempo, msg):
 def animar(fase, passo=0.1, delta_t=0.1):
     tempo = 0
     tempo_final = _animar(delta_t, fase, passo, tempo, 'Play!')
-    rebobina(delta_t, fase, passo / 10, tempo_final, 'Rebobinando 10 vezes mais rápido!')
-    _animar(delta_t, fase, passo / 5, tempo, 'Replay 5 vezes mais rápido!')
+    rebobina(delta_t, fase, passo / 50, tempo_final, 'Rebobinando 50 vezes mais rápido!')
+    _animar(delta_t, fase, passo / 20, tempo, 'Replay 20 vezes mais rápido!')
     apagar_tela()
     print(fase.status())
     print(FIM)
@@ -126,7 +126,7 @@ def main():
         def status(self):
             return 'Você ganhou'
 
-    animar(Fase())
+    animar(Fase(),passo=0.01,delta_t=0.01)
 
 
 if __name__ == '__main__':

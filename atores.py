@@ -8,7 +8,6 @@ ATIVO = 'Ativo'
 
 
 class Ator():
-    _tempo_de_colisao = None
     _caracter_ativo = 'A'
     _caracter_destruido = '✝'
 
@@ -21,6 +20,7 @@ class Ator():
     def __init__(self, x=0, y=0):
         self.y = y
         self.x = x
+        self._tempo_de_colisao = None
 
     def status(self, tempo):
         if self._tempo_de_colisao is None or self._tempo_de_colisao > tempo:
@@ -31,7 +31,8 @@ class Ator():
         return self.arredondar_posicao()
 
     def arredondar_posicao(self):
-        return round(self.x), round(self.y)
+        self.x, self.y = round(self.x), round(self.y)
+        return self.x, self.y
 
     def colidir(self, outro_ator, tempo):
         if self.status(tempo) == DESTRUIDO or outro_ator.status(tempo) == DESTRUIDO:
@@ -57,6 +58,9 @@ class Porco(Ator):
     _caracter_ativo = '☺'
 
 
+GRAVIDADE = 10  # m/s^2
+
+
 class Passaro(Ator):
     _velocidade_scalar = None
 
@@ -67,9 +71,28 @@ class Passaro(Ator):
         self._tempo_de_lancamento = None
         self._angulo_de_lancamento = None  # radianos
 
+    def colidir_com_chao(self, tempo):
+        if self.y <= 0:
+            self._tempo_de_colisao = tempo
+
+    def _calcular_posicao_vertical(self, tempo):
+        delta_t = tempo - self._tempo_de_lancamento
+        self.y = self._y_inicial + \
+                 self._velocidade_scalar * delta_t * math.sin(self._angulo_de_lancamento) - \
+                 (GRAVIDADE / 2) * delta_t ** 2
+
+    def _calcular_posicao(self, tempo):
+        self._calcular_posicao_vertical(tempo)
+
     def calcular_posicao(self, tempo):
         if self._tempo_de_lancamento is None or tempo < self._tempo_de_lancamento:
-            return self.arredondar_posicao()
+            self.x = self._x_inicial
+            self.y = self._y_inicial
+        elif self._tempo_de_colisao is not None and tempo >= self._tempo_de_colisao:
+            self._calcular_posicao(self._tempo_de_colisao)
+        else:
+            self._calcular_posicao(tempo)
+        return self.arredondar_posicao()
 
     def lancar(self, angulo, tempo):
         self._tempo_de_lancamento = tempo
@@ -77,7 +100,7 @@ class Passaro(Ator):
 
 
 class PassaroAmarelo(Passaro):
-    _velocidade_scalar = 10  # m/s
+    _velocidade_scalar = 30  # m/s
     _caracter_ativo = '>'
 
 
