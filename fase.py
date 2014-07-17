@@ -19,6 +19,13 @@ class Fase():
     def acabou(self, tempo):
         return not self._existe_porco_ativo(tempo) or not self._existe_passaro_ativo(tempo)
 
+    def status(self,tempo):
+        if self._existe_passaro_ativo(tempo):
+            return 'Jogo em andamento.'
+        if self._existe_porco_ativo(tempo):
+            return 'Jogo em encerrado. Você perdeu!'
+        return 'Jogo em encerrado. Você ganhou!'
+
     def _existe_porco_ativo(self, tempo):
         return self._verificar_se_existe_ator_ativo(self._porcos, tempo)
 
@@ -30,3 +37,5 @@ class Fase():
 
     def _existe_passaro_ativo(self, tempo):
         return self._verificar_se_existe_ator_ativo(self._passaros,tempo)
+
+

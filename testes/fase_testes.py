@@ -67,8 +67,8 @@ class FaseTestes(TestCase):
         fase.adicionar_porco(Porco())
         self.assertTrue(fase.acabou(3), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
 
-        fase.adicionar_porco(PassaroAmarelo())
-        self.assertTrue(fase.acabou(3), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
+        fase.adicionar_passaro(PassaroAmarelo())
+        self.assertFalse(fase.acabou(3), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
     def teste_status(self):
         fase = Fase()
@@ -96,8 +96,8 @@ class FaseTestes(TestCase):
         self.assertEqual('Jogo em encerrado. Você perdeu!', fase.status(3),
                          'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar em derrota')
 
-        fase.adicionar_porco(PassaroAmarelo())
-        self.assertEqual('Jogo em andamento.', fase.acabou(3),
+        fase.adicionar_passaro(PassaroAmarelo())
+        self.assertEqual('Jogo em andamento.', fase.status(3),
                          'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
 
