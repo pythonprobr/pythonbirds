@@ -15,7 +15,7 @@ Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmi
 
     python executor_de_testes.py
     
-Explicação detalhada sobre classes e métodos se encontram em [Jogo](jogo)
+Explicação detalhada sobre classes e métodos se encontram em [Jogo](#jogo)
 
 ## Ordem de desenvolvimento
 
@@ -47,7 +47,7 @@ Contém classes respectivas a fase e ponto do plano cartesiano
 
 Contém lógica para rodar jogo e exibir no console.
 
-# Simplificação do Jogo [jogo]
+# (#jogo)Simplificação do Jogo 
 
 1. Atores são pontos (um caracter) no plano cartesiano. 
 2. A velocidade dos pontos e pequena, de tal forma que a cada passo os pontos se movam apenas para pontos vizinhos.
