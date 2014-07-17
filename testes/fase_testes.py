@@ -41,5 +41,33 @@ class FaseTestes(TestCase):
         self.assertListEqual([passaro, passaro1, passaro2], fase._passaros)
 
     def teste_acabou_sem_porcos(self):
-        fase=Fase()
+        fase = Fase()
         self.assertTrue(fase.acabou(0))
+
+    def teste_acabou_com_porcos_e_passaros(self):
+        fase = Fase()
+        porcos = [Porco(1, 1) for i in range(2)]
+        passaros = [PassaroAmarelo(1, 1) for i in range(2)]
+        fase.adicionar_porco(*porcos)
+        fase.adicionar_passaro(*passaros)
+        self.assertFalse(fase.acabou(0))
+        self.assertFalse(fase.acabou(2.9))
+        self.assertFalse(fase.acabou(3))
+
+        for passaro, porco in zip(passaros, porcos):
+            passaro.colidir(porco, 3)
+
+        self.assertFalse(fase.acabou(0))
+        self.assertFalse(fase.acabou(2.9))
+        self.assertTrue(fase.acabou(3))
+
+        fase.adicionar_obstaculo(Obstaculo())
+        self.assertTrue(fase.acabou(3), 'Obstáculo não interfere no fim do jogo')
+
+        fase.adicionar_porco(Porco())
+        self.assertTrue(fase.acabou(3), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
+
+        fase.adicionar_porco(PassaroAmarelo())
+        self.assertTrue(fase.acabou(3), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
+
+
