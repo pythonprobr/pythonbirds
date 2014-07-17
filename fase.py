@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
-
 class Fase():
     def __init__(self):
         self._passaros = []

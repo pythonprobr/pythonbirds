@@ -2,6 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 from unittest.case import TestCase
 import placa_grafica
+from templates import FRAMES
 
 
 class TestesDoMotor(TestCase):
@@ -36,139 +37,6 @@ class TestesDoMotor(TestCase):
         self.assertEqual(FRAMES[4], placa_grafica.desenhar(pontoA,pontoB))
 
 
-FRAMES =['''|------------------------------------------------------------------------------|
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-''',
-
-'''|------------------------------------------------------------------------------|
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|A                                                                             |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-'''
-,
-
-'''|------------------------------------------------------------------------------|
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-| A                                                                            |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-'''
-,
-
-'''|------------------------------------------------------------------------------|
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-| A                                                                            |
-|B                                                                             |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-''',
-
-'''|------------------------------------------------------------------------------|
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-| A                                                                            |
-|                                                                              |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-''',
-
-'''|------------------------------------------------------------------------------|
-|                                                                             B|
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-''']
 
 
 

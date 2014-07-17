@@ -1,30 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
 import os
 import platform
 import time
+from templates import FIM
 
-FIM = '''|------------------------------------------------------------------------------|
-|                                                                              |
-|                                                                              |
-|                   PPPP  Y   Y  TTTTT H   H  OOO  NN   N                      |
-|                   P   P  Y Y     T   H   H O   O N N  N                      |
-|                   PPPP    Y      T   HHHHH O   O N  N N                      |
-|                   P       Y      T   H   H O   O N   NN                      |
-|                   P       Y      T   H   H  OOO  N    N                      |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|                       BBBB    I   RRRR  DDDD   SSSS                          |
-|                       B   B   I   R   R D   D S                              |
-|                       BBBB    I   RRRR  D   D  SSS                           |
-|                       B   B   I   R R   D   D     S                          |
-|                       BBBB    I   R   R DDDD  SSSS                           |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-|TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT|
-'''
 
 LARGURA = 80
 ALTURA = 20
@@ -126,7 +104,7 @@ def main():
         def status(self):
             return 'Você ganhou'
 
-    animar(Fase(),passo=0.01,delta_t=0.01)
+    animar(Fase())
 
 
 if __name__ == '__main__':
