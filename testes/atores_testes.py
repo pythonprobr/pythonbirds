@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 from unittest.case import TestCase
-from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo
+from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo, PassaroVermelho
 
 
 def assert_ator_status(test_case, ator, caracter_status_ativo, carater_status_destruido):
@@ -112,6 +112,41 @@ class PassaroBaseTests(TestCase):
         self.assertEqual(status_esperado, passaro.status(tempo), dct)
 
 
+class PassaroVermelhoTests(PassaroBaseTests):
+    def teste_posicao_antes_do_lancamento(self):
+        passaro_amarelo = PassaroVermelho(1, 1)
+        passaro_amarelo.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
+        #
+        for t in range(20):
+            t /= 10
+            self.assertEqual((1, 1), passaro_amarelo.calcular_posicao(t),
+                             'Não deveria se mover no tempo %s < 2 segundtos' % t)
+
+    def teste_status(self):
+        passaro_amarelo = PassaroVermelho(1, 1)
+        assert_ator_status(self, passaro_amarelo, '»', '✝')
+
+    def teste_colisao_com_chao(self):
+        for i in range(30):
+            passaro = PassaroVermelho(i, 0)
+            passaro.colidir_com_chao(3)
+            self.assertEqual(DESTRUIDO, passaro.status(3), 'Deve colidir com chão sempre que y=0')
+
+    def teste_colisao(self):
+        passaro_vermelho = PassaroVermelho(1, 1)
+        passaro_vermelho.lancar(45, 2)  # passaro lancado a 45 graus no tempo 2 segundos
+        # Código de geração de testes
+
+
+        porco = Porco(14, 10)
+        passaro_vermelho.calcular_posicao(2.89)  # tempo exato quanto o passário chega em 14,10
+        passaro_vermelho.colidir(porco, 2.89)
+        self.assertEqual(DESTRUIDO, passaro_vermelho.status(2.89))
+        # Deve ficar parado onde colidiu para qualquer tempo maior que o de colisão
+        self.assertTupleEqual((14, 10), passaro_vermelho.calcular_posicao(2.9))
+        self.assertTupleEqual((14, 10), passaro_vermelho.calcular_posicao(1000))
+
+
 class PassaroAmareloTests(PassaroBaseTests):
     def teste_posicao_antes_do_lancamento(self):
         passaro_amarelo = PassaroAmarelo(1, 1)
@@ -136,11 +171,12 @@ class PassaroAmareloTests(PassaroBaseTests):
         passaro_amarelo = PassaroAmarelo(1, 1)
         passaro_amarelo.lancar(45, 2)  # passaro lancado a 45 graus no tempo 2 segundos
         porco = Porco(4, 4)
-        passaro_amarelo.calcular_posicao(2.12) # tempo exato quanto o passário chega em 4,3
+        passaro_amarelo.calcular_posicao(2.12)  # tempo exato quanto o passário chega em 4,3
         passaro_amarelo.colidir(porco, 2.12)
-        self.assertEqual(DESTRUIDO,passaro_amarelo.status(2.12))
+        self.assertEqual(DESTRUIDO, passaro_amarelo.status(2.12))
         # Deve ficar parado onde colidiu para qualquer tempo maior que o de colisão
-        self.assertTupleEqual((4,3),passaro_amarelo.calcular_posicao(2.13))
+        self.assertTupleEqual((4, 3), passaro_amarelo.calcular_posicao(2.13))
+        self.assertTupleEqual((4, 3), passaro_amarelo.calcular_posicao(1000))
 
     def teste_lacamento_vertical(self):
         passaro_amarelo = PassaroAmarelo(1, 1)
@@ -631,5 +667,5 @@ class PassaroAmareloTests(PassaroBaseTests):
         # for delta_t in range(0, 550):
         # t = 2 + (delta_t / 100)
         # x, y = passaro_amarelo.calcular_posicao(t)
-        #     print('        self.assert_passaro_posicao(%s, %s, ATIVO, passaro_amarelo, %s)' % (x, y, t))
+        # print('        self.assert_passaro_posicao(%s, %s, ATIVO, passaro_amarelo, %s)' % (x, y, t))
 

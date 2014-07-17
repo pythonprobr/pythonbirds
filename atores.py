@@ -107,6 +107,10 @@ class PassaroAmarelo(Passaro):
     _velocidade_scalar = 30  # m/s
     _caracter_ativo = '>'
 
+class PassaroVermelho(Passaro):
+    _velocidade_scalar = 20  # m/s
+    _caracter_ativo = '»'
+
 
 
 
