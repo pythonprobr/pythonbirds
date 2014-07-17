@@ -7,9 +7,11 @@ A versão utilizada para desenvolvimento foi Python 3.4
 
 # Abordagem
 
-Baixar a versão apenas com estrutura do projeto (branch diversao) em:
+Instalar (Python 3)[https://www.python.org/download/] para sua plataforma.
 
+Baixar a versão apenas com estrutura do projeto (branch diversao):
 
+    (Apenas Estrutura)[https://github.com/pythonprobr/pythonbirds/archive/diversao.zip]
 
 Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmica das classes. Para rodar todos testes, execute
 
