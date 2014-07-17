@@ -12,3 +12,6 @@ class Fase():
 
     def adicionar_passaro(self, *passaros):
         self._passaros.extend(passaros)
+
+    def acabou(self,tempo):
+        return True

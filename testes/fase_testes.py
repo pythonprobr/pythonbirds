@@ -40,3 +40,6 @@ class FaseTestes(TestCase):
         fase.adicionar_passaro(passaro1, passaro2)
         self.assertListEqual([passaro, passaro1, passaro2], fase._passaros)
 
+    def teste_acabou_sem_porcos(self):
+        fase=Fase()
+        self.assertTrue(fase.acabou(0))
