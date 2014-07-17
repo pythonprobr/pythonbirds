@@ -15,7 +15,7 @@ Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmi
 
     python executor_de_testes.py
     
-Explicação detalhada sobre classes e métodos se encontram em [Jogo](#jogo)
+Explicação detalhada sobre classes e métodos se encontram em [Jogo](jogo)
 
 ## Ordem de desenvolvimento
 
