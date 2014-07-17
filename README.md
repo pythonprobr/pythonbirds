@@ -5,6 +5,8 @@ Projeto para Ensino de Programação Orientadas a Objetos em Python.
 
 A versão utilizada para desenvolvimento foi Python 3.4
 
+Um vídeo fala mais que 1000 palavras: [Python Birds](https://www.youtube.com/watch?v=b899h0lNd7U&list=PLA05yVJtRWYTm0sIa6n56UpCjCsR5ekla)
+
 # Abordagem
 
 Instalar [Python 3](https://www.python.org/download/).
@@ -33,7 +35,7 @@ Após o desenvolvimento é possível emular um jogo que termina em vitória roda
 Para jogar, aperte enter, digite o ângulo de lançamento e aperte enter novamente.
 Demonstração no vídeo:
 
-[Python Birds](https://youtube.com)
+[Python Birds](https://www.youtube.com/watch?v=b899h0lNd7U&list=PLA05yVJtRWYTm0sIa6n56UpCjCsR5ekla)
 
 ## script atores.py
 
