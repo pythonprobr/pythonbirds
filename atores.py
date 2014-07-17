@@ -82,9 +82,9 @@ class Passaro(Ator):
         self.x = self._x_inicial + self._velocidade_scalar * delta_t * math.cos(self._angulo_de_lancamento)
 
     def _calcular_posicao_vertical(self, delta_t):
-        self.y = self._y_inicial + \
-                 self._velocidade_scalar * delta_t * math.sin(self._angulo_de_lancamento) - \
-                 (GRAVIDADE / 2) * delta_t ** 2
+        self.y = (self._y_inicial +
+                  self._velocidade_scalar * delta_t * math.sin(self._angulo_de_lancamento) -
+                  (GRAVIDADE / 2) * delta_t ** 2)
 
     def _calcular_posicao(self, tempo):
         delta_t = tempo - self._tempo_de_lancamento
@@ -114,10 +114,3 @@ class PassaroAmarelo(Passaro):
 class PassaroVermelho(Passaro):
     _velocidade_scalar = 20  # m/s
     _caracter_ativo = 'D'
-
-
-
-
-
-
-

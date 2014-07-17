@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from itertools import chain
 from atores import ATIVO
 
@@ -76,5 +77,3 @@ class Fase():
 
     def _existe_passaro_ativo(self, tempo):
         return self._verificar_se_existe_ator_ativo(self._passaros, tempo)
-
-

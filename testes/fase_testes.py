@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import os
 from unittest.case import TestCase
@@ -108,10 +109,6 @@ class FaseTestes(TestCase):
                          'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
     def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
-        fase = Fase()
-        fase.lancar(90, 0)
-
-    def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
         passaro_vermelho, passaro_amarelo = PassaroVermelho(1, 1), PassaroAmarelo(1, 1)
         fase = Fase()
         fase.adicionar_passaro(passaro_vermelho, passaro_amarelo)
@@ -128,7 +125,6 @@ class FaseTestes(TestCase):
         self.assertTrue(passaro_amarelo.foi_lancado())
         self.assertEqual(math.radians(45), passaro_amarelo._angulo_de_lancamento)
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
-
 
     def teste_calcular_pontos(self):
         expected = [Ponto(3, 3, 'D'), Ponto(3, 3, '>'), Ponto(3, 3, '>'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
@@ -169,9 +165,3 @@ for i in range(86):
 
 if __name__ == '__main__':
     placa_grafica.animar(fase_exemplo)
-
-
-
-
-
-
