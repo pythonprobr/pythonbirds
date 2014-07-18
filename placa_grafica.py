@@ -3,13 +3,13 @@ import os
 import platform
 import time
 import sys
+from templates import FIM
 
 try:
     import msvcrt
 except:
     pass
 import select
-from templates import FIM
 
 
 eh_windows = platform.system() == 'Windows'

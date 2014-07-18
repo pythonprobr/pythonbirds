@@ -4,8 +4,9 @@ from atores import ATIVO
 
 
 class Ponto():
-    def __init__(self, x, y, caracter):
+    def __init__(self, x, y, caracter, canvas=None):
         self.caracter = caracter
+        self.canvas = canvas
         self.x = x
         self.y = y
 
@@ -17,19 +18,23 @@ class Ponto():
 
 
 class Fase():
-    def __init__(self):
+    def __init__(self,intervalo_de_colisao=1):
+        self.intervalo_de_colisao = intervalo_de_colisao
         self._passaros = []
         self._porcos = []
         self._obstaculos = []
 
+    def _adicionar_ator(self, lista, *atores):
+        lista.extend(atores)
+
     def adicionar_obstaculo(self, *obstaculos):
-        self._obstaculos.extend(obstaculos)
+        self._adicionar_ator(self._obstaculos, *obstaculos)
 
     def adicionar_porco(self, *porcos):
-        self._porcos.extend(porcos)
+        self._adicionar_ator(self._porcos, *porcos)
 
     def adicionar_passaro(self, *passaros):
-        self._passaros.extend(passaros)
+        self._adicionar_ator(self._passaros, *passaros)
 
     def acabou(self, tempo):
         return not self._existe_porco_ativo(tempo) or not self._existe_passaro_ativo(tempo)
@@ -60,7 +65,7 @@ class Fase():
         passaro.calcular_posicao(tempo)
         for ator in chain(self._obstaculos, self._porcos):
             if ATIVO == passaro.status(tempo):
-                passaro.colidir(ator, tempo)
+                passaro.colidir(ator, tempo,self.intervalo_de_colisao)
                 passaro.colidir_com_chao(tempo)
             else:
                 break

@@ -9,7 +9,7 @@ ATIVO = 'Ativo'
 
 class Ator():
     _caracter_ativo = 'A'
-    _caracter_destruido = '+'
+    _caracter_destruido = ' '
 
     def caracter(self, tempo):
         if self.status(tempo) == ATIVO:
@@ -34,13 +34,13 @@ class Ator():
         self.x, self.y = round(self.x), round(self.y)
         return self.x, self.y
 
-    def colidir(self, outro_ator, tempo):
+    def colidir(self, outro_ator, tempo, intervalo=1):
         if self.status(tempo) == DESTRUIDO or outro_ator.status(tempo) == DESTRUIDO:
             return
         x1, y1 = self.arredondar_posicao()
         x2, y2 = outro_ator.arredondar_posicao()
 
-        def esta_no_intervalo(coordenada1, coordenada2, intervalo=1):
+        def esta_no_intervalo(coordenada1, coordenada2):
             coordenadas = sorted([coordenada1, coordenada2])
             return coordenadas[1] - intervalo <= coordenadas[0]
 
@@ -51,18 +51,18 @@ class Ator():
 
 class Obstaculo(Ator):
     _caracter_ativo = 'O'
-    _caracter_destruido = ' '
 
 
 class Porco(Ator):
     _caracter_ativo = '@'
+    _caracter_destruido = '+'
 
 
 GRAVIDADE = 10  # m/s^2
 
 
 class Passaro(Ator):
-    _velocidade_scalar = None
+    velocidade_escalar = None
 
     def __init__(self, x=0, y=0):
         super().__init__(x, y)
@@ -79,11 +79,11 @@ class Passaro(Ator):
             self._tempo_de_colisao = tempo
 
     def _calcular_posicao_horizontal(self, delta_t):
-        self.x = self._x_inicial + self._velocidade_scalar * delta_t * math.cos(self._angulo_de_lancamento)
+        self.x = self._x_inicial + self.velocidade_escalar * delta_t * math.cos(self._angulo_de_lancamento)
 
     def _calcular_posicao_vertical(self, delta_t):
         self.y = (self._y_inicial +
-                  self._velocidade_scalar * delta_t * math.sin(self._angulo_de_lancamento) -
+                  self.velocidade_escalar * delta_t * math.sin(self._angulo_de_lancamento) -
                   (GRAVIDADE / 2) * delta_t ** 2)
 
     def _calcular_posicao(self, tempo):
@@ -107,10 +107,10 @@ class Passaro(Ator):
 
 
 class PassaroAmarelo(Passaro):
-    _velocidade_scalar = 30  # m/s
+    velocidade_escalar = 30  # m/s
     _caracter_ativo = '>'
 
 
 class PassaroVermelho(Passaro):
-    _velocidade_scalar = 20  # m/s
+    velocidade_escalar = 20  # m/s
     _caracter_ativo = 'D'
