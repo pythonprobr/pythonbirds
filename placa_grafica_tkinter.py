@@ -1,11 +1,10 @@
 # coding: utf-8
 import time
+from tkinter import PhotoImage, NW, Tk, Canvas
+from tkinter.constants import ALL
 
-from tkinter import *
-from tkinter import ttk
 from fase import Fase
 from atores import PassaroVermelho, PassaroAmarelo, Porco, Obstaculo
-from fase_tkinter import FaseTk
 
 
 def get_angulo(event):
@@ -27,45 +26,57 @@ ALTURA_DA_TELA = 600  # px
 # b = Button(popup_angulo, text="OK", command=get_angulo)
 # b.pack(pady=5)
 
+root = Tk()
+
+PASSARO_VERMELHO = PhotoImage(file="images/passaro_vermelho.gif")
+PASSARO_AMARELHO = PhotoImage(file="images/passaro_amarelo.gif")
+PORCO = PhotoImage(file="images/porco.gif")
+PORCO_MORTO = PhotoImage(file="images/porco_morto.gif")
+OBSTACULO = PhotoImage(file="images/obstaculo.gif")
+TRANSPARENTE = PhotoImage(file="images/transparente.gif")
+BACKGROUND = PhotoImage(file="images/background.gif")
+
+CARACTER_PARA__IMG_DCT = {'D': PASSARO_VERMELHO, '>': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
+                          '+': PORCO_MORTO, ' ': TRANSPARENTE}
 
 
-
-
-
-def plotar(canvas, ponto):
+def plotar(camada_de_atores, ponto):
     multiplicador = 10  # 10 px/m
     x = multiplicador * ponto.x
-    y = ALTURA_DA_TELA - ponto.y * multiplicador - 11 * multiplicador
-    canvas.coords(ponto.canvas_img_id, (x, y))
+    y = ALTURA_DA_TELA - ponto.y * multiplicador - 12 * multiplicador
+    image = CARACTER_PARA__IMG_DCT.get(ponto.caracter, TRANSPARENTE)
+    camada_de_atores.create_image((x, y), image=image, anchor=NW)
+    # camada_de_atores.create_rectangle(x, y, 150, 75, fill="blue")
 
 
-def animar(tela,fase,passo=0.1, delta_t=0.1):
-    tempo=0
+def animar(tela, camada_de_atores, fase, passo=0.1, delta_t=0.1):
+    tempo = 0
+    passo = int(1000 * passo)
+
     def _animar():
+        camada_de_atores.delete(ALL)
+        camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
         nonlocal tempo
         tempo += delta_t
-        time.sleep(passo)
         for ponto in fase.calcular_pontos(tempo):
-            plotar(fase.canvas, ponto)
-        tela.after(1, _animar)
+            plotar(camada_de_atores, ponto)
+        tela.after(passo, _animar)
 
-
-
-    tela.after(1, _animar)
+    camada_de_atores.pack()
+    _animar()
     tela.mainloop()
+
+    tela.after(passo, _animar)
 
 
 if __name__ == '__main__':
-    root = Tk()
     root.title("Python Birds")
     root.geometry("800x600")
     root.resizable(0, 0)
 
     stage = Canvas(root, width=800, height=ALTURA_DA_TELA)
-    bg_image = PhotoImage(file="images/background.gif")
-    stage.create_image((0, 0), image=bg_image, anchor=NW)
-    stage.pack()
-    fase = FaseTk(stage)
+
+    fase = Fase()
     passaros = [PassaroVermelho(3, 3), PassaroAmarelo(3, 3), PassaroAmarelo(3, 3)]
     porcos = [Porco(75, 1), Porco(70, 1)]
     obstaculos = [Obstaculo(31, 10)]
@@ -75,9 +86,9 @@ if __name__ == '__main__':
     fase.adicionar_obstaculo(*obstaculos)
 
     fase.lancar(45, 1)
-    fase.lancar(64, 2)
+    fase.lancar(63.5, 2)
     fase.lancar(23, 3)
 
-    animar(root,fase)
+    animar(root, stage, fase)
 
     # root.wait_window(popup_angulo)
