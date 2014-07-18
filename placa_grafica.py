@@ -9,7 +9,6 @@ try:
 except:
     pass
 import select
-from templates import FIM
 
 
 eh_windows = platform.system() == 'Windows'

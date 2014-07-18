@@ -4,8 +4,9 @@ from atores import ATIVO
 
 
 class Ponto():
-    def __init__(self, x, y, caracter):
+    def __init__(self, x, y, caracter, canvas=None):
         self.caracter = caracter
+        self.canvas = canvas
         self.x = x
         self.y = y
 
@@ -54,7 +55,7 @@ class Fase():
         return pontos
 
     def _transformar_em_ponto(self, ator, tempo):
-        return Ponto(ator.x, ator.y, ator.caracter(tempo))
+        return Ponto(ator.x, ator.y, ator.caracter(tempo), ator.canvas)
 
     def _calcular_ponto_de_passaro(self, passaro, tempo, ):
         passaro.calcular_posicao(tempo)
