@@ -9,7 +9,7 @@ ATIVO = 'Ativo'
 
 class Ator():
     _caracter_ativo = 'A'
-    _caracter_destruido = '+'
+    _caracter_destruido = ' '
 
     def caracter(self, tempo):
         if self.status(tempo) == ATIVO:
@@ -51,11 +51,11 @@ class Ator():
 
 class Obstaculo(Ator):
     _caracter_ativo = 'O'
-    _caracter_destruido = ' '
 
 
 class Porco(Ator):
     _caracter_ativo = '@'
+    _caracter_destruido = '+'
 
 
 GRAVIDADE = 10  # m/s^2
