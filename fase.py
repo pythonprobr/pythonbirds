@@ -23,14 +23,17 @@ class Fase():
         self._porcos = []
         self._obstaculos = []
 
+    def _adicionar_ator(self, lista, *atores):
+        lista.extend(atores)
+
     def adicionar_obstaculo(self, *obstaculos):
-        self._obstaculos.extend(obstaculos)
+        self._adicionar_ator(self._obstaculos, *obstaculos)
 
     def adicionar_porco(self, *porcos):
-        self._porcos.extend(porcos)
+        self._adicionar_ator(self._porcos, *porcos)
 
     def adicionar_passaro(self, *passaros):
-        self._passaros.extend(passaros)
+        self._adicionar_ator(self._passaros, *passaros)
 
     def acabou(self, tempo):
         return not self._existe_porco_ativo(tempo) or not self._existe_passaro_ativo(tempo)
@@ -55,7 +58,7 @@ class Fase():
         return pontos
 
     def _transformar_em_ponto(self, ator, tempo):
-        return Ponto(ator.x, ator.y, ator.caracter(tempo), ator.canvas)
+        return Ponto(ator.x, ator.y, ator.caracter(tempo))
 
     def _calcular_ponto_de_passaro(self, passaro, tempo, ):
         passaro.calcular_posicao(tempo)

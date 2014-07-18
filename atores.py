@@ -17,10 +17,9 @@ class Ator():
         else:
             return self._caracter_destruido
 
-    def __init__(self, x=0, y=0, canvas=None):
+    def __init__(self, x=0, y=0):
         self.y = y
         self.x = x
-        self.canvas = canvas
         self._tempo_de_colisao = None
 
     def status(self, tempo):
@@ -59,14 +58,14 @@ class Porco(Ator):
     _caracter_ativo = '@'
 
 
-GRAVIDADE = 30  # m/s^2
+GRAVIDADE = 10  # m/s^2
 
 
 class Passaro(Ator):
     _velocidade_scalar = None
 
-    def __init__(self, x=0, y=0, canvas=None):
-        super().__init__(x, y, canvas)
+    def __init__(self, x=0, y=0):
+        super().__init__(x, y)
         self._x_inicial = x
         self._y_inicial = y
         self._tempo_de_lancamento = None
