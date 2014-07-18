@@ -1,8 +1,9 @@
-#coding: utf-8
+# coding: utf-8
 import time
+from tkinter import PhotoImage, NW, Tk, Canvas
+from tkinter.constants import ALL
+import atores
 
-from tkinter import *
-from tkinter import ttk
 from fase import Fase
 from atores import PassaroVermelho, PassaroAmarelo, Porco, Obstaculo
 
@@ -13,31 +14,10 @@ def get_angulo(event):
     popup_angulo.destroy()
 
 
-root = Tk()
-root.title("Python Birds")
-root.geometry("800x600")
-root.resizable(0, 0)
+ALTURA_DA_TELA = 600  # px
 
-stage = Canvas(root, width=800, height=600)
-bg_image = PhotoImage(file="images/background.gif")
-stage.create_image((0, 0), image=bg_image, anchor=NW)
-stage.pack()
 
-passaro_vermelho_img = PhotoImage(file="images/passaro_vermelho.gif")
-passaro_vermelho = stage.create_image((40, 482), image=passaro_vermelho_img, anchor=NW)
 
-passaro_amarelo_img = PhotoImage(file="images/passaro_amarelo.gif")
-passaro_amarelo = stage.create_image((30, 482), image=passaro_amarelo_img, anchor=NW)
-
-passaro_amarelo2 = stage.create_image((20, 482), image=passaro_amarelo_img, anchor=NW)
-
-porco_img = PhotoImage(file="images/porco.gif")
-porco = stage.create_image((700, 482), image=porco_img, anchor=NW)
-
-porco2 = stage.create_image((480, 482), image=porco_img, anchor=NW)
-
-obstaculo_img = PhotoImage(file="images/obstaculo.gif")
-obstaculo = stage.create_image((300, 300), image=obstaculo_img, anchor=NW)
 
 
 # popup_angulo = Toplevel(root)
@@ -47,60 +27,72 @@ obstaculo = stage.create_image((300, 300), image=obstaculo_img, anchor=NW)
 # b = Button(popup_angulo, text="OK", command=get_angulo)
 # b.pack(pady=5)
 
+root = Tk()
 
-def mover(obj, x, y):
-    stage.move(obj, x, y)
-    stage.update()
+PASSARO_VERMELHO = PhotoImage(file="images/passaro_vermelho.gif")
+PASSARO_AMARELHO = PhotoImage(file="images/passaro_amarelo.gif")
+PORCO = PhotoImage(file="images/porco.gif")
+PORCO_MORTO = PhotoImage(file="images/porco_morto.gif")
+OBSTACULO = PhotoImage(file="images/obstaculo.gif")
+TRANSPARENTE = PhotoImage(file="images/transparente.gif")
+BACKGROUND = PhotoImage(file="images/background.gif")
 
-tempo = 0
-passo = 0.1
-delta_t = 0.1
-
-passaros = [passaro_vermelho, passaro_amarelo]
-fase = None
-
-ultima_posicao = {}
-
-def mover(canvas_id, posicao_atual, proxima_posicao):
-    if proxima_posicao.y == 0: 
-        return
-
-    x = posicao_atual.x - proxima_posicao.x
-    y = posicao_atual.y - proxima_posicao.y
-    stage.move(canvas_id, -x * 30, y * 30)
-
-def animar():
-    global tempo, delta_t, fase       
-    tempo += delta_t
-    time.sleep(passo)
-    pontos_cartesianos = fase.calcular_pontos(tempo)
-    for ponto in pontos_cartesianos:
-        canvas_id = ponto.canvas
-        ultima_posicao[canvas_id] = ultima_posicao.get(canvas_id, ponto)
-        mover(canvas_id, ultima_posicao[canvas_id], ponto)
-        #verificar aqui colisão
+CARACTER_PARA__IMG_DCT = {'D': PASSARO_VERMELHO, '>': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
+                          '+': PORCO_MORTO, ' ': TRANSPARENTE}
 
 
-        ultima_posicao[canvas_id] = ponto
-
-    root.after(1, animar)
-
-
-fase = Fase()
-passaros = [PassaroVermelho(3, 3, passaro_vermelho), PassaroAmarelo(3, 3, passaro_amarelo), PassaroAmarelo(3, 3, passaro_amarelo2)]
-porcos = [Porco(78, 1, porco), Porco(78, 1, porco2)]
-obstaculos = [Obstaculo(31, 10, obstaculo)]
-
-fase.adicionar_passaro(*passaros)
-fase.adicionar_porco(*porcos)
-fase.adicionar_obstaculo(*obstaculos)
+def plotar(camada_de_atores, ponto):
+    x = ponto.x
+    y = ALTURA_DA_TELA - ponto.y - 120 #para coincidir com o chao da tela
+    image = CARACTER_PARA__IMG_DCT.get(ponto.caracter, TRANSPARENTE)
+    camada_de_atores.create_image((x, y), image=image, anchor=NW)
+    # camada_de_atores.create_rectangle(x, y, 150, 75, fill="blue")
 
 
-fase.lancar(45, 1)
-fase.lancar(64, 2)
-fase.lancar(23, 3)
+def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
+    tempo = 0
+    passo = int(1000 * passo)
 
-root.after(1, animar)
-root.mainloop()
+    def _animar():
+        camada_de_atores.delete(ALL)
+        camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
+        nonlocal tempo
+        tempo += delta_t
+        for ponto in fase.calcular_pontos(tempo):
+            plotar(camada_de_atores, ponto)
+        tela.after(passo, _animar)
 
-# root.wait_window(popup_angulo)
+    camada_de_atores.pack()
+    _animar()
+    tela.mainloop()
+
+    tela.after(passo, _animar)
+
+
+if __name__ == '__main__':
+    root.title("Python Birds")
+    root.geometry("800x600")
+    root.resizable(0, 0)
+
+    stage = Canvas(root, width=800, height=ALTURA_DA_TELA)
+
+    fase = Fase(intervalo_de_colisao=10)
+    multiplicador = 10
+    atores.GRAVIDADE=100
+    PassaroAmarelo.velocidade_escalar*= multiplicador
+    PassaroVermelho.velocidade_escalar*= multiplicador
+    passaros = [PassaroVermelho(30, 30), PassaroAmarelo(30, 30), PassaroAmarelo(30, 30)]
+    porcos = [Porco(750, 1), Porco(700, 1)]
+    obstaculos = [Obstaculo(310, 100)]
+
+    fase.adicionar_passaro(*passaros)
+    fase.adicionar_porco(*porcos)
+    fase.adicionar_obstaculo(*obstaculos)
+
+    fase.lancar(45, 1)
+    fase.lancar(64, 2)
+    fase.lancar(21, 3)
+
+    animar(root, stage, fase)
+
+    # root.wait_window(popup_angulo)

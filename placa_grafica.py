@@ -3,6 +3,7 @@ import os
 import platform
 import time
 import sys
+from templates import FIM
 
 try:
     import msvcrt
