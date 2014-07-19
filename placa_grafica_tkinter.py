@@ -1,6 +1,6 @@
 # coding: utf-8
 import time
-from tkinter import PhotoImage, NW, Tk, Canvas
+from tkinter import PhotoImage, NW, Tk, Canvas, Label
 from tkinter.constants import ALL
 import atores
 
@@ -15,17 +15,6 @@ def get_angulo(event):
 
 
 ALTURA_DA_TELA = 600  # px
-
-
-
-
-
-# popup_angulo = Toplevel(root)
-# Label(popup_angulo, text="Digite o angulo de lançamento: ").pack()
-# angulo_input = Entry(popup_angulo)
-# angulo_input.pack(padx=6)
-# b = Button(popup_angulo, text="OK", command=get_angulo)
-# b.pack(pady=5)
 
 root = Tk()
 
@@ -43,29 +32,41 @@ CARACTER_PARA__IMG_DCT = {'D': PASSARO_VERMELHO, '>': PASSARO_AMARELHO, '@': POR
 
 def plotar(camada_de_atores, ponto):
     x = ponto.x
-    y = ALTURA_DA_TELA - ponto.y - 120 #para coincidir com o chao da tela
+    y = ALTURA_DA_TELA - ponto.y - 120  # para coincidir com o chao da tela
     image = CARACTER_PARA__IMG_DCT.get(ponto.caracter, TRANSPARENTE)
     camada_de_atores.create_image((x, y), image=image, anchor=NW)
-    # camada_de_atores.create_rectangle(x, y, 150, 75, fill="blue")
 
 
 def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
     tempo = 0
     passo = int(1000 * passo)
+    animar.angulo = 0
 
     def _animar():
         camada_de_atores.delete(ALL)
         camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
         nonlocal tempo
         tempo += delta_t
+
+        camada_de_atores.create_line(52, 493, 100 + animar.angulo / 10, 493 - animar.angulo, width=1.5)
+        camada_de_atores.create_text(35, 493, text=u"%d°" % animar.angulo)
         for ponto in fase.calcular_pontos(tempo):
             plotar(camada_de_atores, ponto)
         tela.after(passo, _animar)
 
+    def _ouvir_comandos_lancamento(evento):
+        if evento.keysym == 'Up':
+            animar.angulo += 1
+        elif evento.keysym == 'Down':
+            animar.angulo -= 1
+        elif evento.keysym == 'Return':
+            fase.lancar(animar.angulo, tempo)
+
     camada_de_atores.pack()
     _animar()
-    tela.mainloop()
+    tela.bind_all('<KeyPress>', _ouvir_comandos_lancamento)
 
+    tela.mainloop()
     tela.after(passo, _animar)
 
 
@@ -78,9 +79,9 @@ if __name__ == '__main__':
 
     fase = Fase(intervalo_de_colisao=10)
     multiplicador = 10
-    atores.GRAVIDADE=100
-    PassaroAmarelo.velocidade_escalar*= multiplicador
-    PassaroVermelho.velocidade_escalar*= multiplicador
+    atores.GRAVIDADE = 100
+    PassaroAmarelo.velocidade_escalar *= multiplicador
+    PassaroVermelho.velocidade_escalar *= multiplicador
     passaros = [PassaroVermelho(30, 30), PassaroAmarelo(30, 30), PassaroAmarelo(30, 30)]
     porcos = [Porco(750, 1), Porco(700, 1)]
     obstaculos = [Obstaculo(310, 100)]
@@ -89,9 +90,9 @@ if __name__ == '__main__':
     fase.adicionar_porco(*porcos)
     fase.adicionar_obstaculo(*obstaculos)
 
-    fase.lancar(45, 1)
-    fase.lancar(64, 2)
-    fase.lancar(21, 3)
+    # fase.lancar(45, 1)
+    # fase.lancar(64, 2)
+    # fase.lancar(21, 3)
 
     animar(root, stage, fase)
 
