@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
+from os import path
+import sys
 
-from __future__ import unicode_literals
+project_dir = path.dirname(__file__)
+project_dir = path.join('..')
+sys.path.append(project_dir)
+
 from atores import PassaroAmarelo, PassaroVermelho, Obstaculo, Porco
 from fase import Fase
 from placa_grafica_tkinter import rodar_fase
 
-if __name__=='__main__':
+if __name__ == '__main__':
     fase = Fase(intervalo_de_colisao=10)
 
 
