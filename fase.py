@@ -40,11 +40,11 @@ class Fase():
         return not self._existe_porco_ativo(tempo) or not self._existe_passaro_ativo(tempo)
 
     def status(self, tempo):
+        if not self._existe_porco_ativo(tempo):
+            return 'Jogo em encerrado. Você ganhou!'
         if self._existe_passaro_ativo(tempo):
             return 'Jogo em andamento.'
-        if self._existe_porco_ativo(tempo):
-            return 'Jogo em encerrado. Você perdeu!'
-        return 'Jogo em encerrado. Você ganhou!'
+        return 'Jogo em encerrado. Você perdeu!'
 
     def lancar(self, angulo, tempo):
         for passaro in self._passaros:

@@ -100,13 +100,18 @@ class FaseTestes(TestCase):
         self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(3),
                          'Obstáculo não interfere para definir vitória')
 
-        fase.adicionar_porco(Porco())
+        porco = Porco()
+        fase.adicionar_porco(porco)
         self.assertEqual('Jogo em encerrado. Você perdeu!', fase.status(3),
                          'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar em derrota')
 
         fase.adicionar_passaro(PassaroAmarelo())
         self.assertEqual('Jogo em andamento.', fase.status(3),
                          'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
+
+        porco.colidir(porco, 3)
+        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(3),
+                         'Sem porco ativo, o jogo deveria acabar com vitória')
 
     def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
         passaro_vermelho, passaro_amarelo = PassaroVermelho(1, 1), PassaroAmarelo(1, 1)

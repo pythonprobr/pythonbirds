@@ -3,6 +3,7 @@ import time
 from tkinter import PhotoImage, NW, Tk, Canvas
 from tkinter.constants import ALL
 import math
+from os import path
 import atores
 
 from fase import Fase
@@ -12,23 +13,21 @@ ALTURA_DA_TELA = 600  # px
 
 root = Tk()
 
-PASSARO_VERMELHO = PhotoImage(file="images/passaro_vermelho.gif")
-PASSARO_VERMELHO_MORTO = PhotoImage(file="images/passaro_vermelho_morto.gif")
-PASSARO_AMARELHO = PhotoImage(file="images/passaro_amarelo.gif")
-PASSARO_AMARELHO_MORTO = PhotoImage(file="images/passaro_amarelo_morto.gif")
-PORCO = PhotoImage(file="images/porco.gif")
-PORCO_MORTO = PhotoImage(file="images/porco_morto.gif")
-OBSTACULO = PhotoImage(file="images/obstaculo.gif")
-TRANSPARENTE = PhotoImage(file="images/transparente.gif")
-BACKGROUND = PhotoImage(file="images/background.gif")
-PYTHONBIRDS_LOGO = PhotoImage(file="images/python-birds-logo.gif")
-VOCE_GANHOU = PhotoImage(file="images/python-birds-voce-ganhou-popup.gif")
-VOCE_PERDEU = PhotoImage(file="images/python-birds-voce-perdeu-popup.gif")
+IMAGES_PATH = path.dirname(__file__)
+IMAGES_PATH = path.join(IMAGES_PATH, 'images')
+PASSARO_VERMELHO = PhotoImage(file=path.join(IMAGES_PATH, "passaro_vermelho.gif"))
+PASSARO_AMARELHO = PhotoImage(file=path.join(IMAGES_PATH, "passaro_amarelo.gif"))
+PORCO = PhotoImage(file=path.join(IMAGES_PATH, "porco.gif"))
+PORCO_MORTO = PhotoImage(file=path.join(IMAGES_PATH, "porco_morto.gif"))
+OBSTACULO = PhotoImage(file=path.join(IMAGES_PATH, "obstaculo.gif"))
+TRANSPARENTE = PhotoImage(file=path.join(IMAGES_PATH, "transparente.gif"))
+BACKGROUND = PhotoImage(file=path.join(IMAGES_PATH, "background.gif"))
+PYTHONBIRDS_LOGO = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-logo.gif"))
+VOCE_GANHOU = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-voce-ganhou-popup.gif"))
+VOCE_PERDEU = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-voce-perdeu-popup.gif"))
 
 CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO,
-                          'v': PASSARO_VERMELHO_MORTO,
                           'A': PASSARO_AMARELHO,
-                          'a': PASSARO_AMARELHO_MORTO,
                           '@': PORCO,
                           'O': OBSTACULO,
                           '+': PORCO_MORTO,
@@ -56,7 +55,8 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
         tamanho_seta = 60
         angulo_rad = math.radians(-angulo)
 
-        camada_de_atores.create_line(52, 493, 52 + tamanho_seta*math.cos(angulo_rad), 493 + tamanho_seta*math.sin(angulo_rad), width=1.5)
+        camada_de_atores.create_line(52, 493, 52 + tamanho_seta * math.cos(angulo_rad),
+                                     493 + tamanho_seta * math.sin(angulo_rad), width=1.5)
         camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
         for ponto in fase.calcular_pontos(tempo):
             plotar(camada_de_atores, ponto)
@@ -107,7 +107,6 @@ def rodar_fase(fase):
     PassaroVermelho.velocidade_escalar *= multiplicador
     atores.GRAVIDADE = 100
     animar(root, stage, fase)
-
 
 
 if __name__ == '__main__':
