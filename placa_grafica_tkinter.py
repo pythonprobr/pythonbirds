@@ -105,5 +105,3 @@ if __name__ == '__main__':
     # fase.lancar(21, 3)
 
     animar(root, stage, fase)
-
-    # root.wait_window(popup_angulo)
