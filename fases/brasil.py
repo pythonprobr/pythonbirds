@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     deltax_gambi=80
     # Adicionar Pássaros Amarelos
-    for i in range(50):
+    for i in range(100):
         fase.adicionar_passaro(PassaroAmarelo(30, 30))
 
     # linhas verticais
