@@ -23,7 +23,7 @@ PYTHONBIRDS_LOGO = PhotoImage(file="images/python-birds-logo.gif")
 VOCE_GANHOU = PhotoImage(file="images/python-birds-voce-ganhou-popup.gif")
 VOCE_PERDEU = PhotoImage(file="images/python-birds-voce-perdeu-popup.gif")
 
-CARACTER_PARA__IMG_DCT = {'D': PASSARO_VERMELHO, '>': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
+CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO, 'A': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
                           '+': PORCO_MORTO, ' ': TRANSPARENTE}
 
 
