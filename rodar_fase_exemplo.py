@@ -5,7 +5,7 @@ from atores import PassaroAmarelo, PassaroVermelho, Obstaculo, Porco
 from fase import Fase
 from placa_grafica_tkinter import rodar_fase
 
-fase = Fase()
+fase = Fase(intervalo_de_colisao=10)
 
 
 # Adicion Pássaros Vermelhos
