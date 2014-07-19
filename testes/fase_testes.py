@@ -127,19 +127,19 @@ class FaseTestes(TestCase):
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
 
     def teste_calcular_pontos(self):
-        expected = [Ponto(3, 3, 'D'), Ponto(3, 3, '>'), Ponto(3, 3, '>'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
+        expected = [Ponto(3, 3, 'V'), Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
                     Ponto(70, 1, '@')]
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(0))
 
-        expected = [Ponto(31, 11, 'd'), Ponto(17, 25, '>'), Ponto(3, 3, '>'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+        expected = [Ponto(31, 11, 'v'), Ponto(17, 25, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
                     Ponto(70, 1, '@')]
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(4))
 
-        expected = [Ponto(31, 11, 'd'), Ponto(57, 30, '>'), Ponto(69, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+        expected = [Ponto(31, 11, 'v'), Ponto(57, 30, 'A'), Ponto(69, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
                     Ponto(70, 1, '+')]
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(7))
 
-        expected = [Ponto(31, 11, 'd'), Ponto(77, 2, 'a'), Ponto(69, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
+        expected = [Ponto(31, 11, 'v'), Ponto(77, 2, 'a'), Ponto(69, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
                     Ponto(70, 1, '+')]
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(8.5))
 
