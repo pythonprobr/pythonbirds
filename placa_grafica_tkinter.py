@@ -16,17 +16,6 @@ def get_angulo(event):
 
 ALTURA_DA_TELA = 600  # px
 
-
-
-
-
-# popup_angulo = Toplevel(root)
-# Label(popup_angulo, text="Digite o angulo de lançamento: ").pack()
-# angulo_input = Entry(popup_angulo)
-# angulo_input.pack(padx=6)
-# b = Button(popup_angulo, text="OK", command=get_angulo)
-# b.pack(pady=5)
-
 root = Tk()
 
 PASSARO_VERMELHO = PhotoImage(file="images/passaro_vermelho.gif")
@@ -43,7 +32,7 @@ CARACTER_PARA__IMG_DCT = {'D': PASSARO_VERMELHO, '>': PASSARO_AMARELHO, '@': POR
 
 def plotar(camada_de_atores, ponto):
     x = ponto.x
-    y = ALTURA_DA_TELA - ponto.y - 120 #para coincidir com o chao da tela
+    y = ALTURA_DA_TELA - ponto.y - 120  # para coincidir com o chao da tela
     image = CARACTER_PARA__IMG_DCT.get(ponto.caracter, TRANSPARENTE)
     camada_de_atores.create_image((x, y), image=image, anchor=NW)
 
@@ -90,9 +79,9 @@ if __name__ == '__main__':
 
     fase = Fase(intervalo_de_colisao=10)
     multiplicador = 10
-    atores.GRAVIDADE=100
-    PassaroAmarelo.velocidade_escalar*= multiplicador
-    PassaroVermelho.velocidade_escalar*= multiplicador
+    atores.GRAVIDADE = 100
+    PassaroAmarelo.velocidade_escalar *= multiplicador
+    PassaroVermelho.velocidade_escalar *= multiplicador
     passaros = [PassaroVermelho(30, 30), PassaroAmarelo(30, 30), PassaroAmarelo(30, 30)]
     porcos = [Porco(750, 1), Porco(700, 1)]
     obstaculos = [Obstaculo(310, 100)]

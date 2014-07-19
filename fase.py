@@ -18,7 +18,7 @@ class Ponto():
 
 
 class Fase():
-    def __init__(self,intervalo_de_colisao=1):
+    def __init__(self, intervalo_de_colisao=1):
         self.intervalo_de_colisao = intervalo_de_colisao
         self._passaros = []
         self._porcos = []
@@ -65,7 +65,7 @@ class Fase():
         passaro.calcular_posicao(tempo)
         for ator in chain(self._obstaculos, self._porcos):
             if ATIVO == passaro.status(tempo):
-                passaro.colidir(ator, tempo,self.intervalo_de_colisao)
+                passaro.colidir(ator, tempo, self.intervalo_de_colisao)
                 passaro.colidir_com_chao(tempo)
             else:
                 break
