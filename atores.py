@@ -22,6 +22,9 @@ class Ator():
         self.x = x
         self._tempo_de_colisao = None
 
+    def resetar(self):
+        self._tempo_de_colisao = None
+
     def status(self, tempo):
         if self._tempo_de_colisao is None or self._tempo_de_colisao > tempo:
             return ATIVO
@@ -71,6 +74,12 @@ class Passaro(Ator):
         self._tempo_de_lancamento = None
         self._angulo_de_lancamento = None  # radianos
 
+    def resetar(self):
+        super().resetar()
+        self._tempo_de_lancamento = None
+        self._angulo_de_lancamento = None
+
+
     def foi_lancado(self):
         return self._tempo_de_lancamento is not None
 
@@ -110,7 +119,6 @@ class PassaroAmarelo(Passaro):
     velocidade_escalar = 30  # m/s
     _caracter_ativo = 'A'
     _caracter_destruido = 'a'
-
 
 
 class PassaroVermelho(Passaro):

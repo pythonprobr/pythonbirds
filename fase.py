@@ -52,6 +52,10 @@ class Fase():
                 passaro.lancar(angulo, tempo)
                 return
 
+    def resetar(self):
+        for ator in chain(self._passaros,self._obstaculos,self._porcos):
+            ator.resetar()
+
     def calcular_pontos(self, tempo):
         pontos = [self._calcular_ponto_de_passaro(p, tempo) for p in self._passaros]
         obstaculos_e_porcos = chain(self._obstaculos, self._porcos)

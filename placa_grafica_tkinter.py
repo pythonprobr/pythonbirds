@@ -96,8 +96,12 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
 
 
     def _jogar_novamente(event):
-        # verificar se a fase ja acabou
-        pass
+        nonlocal tempo
+        nonlocal delta_t
+        if fase.acabou(tempo):
+            tempo = delta_t
+            fase.resetar()
+            _animar()
 
     def _finalizar(event):
         root.destroy()
