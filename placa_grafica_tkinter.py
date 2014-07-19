@@ -2,6 +2,7 @@
 import time
 from tkinter import PhotoImage, NW, Tk, Canvas, Label
 from tkinter.constants import ALL
+import math
 import atores
 
 from fase import Fase
@@ -43,12 +44,15 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
     angulo = 0
 
     def _animar():
+        nonlocal tempo
+        nonlocal angulo
         camada_de_atores.delete(ALL)
         camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
-        nonlocal tempo
         tempo += delta_t
+        tamanho_seta=40
+        angulo_rad=math.radians(-angulo)
 
-        camada_de_atores.create_line(52, 493, 100 + angulo / 10, 493 - angulo, width=1.5)
+        camada_de_atores.create_line(52, 493, 52 + tamanho_seta*math.cos(angulo_rad), 493 + tamanho_seta*math.sin(angulo_rad), width=1.5)
         camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
         for ponto in fase.calcular_pontos(tempo):
             plotar(camada_de_atores, ponto)
