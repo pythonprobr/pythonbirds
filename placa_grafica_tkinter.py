@@ -13,7 +13,9 @@ ALTURA_DA_TELA = 600  # px
 root = Tk()
 
 PASSARO_VERMELHO = PhotoImage(file="images/passaro_vermelho.gif")
+PASSARO_VERMELHO_MORTO = PhotoImage(file="images/passaro_vermelho_morto.gif")
 PASSARO_AMARELHO = PhotoImage(file="images/passaro_amarelo.gif")
+PASSARO_AMARELHO_MORTO = PhotoImage(file="images/passaro_amarelo_morto.gif")
 PORCO = PhotoImage(file="images/porco.gif")
 PORCO_MORTO = PhotoImage(file="images/porco_morto.gif")
 OBSTACULO = PhotoImage(file="images/obstaculo.gif")
@@ -23,8 +25,14 @@ PYTHONBIRDS_LOGO = PhotoImage(file="images/python-birds-logo.gif")
 VOCE_GANHOU = PhotoImage(file="images/python-birds-voce-ganhou-popup.gif")
 VOCE_PERDEU = PhotoImage(file="images/python-birds-voce-perdeu-popup.gif")
 
-CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO, 'A': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
-                          '+': PORCO_MORTO, ' ': TRANSPARENTE}
+CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO,
+                          'v': PASSARO_VERMELHO_MORTO,
+                          'A': PASSARO_AMARELHO,
+                          'a': PASSARO_AMARELHO_MORTO,
+                          '@': PORCO,
+                          'O': OBSTACULO,
+                          '+': PORCO_MORTO,
+                          ' ': TRANSPARENTE}
 
 
 def plotar(camada_de_atores, ponto):
@@ -71,6 +79,15 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
             angulo -= 1
         elif evento.keysym == 'Return':
             fase.lancar(angulo, tempo)
+
+    def _replay():
+        pass
+
+    def _jogar_de_novo():
+        pass
+
+    def _finalizar():
+        root.destroy()
 
     camada_de_atores.pack()
     _animar()
