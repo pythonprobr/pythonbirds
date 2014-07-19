@@ -1,19 +1,12 @@
 # coding: utf-8
 import time
-from tkinter import PhotoImage, NW, Tk, Canvas, Label
+from tkinter import PhotoImage, NW, Tk, Canvas
 from tkinter.constants import ALL
 import math
 import atores
 
 from fase import Fase
 from atores import PassaroVermelho, PassaroAmarelo, Porco, Obstaculo
-
-
-def get_angulo(event):
-    global angulo_input, popup_angulo
-    print(angulo_input.get())
-    popup_angulo.destroy()
-
 
 ALTURA_DA_TELA = 600  # px
 
@@ -26,6 +19,9 @@ PORCO_MORTO = PhotoImage(file="images/porco_morto.gif")
 OBSTACULO = PhotoImage(file="images/obstaculo.gif")
 TRANSPARENTE = PhotoImage(file="images/transparente.gif")
 BACKGROUND = PhotoImage(file="images/background.gif")
+PYTHONBIRDS_LOGO = PhotoImage(file="images/python-birds-logo.gif")
+VOCE_GANHOU = PhotoImage(file="images/python-birds-voce-ganhou-popup.gif")
+VOCE_PERDEU = PhotoImage(file="images/python-birds-voce-perdeu-popup.gif")
 
 CARACTER_PARA__IMG_DCT = {'D': PASSARO_VERMELHO, '>': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
                           '+': PORCO_MORTO, ' ': TRANSPARENTE}
@@ -49,14 +45,23 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
         camada_de_atores.delete(ALL)
         camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
         tempo += delta_t
-        tamanho_seta=40
-        angulo_rad=math.radians(-angulo)
+        tamanho_seta = 60
+        angulo_rad = math.radians(-angulo)
 
         camada_de_atores.create_line(52, 493, 52 + tamanho_seta*math.cos(angulo_rad), 493 + tamanho_seta*math.sin(angulo_rad), width=1.5)
         camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
         for ponto in fase.calcular_pontos(tempo):
             plotar(camada_de_atores, ponto)
-        tela.after(passo, _animar)
+
+        if fase.acabou(tempo):
+            camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
+            if 'ganhou' in fase.status(tempo):
+                img = VOCE_GANHOU
+            else:
+                img = VOCE_PERDEU
+            camada_de_atores.create_image(192, 211, image=img, anchor=NW)
+        else:
+            tela.after(passo, _animar)
 
     def _ouvir_comandos_lancamento(evento):
         nonlocal angulo
