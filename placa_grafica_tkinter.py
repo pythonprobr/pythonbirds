@@ -40,7 +40,7 @@ def plotar(camada_de_atores, ponto):
 def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
     tempo = 0
     passo = int(1000 * passo)
-    animar.angulo = 0
+    angulo = 0
 
     def _animar():
         camada_de_atores.delete(ALL)
@@ -48,19 +48,20 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
         nonlocal tempo
         tempo += delta_t
 
-        camada_de_atores.create_line(52, 493, 100 + animar.angulo / 10, 493 - animar.angulo, width=1.5)
-        camada_de_atores.create_text(35, 493, text=u"%d°" % animar.angulo)
+        camada_de_atores.create_line(52, 493, 100 + angulo / 10, 493 - angulo, width=1.5)
+        camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
         for ponto in fase.calcular_pontos(tempo):
             plotar(camada_de_atores, ponto)
         tela.after(passo, _animar)
 
     def _ouvir_comandos_lancamento(evento):
+        nonlocal angulo
         if evento.keysym == 'Up':
-            animar.angulo += 1
+            angulo += 1
         elif evento.keysym == 'Down':
-            animar.angulo -= 1
+            angulo -= 1
         elif evento.keysym == 'Return':
-            fase.lancar(animar.angulo, tempo)
+            fase.lancar(angulo, tempo)
 
     camada_de_atores.pack()
     _animar()
