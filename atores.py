@@ -109,8 +109,11 @@ class Passaro(Ator):
 class PassaroAmarelo(Passaro):
     velocidade_escalar = 30  # m/s
     _caracter_ativo = '>'
+    _caracter_destruido = 'a'
+
 
 
 class PassaroVermelho(Passaro):
     velocidade_escalar = 20  # m/s
     _caracter_ativo = 'D'
+    _caracter_destruido = 'd'
