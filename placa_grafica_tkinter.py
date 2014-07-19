@@ -23,6 +23,7 @@ OBSTACULO = PhotoImage(file=path.join(IMAGES_PATH, "obstaculo.gif"))
 TRANSPARENTE = PhotoImage(file=path.join(IMAGES_PATH, "transparente.gif"))
 BACKGROUND = PhotoImage(file=path.join(IMAGES_PATH, "background.gif"))
 PYTHONBIRDS_LOGO = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-logo.gif"))
+MENU = PhotoImage(file=path.join(IMAGES_PATH, "menu.gif"))
 VOCE_GANHOU = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-voce-ganhou-popup.gif"))
 VOCE_PERDEU = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-voce-perdeu-popup.gif"))
 
@@ -63,6 +64,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
 
         if fase.acabou(tempo):
             camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
+            camada_de_atores.create_image(54, 540, image=MENU, anchor=NW)
             if 'ganhou' in fase.status(tempo):
                 img = VOCE_GANHOU
             else:
@@ -80,18 +82,24 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
         elif evento.keysym == 'Return' or evento.keysym == 'space':
             fase.lancar(angulo, tempo)
 
-    def _replay():
+    def _replay(event):
+        #verificar se a fase ja acabou
         pass
 
-    def _jogar_de_novo():
+    def _jogar_novamente(event):
+        #verificar se a fase ja acabou
         pass
 
-    def _finalizar():
+    def _finalizar(event):
         root.destroy()
 
     camada_de_atores.pack()
     _animar()
     tela.bind_all('<KeyPress>', _ouvir_comandos_lancamento)
+    tela.bind_all('1', _replay)
+    tela.bind_all('2', _jogar_novamente)
+    tela.bind_all('3', _finalizar)
+    tela.bind_all('esc', _finalizar)
 
     tela.mainloop()
     tela.after(passo, _animar)
