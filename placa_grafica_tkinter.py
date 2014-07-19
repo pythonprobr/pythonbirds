@@ -79,31 +79,27 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
     tela.mainloop()
     tela.after(passo, _animar)
 
-
-if __name__ == '__main__':
+def rodar_fase(fase):
     root.title("Python Birds")
     root.geometry("800x600")
     root.resizable(0, 0)
-
     stage = Canvas(root, width=800, height=ALTURA_DA_TELA)
 
-    fase = Fase(intervalo_de_colisao=10)
     multiplicador = 10
-    atores.GRAVIDADE = 100
     PassaroAmarelo.velocidade_escalar *= multiplicador
     PassaroVermelho.velocidade_escalar *= multiplicador
+    atores.GRAVIDADE = 100
+    animar(root, stage, fase)
+
+
+
+if __name__ == '__main__':
+    fase = Fase(intervalo_de_colisao=10)
     passaros = [PassaroVermelho(30, 30), PassaroAmarelo(30, 30), PassaroAmarelo(30, 30)]
     porcos = [Porco(750, 1), Porco(700, 1)]
     obstaculos = [Obstaculo(310, 100)]
 
+    fase.adicionar_obstaculo(*obstaculos)
     fase.adicionar_passaro(*passaros)
     fase.adicionar_porco(*porcos)
-    fase.adicionar_obstaculo(*obstaculos)
-
-    # fase.lancar(45, 1)
-    # fase.lancar(64, 2)
-    # fase.lancar(21, 3)
-
-    animar(root, stage, fase)
-
-    # root.wait_window(popup_angulo)
+    rodar_fase(fase)
