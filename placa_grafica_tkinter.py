@@ -47,22 +47,16 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
     tempo = 0
     passo = int(1000 * passo)
     angulo = 0
+    multiplicador_rebobinar = 20
 
     def _animar():
         nonlocal tempo
+        nonlocal delta_t
         nonlocal angulo
-        camada_de_atores.delete(ALL)
-        camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
         tempo += delta_t
-        tamanho_seta = 60
-        angulo_rad = math.radians(-angulo)
-
-        camada_de_atores.create_line(52, 493, 52 + tamanho_seta * math.cos(angulo_rad),
-                                     493 + tamanho_seta * math.sin(angulo_rad), width=1.5)
-        camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
-        for ponto in fase.calcular_pontos(tempo):
-            plotar(camada_de_atores, ponto)
-
+        if tempo <= 0:
+            tempo = 0
+            delta_t /= -multiplicador_rebobinar
         if fase.acabou(tempo):
             camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
             camada_de_atores.create_image(54, 540, image=MENU, anchor=NW)
@@ -72,6 +66,16 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
                 img = VOCE_PERDEU
             camada_de_atores.create_image(192, 211, image=img, anchor=NW)
         else:
+            camada_de_atores.delete(ALL)
+            camada_de_atores.create_image((0, 0), image=BACKGROUND, anchor=NW)
+            tamanho_seta = 60
+            angulo_rad = math.radians(-angulo)
+
+            camada_de_atores.create_line(52, 493, 52 + tamanho_seta * math.cos(angulo_rad),
+                                         493 + tamanho_seta * math.sin(angulo_rad), width=1.5)
+            camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
+            for ponto in fase.calcular_pontos(tempo):
+                plotar(camada_de_atores, ponto)
             tela.after(passo, _animar)
 
     def _ouvir_comandos_lancamento(evento):
@@ -84,8 +88,12 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
             fase.lancar(angulo, tempo)
 
     def _replay(event):
-        # verificar se a fase ja acabou
-        pass
+        nonlocal tempo
+        nonlocal delta_t
+        if fase.acabou(tempo):
+            delta_t *= -multiplicador_rebobinar
+            _animar()
+
 
     def _jogar_novamente(event):
         # verificar se a fase ja acabou
