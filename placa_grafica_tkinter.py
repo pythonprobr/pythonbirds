@@ -36,10 +36,11 @@ CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO,
 
 
 def plotar(camada_de_atores, ponto):
-    x = ponto.x
-    y = ALTURA_DA_TELA - ponto.y - 120  # para coincidir com o chao da tela
-    image = CARACTER_PARA__IMG_DCT.get(ponto.caracter, TRANSPARENTE)
-    camada_de_atores.create_image((x, y), image=image, anchor=NW)
+    if ponto.caracter != ' ':
+        x = ponto.x
+        y = ALTURA_DA_TELA - ponto.y - 120  # para coincidir com o chao da tela
+        image = CARACTER_PARA__IMG_DCT.get(ponto.caracter, TRANSPARENTE)
+        camada_de_atores.create_image((x, y), image=image, anchor=NW)
 
 
 def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
@@ -83,11 +84,11 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
             fase.lancar(angulo, tempo)
 
     def _replay(event):
-        #verificar se a fase ja acabou
+        # verificar se a fase ja acabou
         pass
 
     def _jogar_novamente(event):
-        #verificar se a fase ja acabou
+        # verificar se a fase ja acabou
         pass
 
     def _finalizar(event):
@@ -103,6 +104,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
 
     tela.mainloop()
     tela.after(passo, _animar)
+
 
 def rodar_fase(fase):
     root.title("Python Birds")
