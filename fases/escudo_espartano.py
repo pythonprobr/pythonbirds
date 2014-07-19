@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 
     # Adicionar Pássaros Amarelos
-    for i in range(40):
+    for i in range(80):
         fase.adicionar_passaro(PassaroAmarelo(30, 30))
 
 

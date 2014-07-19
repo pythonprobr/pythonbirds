@@ -99,7 +99,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
     tela.bind_all('1', _replay)
     tela.bind_all('2', _jogar_novamente)
     tela.bind_all('3', _finalizar)
-    tela.bind_all('esc', _finalizar)
+    tela.bind_all('<Escape>', _finalizar)
 
     tela.mainloop()
     tela.after(passo, _animar)
