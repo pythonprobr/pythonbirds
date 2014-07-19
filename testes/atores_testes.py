@@ -129,7 +129,7 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
     def teste_status(self):
         passaro_amarelo = PassaroVermelho(1, 1)
-        assert_ator_status(self, passaro_amarelo, 'D', ' ')
+        assert_ator_status(self, passaro_amarelo, 'V', 'v')
 
     def teste_colisao_com_chao(self):
         for i in range(30):
@@ -163,7 +163,7 @@ class PassaroAmareloTests(PassaroBaseTests):
 
     def teste_status(self):
         passaro_amarelo = PassaroAmarelo(1, 1)
-        assert_ator_status(self, passaro_amarelo, '>', ' ')
+        assert_ator_status(self, passaro_amarelo, 'A', 'a')
 
     def teste_colisao_com_chao(self):
         for i in range(30):
