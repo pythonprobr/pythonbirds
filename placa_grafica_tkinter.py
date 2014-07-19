@@ -12,6 +12,7 @@ from atores import PassaroVermelho, PassaroAmarelo, Porco, Obstaculo
 ALTURA_DA_TELA = 600  # px
 
 root = Tk()
+
 IMAGES_PATH = path.dirname(__file__)
 IMAGES_PATH = path.join(IMAGES_PATH, 'images')
 PASSARO_VERMELHO = PhotoImage(file=path.join(IMAGES_PATH, "passaro_vermelho.gif"))
@@ -22,11 +23,16 @@ OBSTACULO = PhotoImage(file=path.join(IMAGES_PATH, "obstaculo.gif"))
 TRANSPARENTE = PhotoImage(file=path.join(IMAGES_PATH, "transparente.gif"))
 BACKGROUND = PhotoImage(file=path.join(IMAGES_PATH, "background.gif"))
 PYTHONBIRDS_LOGO = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-logo.gif"))
+MENU = PhotoImage(file=path.join(IMAGES_PATH, "menu.gif"))
 VOCE_GANHOU = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-voce-ganhou-popup.gif"))
 VOCE_PERDEU = PhotoImage(file=path.join(IMAGES_PATH, "python-birds-voce-perdeu-popup.gif"))
 
-CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO, 'A': PASSARO_AMARELHO, '@': PORCO, 'O': OBSTACULO,
-                          '+': PORCO_MORTO, ' ': TRANSPARENTE}
+CARACTER_PARA__IMG_DCT = {'V': PASSARO_VERMELHO,
+                          'A': PASSARO_AMARELHO,
+                          '@': PORCO,
+                          'O': OBSTACULO,
+                          '+': PORCO_MORTO,
+                          ' ': TRANSPARENTE}
 
 
 def plotar(camada_de_atores, ponto):
@@ -58,6 +64,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
 
         if fase.acabou(tempo):
             camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
+            camada_de_atores.create_image(54, 540, image=MENU, anchor=NW)
             if 'ganhou' in fase.status(tempo):
                 img = VOCE_GANHOU
             else:
@@ -72,16 +79,30 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
             angulo += 1
         elif evento.keysym == 'Down':
             angulo -= 1
-        elif evento.keysym == 'Return':
+        elif evento.keysym == 'Return' or evento.keysym == 'space':
             fase.lancar(angulo, tempo)
+
+    def _replay(event):
+        #verificar se a fase ja acabou
+        pass
+
+    def _jogar_novamente(event):
+        #verificar se a fase ja acabou
+        pass
+
+    def _finalizar(event):
+        root.destroy()
 
     camada_de_atores.pack()
     _animar()
     tela.bind_all('<KeyPress>', _ouvir_comandos_lancamento)
+    tela.bind_all('1', _replay)
+    tela.bind_all('2', _jogar_novamente)
+    tela.bind_all('3', _finalizar)
+    tela.bind_all('<Escape>', _finalizar)
 
     tela.mainloop()
     tela.after(passo, _animar)
-
 
 def rodar_fase(fase):
     root.title("Python Birds")
