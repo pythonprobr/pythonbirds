@@ -11,7 +11,7 @@ Um vídeo fala mais que 1000 palavras: [Python Birds](https://www.youtube.com/wa
 
 Instalar [Python 3](https://www.python.org/download/).
 
-Baixar a versão apenas a [estrutura do projeto](https://github.com/pythonprobr/pythonbirds/archive/diversao.zip)
+Baixar a versão contendo apenas a [estrutura do projeto](https://github.com/pythonprobr/pythonbirds/archive/diversao.zip)
 
 Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmica das classes. Para rodar todos testes, execute
 
@@ -30,10 +30,10 @@ Após o desenvolvimento é possível emular um jogo que termina em vitória roda
 
 É possível jogar a fase rodando:
 
-    python python_birds.py
+    python placa_grafica_tkinter.py
 
-Para jogar, aperte enter, digite o ângulo de lançamento e aperte enter novamente.
-Demonstração no vídeo:
+Para jogar, utilize as setas para cima e para baixo. Para lançar, utilize a tecla enter ou espaço.
+Demonstração nos vídeos:
 
 [Python Birds](https://www.youtube.com/watch?v=b899h0lNd7U&list=PLA05yVJtRWYTm0sIa6n56UpCjCsR5ekla)
 
@@ -49,17 +49,21 @@ Contém classes respectivas a fase e ponto do plano cartesiano
 
 Contém lógica para rodar jogo e exibir no console.
 
+## script placa_grafica_tkinter.py
+
+Contém lógica para rodar jogo e em uma janela.
+
 # Simplificação do Jogo
 
-1. Atores são pontos (um caracter) no plano cartesiano. 
-2. A velocidade dos pontos e pequena, de tal forma que a cada passo os pontos se movam apenas para pontos vizinhos.
-3. A colisão entre pontos ocorre quando eles estão em ponto vizinho
+1. Atores são pontos no plano cartesiano. 
+2. A velocidade dos pontos e pequena, de tal forma que a cada passo os atores se movam apenas para pontos vizinhos.
+3. A colisão entre pontos ocorre quando eles estão em ponto vizinho, de acordo com valor de intervalo.
 
-A seguir segue a especificação detalhada do jogo.
+A seguir é apresentada a especificação detalhada do jogo.
 
 ## Classe Ator
 
-Classe base para todos os atores do jogo.
+Classe base para todos atores do jogo.
 
 ### Método calcular_posicao
 
@@ -72,14 +76,15 @@ O ator possui os status Ativo ou Destruido. Além disso o status deve ser depend
 destruido no tempo t, ele deve possuir status Ativo antes desse tempo e Destruido após.
  
 
-## Método sinal
+## Método caracter
 
-O método sinal retorna 'A' quando o ator tem status Ativo e '+' caso contrário. Também é depende do tempo.
+O método caracter retorna 'A' quando o ator tem status Ativo e '+' caso contrário. Também é depende do tempo.
 
 ### Método colidir
 
-O método colidir deve ser executada para executar a ação de colisão. Colisão só ocorre com atores ativos e que estejam
+O método colidir executa a lógica de colisão. A colisão só ocorre com atores ativos e que estejam
 em pontos vizinhos. O ator deve guardar o tempo de colisão para calcular corretamente seu status.
+Além disso, um intervalo é recebido como parâmetro indicando qual a tolerância para considerar um ponto vizinho.
 
 ## Classe Obstaculo
 
@@ -105,7 +110,7 @@ gravidade (G) constante e igual a 10 m/s^2.
 ### Método lancar
 
 O método lançar recebe o ângulo, em graus, que será feito o lançamento. Cada pássaro deve armazenar esse valor e o tempo
-de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t = Tfinal - Tinicial
+de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t = T_final - T_inicial
 
 ### Método posicao_horizontal
 
@@ -116,9 +121,9 @@ Fórmula X=X0+v*cos(teta)*delta_t.
 Fórmula Y=Y0+v*sen(teta)delta_t-(G*delta_t^2)/2.
     
 
-### Método de colidir_com_chaoo
+### Método de colidir_com_chao
 
-Toda vez que o pássaro colidir com o chão (y=0) ele deve ser destruido.
+Todo pássaro que colidir com o chão (y<=0) deve ser destruído.
 
 ## Classe Passaro Vermelho
 
@@ -149,7 +154,7 @@ Método que adiciona um ou mais pássaros na fase
 Método que recebe o tempo do jogo e retorna verdadeiro (True) se o jogo acabou e (False) caso contrário.
 O jogo pode acabar por duas razôes:
 
-1. Todos porcos foram destruidos
+1. Todos porcos foram destruídos
 2. Não há mais pássaros a serem lançados
 
 ### Método status

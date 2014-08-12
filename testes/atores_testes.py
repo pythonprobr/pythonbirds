@@ -26,11 +26,11 @@ class AtorTestes(TestCase):
         ator = Ator(0.6, 2.1)
         self.assertTupleEqual((1, 2), ator.calcular_posicao(3.14))
 
-    def assert_colisao_atores_ativos(self, ator, ator2):
+    def assert_colisao_atores_ativos(self, ator, ator2, intervalo=1):
         tempo_da_colisao = 2
         self.assertEqual(ator.status(tempo_da_colisao), ATIVO)
         self.assertEqual(ator2.status(tempo_da_colisao), ATIVO)
-        ator.colidir(ator2, tempo_da_colisao)
+        ator.colidir(ator2, tempo_da_colisao, intervalo)
         self.assertEqual(ator2.status(tempo_da_colisao), DESTRUIDO)
         self.assertEqual(ator.status(tempo_da_colisao), DESTRUIDO)
 
@@ -52,6 +52,9 @@ class AtorTestes(TestCase):
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 1))
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 2))
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 3))
+
+    def teste_colisao_entre_atores_ativos_com_intervalo(self):
+        self.assert_colisao_atores_ativos(Ator(2, 2), Ator(2, 4), 2)
 
     def teste_nao_colisao_entre_atores_ativos(self):
         self.assert_nao_colisao(Ator(2, 2), Ator(2, 4))
