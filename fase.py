@@ -4,9 +4,8 @@ from atores import ATIVO
 
 
 class Ponto():
-    def __init__(self, x, y, caracter, canvas=None):
+    def __init__(self, x, y, caracter):
         self.caracter = caracter
-        self.canvas = canvas
         self.x = x
         self.y = y
 
