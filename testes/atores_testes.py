@@ -115,6 +115,9 @@ class PassaroBaseTests(TestCase):
 
 
 class PassaroVermelhoTests(PassaroBaseTests):
+    def teste_velocidade_escalar(self):
+        self.assertEqual(20, PassaroVermelho.velocidade_escalar)
+
     def teste_foi_lancado(self):
         passaro_vermelho = PassaroVermelho(1, 1)
         self.assertFalse(passaro_vermelho.foi_lancado())
@@ -155,6 +158,9 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
 
 class PassaroAmareloTests(PassaroBaseTests):
+    def teste_velocidade_escalar(self):
+        self.assertEqual(30, PassaroAmarelo.velocidade_escalar)
+
     def teste_posicao_antes_do_lancamento(self):
         passaro_amarelo = PassaroAmarelo(1, 1)
         passaro_amarelo.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
