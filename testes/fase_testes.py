@@ -132,6 +132,7 @@ class FaseTestes(TestCase):
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
 
     def teste_calcular_pontos(self):
+        fase_exemplo = criar_fase_exemplo()
         expected = [Ponto(3, 3, 'V'), Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
                     Ponto(70, 1, '@')]
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(0))
@@ -152,21 +153,23 @@ class FaseTestes(TestCase):
         self.assertTrue(fase_exemplo.acabou(8.5))
 
 
-fase_exemplo = Fase()
-passaros = [PassaroVermelho(3, 3), PassaroAmarelo(3, 3), PassaroAmarelo(3, 3)]
-porcos = [Porco(78, 1), Porco(70, 1)]
-obstaculos = [Obstaculo(31, 10)]
+def criar_fase_exemplo():
+    fase_exemplo = Fase()
+    passaros = [PassaroVermelho(3, 3), PassaroAmarelo(3, 3), PassaroAmarelo(3, 3)]
+    porcos = [Porco(78, 1), Porco(70, 1)]
+    obstaculos = [Obstaculo(31, 10)]
 
-fase_exemplo.adicionar_passaro(*passaros)
-fase_exemplo.adicionar_porco(*porcos)
-fase_exemplo.adicionar_obstaculo(*obstaculos)
+    fase_exemplo.adicionar_passaro(*passaros)
+    fase_exemplo.adicionar_porco(*porcos)
+    fase_exemplo.adicionar_obstaculo(*obstaculos)
 
-fase_exemplo.lancar(45, 1)
-fase_exemplo.lancar(63, 3)
-fase_exemplo.lancar(23, 4)
+    fase_exemplo.lancar(45, 1)
+    fase_exemplo.lancar(63, 3)
+    fase_exemplo.lancar(23, 4)
 
-for i in range(86):
-    fase_exemplo.calcular_pontos(i / 10)
+    for i in range(86):
+        fase_exemplo.calcular_pontos(i / 10)
+
 
 if __name__ == '__main__':
-    placa_grafica.animar(fase_exemplo)
+    placa_grafica.animar(criar_fase_exemplo())
