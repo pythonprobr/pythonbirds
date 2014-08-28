@@ -54,14 +54,17 @@ class FaseTestes(TestCase):
 
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
-        porcos = [Porco(1, 1) for i in range(2)]
-        passaros = [PassaroAmarelo(1, 1) for i in range(2)]
+        porcos = [Porco(1, 1) for i in range(2)] #criando 2 porcos
+        passaros = [PassaroAmarelo(1, 1) for i in range(2)] #criando 2 pássaros
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
+
+
         self.assertFalse(fase.acabou(0))
         self.assertFalse(fase.acabou(2.9))
         self.assertFalse(fase.acabou(3))
 
+        #colidingo cada passaro com um porco no tempo 3
         for passaro, porco in zip(passaros, porcos):
             passaro.colidir(porco, 3)
 
