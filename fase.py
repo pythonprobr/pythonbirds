@@ -52,7 +52,7 @@ class Fase():
                 return
 
     def resetar(self):
-        for ator in chain(self._passaros,self._obstaculos,self._porcos):
+        for ator in chain(self._passaros, self._obstaculos, self._porcos):
             ator.resetar()
 
     def calcular_pontos(self, tempo):
