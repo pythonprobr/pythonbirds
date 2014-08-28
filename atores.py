@@ -40,11 +40,7 @@ class Ator():
         x1, y1 = self.arredondar_posicao()
         x2, y2 = outro_ator.arredondar_posicao()
 
-        def esta_no_intervalo(coordenada1, coordenada2):
-            coordenadas = sorted([coordenada1, coordenada2])
-            return coordenadas[1] - intervalo <= coordenadas[0]
-
-        if esta_no_intervalo(x1, x2) and esta_no_intervalo(y1, y2):
+        if x1 - intervalo <= x2 <= x1 + intervalo and y1 - intervalo <= y2 <= y1 + intervalo:
             self._tempo_de_colisao = tempo
             outro_ator._tempo_de_colisao = tempo
 
@@ -98,10 +94,10 @@ class Passaro(Ator):
         self._calcular_posicao_horizontal(delta_t)
 
     def calcular_posicao(self, tempo):
-        if self._tempo_de_lancamento is None or tempo < self._tempo_de_lancamento:
+        if self._aguardando_lancamento(tempo):
             self.x = self._x_inicial
             self.y = self._y_inicial
-        elif self._tempo_de_colisao is not None and tempo >= self._tempo_de_colisao:
+        elif self._ja_colidiu(tempo):
             self._calcular_posicao(self._tempo_de_colisao)
         else:
             self._calcular_posicao(tempo)
@@ -110,6 +106,12 @@ class Passaro(Ator):
     def lancar(self, angulo, tempo):
         self._tempo_de_lancamento = tempo
         self._angulo_de_lancamento = math.radians(angulo)
+
+    def _aguardando_lancamento(self, tempo):
+        return not self.foi_lancado() or tempo < self._tempo_de_lancamento
+
+    def _ja_colidiu(self, tempo):
+        return self.foi_lancado() and self.status(tempo) == DESTRUIDO
 
 
 class PassaroAmarelo(Passaro):
