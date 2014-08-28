@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from itertools import chain
 
 import os
 from unittest.case import TestCase
@@ -9,7 +10,7 @@ project_dir = os.path.join(os.path.dirname(__file__), '..')
 project_dir = os.path.normpath(project_dir)
 sys.path.append(project_dir)
 
-from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo
+from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO, ATIVO
 from fase import Fase, Ponto
 import placa_grafica
 
@@ -48,20 +49,23 @@ class FaseTestes(TestCase):
         fase.adicionar_passaro(passaro1, passaro2)
         self.assertListEqual([passaro, passaro1, passaro2], fase._passaros)
 
+
     def teste_acabou_sem_porcos(self):
         fase = Fase()
         self.assertTrue(fase.acabou(0))
 
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
-        porcos = [Porco(1, 1) for i in range(2)]
-        passaros = [PassaroAmarelo(1, 1) for i in range(2)]
+        porcos = [Porco(1, 1) for i in range(2)]  # criando 2 porcos
+        passaros = [PassaroAmarelo(1, 1) for i in range(2)]  # criando 2 pássaros
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
+
         self.assertFalse(fase.acabou(0))
         self.assertFalse(fase.acabou(2.9))
         self.assertFalse(fase.acabou(3))
 
+        # colidingo cada passaro com um porco no tempo 3
         for passaro, porco in zip(passaros, porcos):
             passaro.colidir(porco, 3)
 
@@ -121,7 +125,7 @@ class FaseTestes(TestCase):
         self.assertFalse(passaro_amarelo.foi_lancado())
         fase.lancar(90, 1)
         fase.lancar(45, 3)
-        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
+        fase.lancar(31, 5)  # testando que lançar passaros depios de todos lançados não causa erro
 
         self.assertTrue(passaro_vermelho.foi_lancado())
         self.assertEqual(math.radians(90), passaro_vermelho._angulo_de_lancamento)
@@ -152,6 +156,30 @@ class FaseTestes(TestCase):
         self.assertFalse(fase_exemplo.acabou(8.3))
         self.assertTrue(fase_exemplo.acabou(8.5))
 
+    def teste_resetar(self):
+        'Testa se o método resetar de faze chama o método resetar de todos atores'
+        fase_exemplo = criar_fase_exemplo()
+        atores = list(chain(fase_exemplo._passaros, fase_exemplo._obstaculos, fase_exemplo._porcos))
+        fase_exemplo.calcular_pontos(0)
+
+        fase_exemplo.calcular_pontos(4)
+
+        fase_exemplo.calcular_pontos(7)
+        fase_exemplo.calcular_pontos(8.5)
+
+        self.assertFalse(fase_exemplo.acabou(8.3))
+        self.assertTrue(fase_exemplo.acabou(8.5))
+        # certificando que todos atore foram destruidos
+        for a in atores:
+            self.assertEqual(DESTRUIDO, a.status(8.5))
+        for p in fase_exemplo._passaros:
+            self.assertTrue(p.foi_lancado(), 'Todos pássaros foram lançados')
+        fase_exemplo.resetar()
+        for a in atores:
+            self.assertEqual(ATIVO, a.status(8.5), 'Após resetar atore devem voltar a ficar ativos')
+        for p in fase_exemplo._passaros:
+            self.assertFalse(p.foi_lancado(), 'Nenhum pássaro foi lançado')
+
 
 def criar_fase_exemplo():
     fase_exemplo = Fase()
@@ -169,6 +197,7 @@ def criar_fase_exemplo():
 
     for i in range(86):
         fase_exemplo.calcular_pontos(i / 10)
+    return fase_exemplo
 
 
 if __name__ == '__main__':
