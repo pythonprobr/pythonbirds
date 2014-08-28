@@ -11,16 +11,13 @@ class Ator():
     _caracter_ativo = 'A'
     _caracter_destruido = ' '
 
-    def caracter(self, tempo):
-        if self.status(tempo) == ATIVO:
-            return self._caracter_ativo
-        else:
-            return self._caracter_destruido
-
     def __init__(self, x=0, y=0):
         self.y = y
         self.x = x
         self._tempo_de_colisao = None
+
+    def caracter(self, tempo):
+        return self._caracter_ativo if self.status(tempo) == ATIVO else self._caracter_destruido
 
     def resetar(self):
         self._tempo_de_colisao = None

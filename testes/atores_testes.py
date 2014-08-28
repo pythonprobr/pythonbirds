@@ -32,6 +32,14 @@ class AtorTestes(AtorBaseTest):
         ator = Ator(0.6, 2.1)
         self.assertTupleEqual((1, 2), ator.calcular_posicao(3.14), 'Deveria arredondar para inteiro')
 
+    def teste_resetar(self):
+        ator = Ator()
+        self.assertIsNone(ator._tempo_de_colisao)
+        ator._tempo_de_colisao = 1
+        ator.resetar()
+        self.assertIsNone(ator._tempo_de_colisao)
+
+
     def teste_status(self):
         ator = Ator()
         'Confere status de um ator'
@@ -156,6 +164,19 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
     def teste_velocidade_escalar(self):
         self.assertEqual(20, PassaroVermelho.velocidade_escalar)
+
+    def teste_resetar(self):
+        passaro = PassaroVermelho()
+        self.assertIsNone(passaro._tempo_de_colisao)
+        self.assertIsNone(passaro._tempo_de_lancamento)
+        self.assertIsNone(passaro._angulo_de_lancamento)
+        passaro._tempo_de_colisao = 1
+        passaro._tempo_de_lancamento = 2
+        passaro._angulo_de_lancamento = 90
+        passaro.resetar()
+        self.assertIsNone(passaro._tempo_de_colisao)
+        self.assertIsNone(passaro._tempo_de_lancamento)
+        self.assertIsNone(passaro._angulo_de_lancamento)
 
     def teste_foi_lancado(self):
         passaro_vermelho = PassaroVermelho(1, 1)
