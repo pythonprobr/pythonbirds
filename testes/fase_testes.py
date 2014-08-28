@@ -125,7 +125,7 @@ class FaseTestes(TestCase):
         self.assertFalse(passaro_amarelo.foi_lancado())
         fase.lancar(90, 1)
         fase.lancar(45, 3)
-        fase.lancar(31, 5)  # testando que lançar passaros depos de todos lançados não causa erro
+        fase.lancar(31, 5)  # testando que lançar passaros depios de todos lançados não causa erro
 
         self.assertTrue(passaro_vermelho.foi_lancado())
         self.assertEqual(math.radians(90), passaro_vermelho._angulo_de_lancamento)

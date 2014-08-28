@@ -70,21 +70,27 @@ Classe base para todos atores do jogo.
 Método que recebe o tempo (float) como parâmetro e retorna uma tupla com 2 elementos, posição horizontal (x) como 
 primeiro elemento e posição vertical (y) como segundo.
 
+### Método resetar
+
+Método que ao ser executado, seta o valor de _tempo_de_colisão para None
+
 ### Método status
 
 O ator possui os status Ativo ou Destruido. Além disso o status deve ser dependente do tempo. Ou seja, se o ator foi 
-destruido no tempo t, ele deve possuir status Ativo antes desse tempo e Destruido após.
+destruido no tempo 1, ele deve possuir status Ativo antes desse tempo, como 0.9, e Destruido após esse tempo, como em tempo 1.1.
  
+### Método colidir
+
+O método colidir executa a lógica de colisão. A colisão só ocorre com atores ativos e que estejam
+em pontos vizinhos. 
+O ator deve guardar o tempo de colisão para calcular corretamente seu status.
+Além disso, um intervalo é recebido como parâmetro indicando qual a tolerância para considerar um ponto vizinho.
+ Por padrão, seu valor é 1.
 
 ## Método caracter
 
 O método caracter retorna 'A' quando o ator tem status Ativo e '+' caso contrário. Também é depende do tempo.
 
-### Método colidir
-
-O método colidir executa a lógica de colisão. A colisão só ocorre com atores ativos e que estejam
-em pontos vizinhos. O ator deve guardar o tempo de colisão para calcular corretamente seu status.
-Além disso, um intervalo é recebido como parâmetro indicando qual a tolerância para considerar um ponto vizinho.
 
 ## Classe Obstaculo
 
@@ -112,18 +118,40 @@ gravidade (G) constante e igual a 10 m/s^2.
 O método lançar recebe o ângulo, em graus, que será feito o lançamento. Cada pássaro deve armazenar esse valor e o tempo
 de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t = T_final - T_inicial
 
-### Método posicao_horizontal
+### Método de resetar
 
-Fórmula X=X0+v*cos(teta)*delta_t.
+O método resetar deve chamar o método resetar de Ator.
+Além disso, deve setar como Nome os parầmetros de tempo de lançamento e ângulo de lançamento
 
-### Método posicao_vertical
-
-Fórmula Y=Y0+v*sen(teta)delta_t-(G*delta_t^2)/2.
-    
 
 ### Método de colidir_com_chao
 
 Todo pássaro que colidir com o chão (y<=0) deve ser destruído.
+
+### Método foi lançado
+
+Esse método deve retornar verdadadeiro se o pássaro foi lançado (tempo de lançamento é None).
+Caso contrário deve retornar falso
+
+### Lançamentomento
+
+Se o pássaro ainda não foi lançado, ou se o tempo de jogo é menor que o tempo de lançamento,
+O pássaro deve permanecer na posição inicial.
+  
+Calso tenha sido lançado e seu status esteja ativo, sua posição deve ser calculada de acordo com o lançamento oblíquo.
+Nesse caso, delta_t vai ser igual ao tempo do jogo menos o tempo do lançamento.
+  
+Caso contrário, ele deve retornar a posição onde colidiu. Para isso, pasta
+calcular o ponto em que o pássaro estava no tempo da colisão.
+
+#### Método posicao_horizontal
+
+Fórmula X=X0+v*cos(teta)*delta_t.
+
+#### Método posicao_vertical
+
+Fórmula Y=Y0+v*sen(teta)delta_t-(G*delta_t^2)/2.
+    
 
 ## Classe Passaro Vermelho
 
