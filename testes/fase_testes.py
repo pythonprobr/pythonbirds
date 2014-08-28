@@ -169,6 +169,7 @@ def criar_fase_exemplo():
 
     for i in range(86):
         fase_exemplo.calcular_pontos(i / 10)
+    return fase_exemplo
 
 
 if __name__ == '__main__':
