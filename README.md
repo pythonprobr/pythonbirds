@@ -61,7 +61,9 @@ Contém lógica para rodar jogo e em uma janela.
 
 A seguir é apresentada a especificação detalhada do jogo.
 
-## Classe Ator
+## Classe Ator 
+
+Confira o [Diagrama de Classes](https://github.com/pythonprobr/pythonbirds/blob/master/diagramas/atore-classes.jpg)
 
 Classe base para todos atores do jogo.
 
