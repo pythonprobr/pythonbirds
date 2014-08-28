@@ -157,6 +157,7 @@ class FaseTestes(TestCase):
         self.assertTrue(fase_exemplo.acabou(8.5))
 
     def teste_resetar(self):
+        'Testa se o método resetar de faze chama o método resetar de todos atores'
         fase_exemplo = criar_fase_exemplo()
         atores = list(chain(fase_exemplo._passaros, fase_exemplo._obstaculos, fase_exemplo._porcos))
         fase_exemplo.calcular_pontos(0)
