@@ -135,6 +135,32 @@ class FaseTestes(TestCase):
         self.assertEqual(math.radians(45), passaro_amarelo._angulo_de_lancamento)
         self.assertEqual(3, passaro_amarelo._tempo_de_lancamento)
 
+    def teste_intervalo_de_colisao_padrão(self):
+        '''
+        Método que testa se o intervalo de colisão da Fase é repassado aos atores. Padrão de intervalo é 1
+        '''
+        fase = Fase()
+        passaro = PassaroAmarelo(1, 1)
+        fase.adicionar_passaro(passaro)
+        porco = Porco(2, 2)
+        fase.adicionar_porco(porco)
+        fase.calcular_pontos(0)
+        self.assertEqual(DESTRUIDO, passaro.status(0))
+        self.assertEqual(DESTRUIDO, porco.status(0))
+
+    def teste_intervalo_de_colisao_nao_padrao(self):
+        '''
+        Método que testa se o intervalo de colisão da Fase é repassado aos atores. valor testado: 31
+        '''
+        fase = Fase(30)
+        passaro = PassaroAmarelo(1, 1)
+        fase.adicionar_passaro(passaro)
+        porco = Porco(31, 31)
+        fase.adicionar_porco(porco)
+        fase.calcular_pontos(0)
+        self.assertEqual(DESTRUIDO, passaro.status(0))
+        self.assertEqual(DESTRUIDO, porco.status(0))
+
     def teste_calcular_pontos(self):
         fase_exemplo = criar_fase_exemplo()
         expected = [Ponto(3, 3, 'V'), Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
