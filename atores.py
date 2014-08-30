@@ -5,6 +5,7 @@ import math
 
 DESTRUIDO = 'Destruido'
 ATIVO = 'Ativo'
+GRAVIDADE = 10  # m/s^2
 
 
 class Ator():
@@ -14,35 +15,21 @@ class Ator():
     def __init__(self, x=0, y=0):
         self.y = y
         self.x = x
-        self._tempo_de_colisao = None
-
-    def caracter(self, tempo):
-        return self._caracter_ativo if self.status(tempo) == ATIVO else self._caracter_destruido
-
-    def resetar(self):
-        self._tempo_de_colisao = None
-
-    def status(self, tempo):
-        if self._tempo_de_colisao is None or self._tempo_de_colisao > tempo:
-            return ATIVO
-        return DESTRUIDO
+        self.caracter = self._caracter_ativo
+        self.status = ATIVO
 
     def calcular_posicao(self, tempo):
-        return self.arredondar_posicao()
-
-    def arredondar_posicao(self):
-        self.x, self.y = round(self.x), round(self.y)
         return self.x, self.y
 
-    def colidir(self, outro_ator, tempo, intervalo=1):
-        if self.status(tempo) == DESTRUIDO or outro_ator.status(tempo) == DESTRUIDO:
+    def colidir(self, outro_ator, intervalo=1):
+        if self.status == DESTRUIDO or outro_ator.status == DESTRUIDO:
             return
-        x1, y1 = self.arredondar_posicao()
-        x2, y2 = outro_ator.arredondar_posicao()
 
-        if x1 - intervalo <= x2 <= x1 + intervalo and y1 - intervalo <= y2 <= y1 + intervalo:
-            self._tempo_de_colisao = tempo
-            outro_ator._tempo_de_colisao = tempo
+        if self.x - intervalo <= outro_ator.x <= self.x + intervalo and self.y - intervalo <= outro_ator.y <= self.y + intervalo:
+            self.status = DESTRUIDO
+            self.caracter = self._caracter_destruido
+            outro_ator.caracter = outro_ator._caracter_destruido
+            outro_ator.status = DESTRUIDO
 
 
 class Obstaculo(Ator):
@@ -52,9 +39,6 @@ class Obstaculo(Ator):
 class Porco(Ator):
     _caracter_ativo = '@'
     _caracter_destruido = '+'
-
-
-GRAVIDADE = 10  # m/s^2
 
 
 class Passaro(Ator):
@@ -67,18 +51,12 @@ class Passaro(Ator):
         self._tempo_de_lancamento = None
         self._angulo_de_lancamento = None  # radianos
 
-    def resetar(self):
-        super().resetar()
-        self._tempo_de_lancamento = None
-        self._angulo_de_lancamento = None
-
-
     def foi_lancado(self):
         return self._tempo_de_lancamento is not None
 
-    def colidir_com_chao(self, tempo):
+    def colidir_com_chao(self):
         if self.y <= 0:
-            self._tempo_de_colisao = tempo
+            self.status = DESTRUIDO
 
     def _calcular_posicao_horizontal(self, delta_t):
         self.x = self._x_inicial + self.velocidade_escalar * delta_t * math.cos(self._angulo_de_lancamento)
@@ -94,14 +72,12 @@ class Passaro(Ator):
         self._calcular_posicao_horizontal(delta_t)
 
     def calcular_posicao(self, tempo):
-        if self._aguardando_lancamento(tempo):
-            self.x = self._x_inicial
-            self.y = self._y_inicial
-        elif self._ja_colidiu(tempo):
-            self._calcular_posicao(self._tempo_de_colisao)
-        else:
+        if self._tempo_de_lancamento is None:
+            return self._x_inicial, self._y_inicial
+        if self.status == ATIVO:
             self._calcular_posicao(tempo)
-        return self.arredondar_posicao()
+        return self.x, self.y
+
 
     def lancar(self, angulo, tempo):
         self._tempo_de_lancamento = tempo
