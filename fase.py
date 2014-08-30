@@ -6,8 +6,8 @@ from atores import ATIVO
 class Ponto():
     def __init__(self, x, y, caracter):
         self.caracter = caracter
-        self.x = x
-        self.y = y
+        self.x = round(x)
+        self.y = round(y)
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.caracter == other.caracter
@@ -35,13 +35,13 @@ class Fase():
     def adicionar_passaro(self, *passaros):
         self._adicionar_ator(self._passaros, *passaros)
 
-    def acabou(self, tempo):
-        return not self._existe_porco_ativo(tempo) or not self._existe_passaro_ativo(tempo)
+    def acabou(self):
+        return not self._existe_porco_ativo() or not self._existe_passaro_ativo()
 
-    def status(self, tempo):
-        if not self._existe_porco_ativo(tempo):
+    def status(self):
+        if not self._existe_porco_ativo():
             return 'Jogo em encerrado. Você ganhou!'
-        if self._existe_passaro_ativo(tempo):
+        if self._existe_passaro_ativo():
             return 'Jogo em andamento.'
         return 'Jogo em encerrado. Você perdeu!'
 
@@ -51,37 +51,34 @@ class Fase():
                 passaro.lancar(angulo, tempo)
                 return
 
-    def resetar(self):
-        for ator in chain(self._passaros, self._obstaculos, self._porcos):
-            ator.resetar()
 
     def calcular_pontos(self, tempo):
         pontos = [self._calcular_ponto_de_passaro(p, tempo) for p in self._passaros]
         obstaculos_e_porcos = chain(self._obstaculos, self._porcos)
-        pontos.extend([self._transformar_em_ponto(ator, tempo) for ator in obstaculos_e_porcos])
+        pontos.extend([self._transformar_em_ponto(ator) for ator in obstaculos_e_porcos])
         return pontos
 
-    def _transformar_em_ponto(self, ator, tempo):
-        return Ponto(ator.x, ator.y, ator.caracter(tempo))
+    def _transformar_em_ponto(self, ator):
+        return Ponto(ator.x, ator.y, ator.caracter)
 
     def _calcular_ponto_de_passaro(self, passaro, tempo, ):
         passaro.calcular_posicao(tempo)
         for ator in chain(self._obstaculos, self._porcos):
-            if ATIVO == passaro.status(tempo):
-                passaro.colidir(ator, tempo, self.intervalo_de_colisao)
-                passaro.colidir_com_chao(tempo)
+            if ATIVO == passaro.status:
+                passaro.colidir(ator, self.intervalo_de_colisao)
+                passaro.colidir_com_chao()
             else:
                 break
-        return self._transformar_em_ponto(passaro, tempo)
+        return self._transformar_em_ponto(passaro)
 
-    def _existe_porco_ativo(self, tempo):
-        return self._verificar_se_existe_ator_ativo(self._porcos, tempo)
+    def _existe_porco_ativo(self):
+        return self._verificar_se_existe_ator_ativo(self._porcos)
 
-    def _verificar_se_existe_ator_ativo(self, atores, tempo):
+    def _verificar_se_existe_ator_ativo(self, atores):
         for a in atores:
-            if a.status(tempo) == ATIVO:
+            if a.status == ATIVO:
                 return True
         return False
 
-    def _existe_passaro_ativo(self, tempo):
-        return self._verificar_se_existe_ator_ativo(self._passaros, tempo)
+    def _existe_passaro_ativo(self):
+        return self._verificar_se_existe_ator_ativo(self._passaros)

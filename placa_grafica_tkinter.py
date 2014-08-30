@@ -57,10 +57,10 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
         if tempo <= 0:
             tempo = 0
             delta_t /= -multiplicador_rebobinar
-        if fase.acabou(tempo):
+        if fase.acabou():
             camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
             camada_de_atores.create_image(54, 540, image=MENU, anchor=NW)
-            if 'ganhou' in fase.status(tempo):
+            if 'ganhou' in fase.status():
                 img = VOCE_GANHOU
             else:
                 img = VOCE_PERDEU
