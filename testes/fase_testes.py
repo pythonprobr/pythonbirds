@@ -2,9 +2,15 @@
 from itertools import chain
 
 import os
+from os import path
 from unittest.case import TestCase
 import math
 import sys
+
+project_dir = path.dirname(__file__)
+project_dir = path.join('..')
+sys.path.append(project_dir)
+from placa_grafica_tkinter import rodar_fase
 
 project_dir = os.path.join(os.path.dirname(__file__), '..')
 project_dir = os.path.normpath(project_dir)
@@ -12,7 +18,6 @@ sys.path.append(project_dir)
 
 from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO, ATIVO
 from fase import Fase, Ponto
-import placa_grafica
 
 
 class FaseTestes(TestCase):
@@ -192,19 +197,21 @@ class FaseTestes(TestCase):
             fase_exemplo.calcular_pontos(i / 100)
         print(fase_exemplo.calcular_pontos(8.5))
 
-
-        expected = [Ponto(32,11,'v'), Ponto(77,0,'a'), Ponto(70,2,'a'), Ponto(31,10,' '), Ponto(78,1,'+'), Ponto(70,1,'+')]
+        expected = [Ponto(32, 11, 'v'), Ponto(77, 0, 'a'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
+                    Ponto(70, 1, '+')]
 
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(8.5))
 
         self.assertTrue(fase_exemplo.acabou())
 
 
-def criar_fase_exemplo():
-    fase_exemplo = Fase()
-    passaros = [PassaroVermelho(3, 3), PassaroAmarelo(3, 3), PassaroAmarelo(3, 3)]
-    porcos = [Porco(78, 1), Porco(70, 1)]
-    obstaculos = [Obstaculo(31, 10)]
+def criar_fase_exemplo(multiplicador=1):
+    fase_exemplo = Fase(1 if multiplicador == 1 else 32)
+    passaros = [PassaroVermelho(3 * multiplicador, 3 * multiplicador),
+                PassaroAmarelo(3 * multiplicador, 3 * multiplicador),
+                PassaroAmarelo(3 * multiplicador, 3 * multiplicador)]
+    porcos = [Porco(78 * multiplicador, multiplicador), Porco(70 * multiplicador, multiplicador)]
+    obstaculos = [Obstaculo(31 * multiplicador, 10 * multiplicador)]
 
     fase_exemplo.adicionar_passaro(*passaros)
     fase_exemplo.adicionar_porco(*porcos)
@@ -214,4 +221,4 @@ def criar_fase_exemplo():
 
 
 if __name__ == '__main__':
-    placa_grafica.animar(criar_fase_exemplo())
+    rodar_fase(criar_fase_exemplo(10))

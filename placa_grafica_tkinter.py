@@ -73,7 +73,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
 
             camada_de_atores.create_line(52, 493, 52 + tamanho_seta * math.cos(angulo_rad),
                                          493 + tamanho_seta * math.sin(angulo_rad), width=1.5)
-            camada_de_atores.create_text(35, 493, text=u"%d°" % angulo)
+            camada_de_atores.create_text(35, 493, text="%d°" % angulo)
             for ponto in fase.calcular_pontos(tempo):
                 plotar(camada_de_atores, ponto)
             tela.after(passo, _animar)
@@ -88,6 +88,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
             fase.lancar(angulo, tempo)
 
     def _replay(event):
+        return
         nonlocal tempo
         nonlocal delta_t
         if fase.acabou(tempo):
@@ -96,6 +97,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
 
 
     def _jogar_novamente(event):
+        return
         nonlocal tempo
         nonlocal delta_t
         if fase.acabou(tempo):

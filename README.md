@@ -1,6 +1,10 @@
 Python Birds
 ===========
 
+Essa versão é a mais simples. Ela não contém replay nem reset, de forma que o jogo não pode retroceder.
+
+Para versão mais complexa, acesse a branch [master](https://github.com/pythonprobr/pythonbirds/tree/master)
+
 Projeto para Ensino de Programação Orientadas a Objetos em Python.
 
 A versão utilizada para desenvolvimento foi Python 3.4
@@ -11,20 +15,20 @@ Um vídeo fala mais que 1000 palavras: [Python Birds](https://www.youtube.com/wa
 
 Instalar [Python 3](https://www.python.org/download/).
 
-Baixar a versão contendo apenas a [estrutura do projeto](https://github.com/pythonprobr/pythonbirds/archive/diversao.zip)
+Baixar o zip do projeto (botão Download Zip) 
 
 Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmica das classes. Para rodar todos testes, execute
 
     python executor_de_testes.py
     
-Explicação detalhada sobre classes e métodos se encontram em [Simplificação do Jogo](#simplifica%C3%A7%C3%A3o-do-jogo)
+Explicação detalhada sobre classes e métodos se encontram nos scripts atores.py e fase.py
 
 ## Ordem de desenvolvimento
 
 A ordem preferida é começar pelos atores, seguindo a ordem dos testes presentes no script atores_testes.py.
 Depois passar para a fase_teste.py, onde é implementada uma fase.
 
-Após o desenvolvimento é possível emular um jogo que termina em vitória rodando:
+É possível emular um jogo que termina em vitória rodando:
 
     python fase_testes.py
 
@@ -70,27 +74,10 @@ Classe base para todos atores do jogo.
 Método que recebe o tempo (float) como parâmetro e retorna uma tupla com 2 elementos, posição horizontal (x) como 
 primeiro elemento e posição vertical (y) como segundo.
 
-### Método resetar
-
-Método que ao ser executado, seta o valor de _tempo_de_colisão para None
-
-### Método status
-
-O ator possui os status Ativo ou Destruido. Além disso o status deve ser dependente do tempo. Ou seja, se o ator foi 
-destruido no tempo 1, ele deve possuir status Ativo antes desse tempo, como 0.9, e Destruido após esse tempo, como em tempo 1.1.
- 
 ### Método colidir
 
 O método colidir executa a lógica de colisão. A colisão só ocorre com atores ativos e que estejam
 em pontos vizinhos. 
-O ator deve guardar o tempo de colisão para calcular corretamente seu status.
-Além disso, um intervalo é recebido como parâmetro indicando qual a tolerância para considerar um ponto vizinho.
- Por padrão, seu valor é 1.
-
-## Método caracter
-
-O método caracter retorna 'A' quando o ator tem status Ativo e '+' caso contrário. Também é depende do tempo.
-
 
 ## Classe Obstaculo
 
@@ -111,38 +98,31 @@ representação é a o caracter "@".
 
 Classe base de todos os passáros. Cada tipo possui uma velocidade de lançamento (v). No lançamento o jogador escolhe o 
 ângulo (teta), em graus, no qual o passáro deve ser lançado. O lançamento respeita as regras de lançamento oblíquo com 
-gravidade (G) constante e igual a 10 m/s^2.
+gravidade (GRAVIDADE) constante e igual a 10 m/s^2.
 
 ### Método lancar
 
 O método lançar recebe o ângulo, em graus, que será feito o lançamento. Cada pássaro deve armazenar esse valor e o tempo
 de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t = T_final - T_inicial
 
-### Método de resetar
-
-O método resetar deve chamar o método resetar de Ator.
-Além disso, deve setar como Nome os parầmetros de tempo de lançamento e ângulo de lançamento
-
 
 ### Método de colidir_com_chao
 
 Todo pássaro que colidir com o chão (y<=0) deve ser destruído.
 
-### Método foi lançado
+### Método foi_lançado
 
 Esse método deve retornar verdadadeiro se o pássaro foi lançado (tempo de lançamento é None).
 Caso contrário deve retornar falso
 
-### Lançamentomento
+### Lançamento
 
-Se o pássaro ainda não foi lançado, ou se o tempo de jogo é menor que o tempo de lançamento,
-O pássaro deve permanecer na posição inicial.
+Se o pássaro ainda não foi lançado, o pássaro deve permanecer na posição inicial.
   
-Calso tenha sido lançado e seu status esteja ativo, sua posição deve ser calculada de acordo com o lançamento oblíquo.
+Caso tenha sido lançado e seu status esteja ativo, sua posição deve ser calculada de acordo com o lançamento oblíquo.
 Nesse caso, delta_t vai ser igual ao tempo do jogo menos o tempo do lançamento.
   
-Caso contrário, ele deve retornar a posição onde colidiu. Para isso, pasta
-calcular o ponto em que o pássaro estava no tempo da colisão.
+Caso contrário, ele deve retornar a posição onde colidiu.
 
 #### Método posicao_horizontal
 
@@ -195,7 +175,8 @@ Recebe o tempo como parâmetro e retorna mensagem com status do jogo.
 
 ### Método lancar
 
-Recebe o ângulo e o tempo do lançamento. Deve delegar o lançamento ao primeiro pássaro ativo da lista de pássaros.
+Recebe o ângulo e o tempo do lançamento. Deve delegar o lançamento ao primeiro pássaro ativo da lista de pássaros que 
+ainda não foi lançado.
 
 ### Método calcular_pontos
 
