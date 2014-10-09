@@ -13,7 +13,7 @@ from placa_grafica_tkinter import rodar_fase
 from random import randint
 
 if __name__ == '__main__':
-    fase = Fase(intervalo_de_colisao=10)
+    fase = Fase(intervalo_de_colisao=32)
 
 
     # Adicionar Pássaros Amarelos
