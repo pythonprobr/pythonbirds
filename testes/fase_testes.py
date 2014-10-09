@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from itertools import chain
 
 import os
 from os import path
+import unittest
 from unittest.case import TestCase
 import math
 import sys
@@ -10,13 +10,12 @@ import sys
 project_dir = path.dirname(__file__)
 project_dir = path.join('..')
 sys.path.append(project_dir)
-from placa_grafica_tkinter import rodar_fase
 
 project_dir = os.path.join(os.path.dirname(__file__), '..')
 project_dir = os.path.normpath(project_dir)
 sys.path.append(project_dir)
 
-from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO, ATIVO
+from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO
 from fase import Fase, Ponto
 
 
@@ -221,4 +220,4 @@ def criar_fase_exemplo(multiplicador=1):
 
 
 if __name__ == '__main__':
-    rodar_fase(criar_fase_exemplo(10))
+    unittest.main()

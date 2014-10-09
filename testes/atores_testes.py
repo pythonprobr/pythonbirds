@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
+import sys
+from os import path
+import unittest
+
+project_dir = path.dirname(__file__)
+project_dir = path.join('..')
+sys.path.append(project_dir)
+
+project_dir = path.join(path.dirname(__file__), '..')
+project_dir = path.normpath(project_dir)
+sys.path.append(project_dir)
 from unittest.case import TestCase
 from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo, PassaroVermelho
 
@@ -681,3 +693,7 @@ class PassaroAmareloTests(PassaroBaseTests):
         # t = 2 + (delta_t / 100)
         # x, y = passaro_amarelo.calcular_posicao(t)
         # print('        self.assert_passaro_posicao(%s, %s, ATIVO, passaro_amarelo, %s)' % (x, y, t))
+
+
+if __name__ == '__main__':
+    unittest.main()
