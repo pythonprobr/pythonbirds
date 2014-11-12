@@ -103,7 +103,6 @@ class Passaro(Ator):
         """
         if self.y <= 0:
             self.status = DESTRUIDO
-            self.caracter = self._caracter_destruido
 
     def _calcular_posicao_horizontal(self, delta_t):
         self.x = self._x_inicial + self.velocidade_escalar * delta_t * math.cos(self._angulo_de_lancamento)

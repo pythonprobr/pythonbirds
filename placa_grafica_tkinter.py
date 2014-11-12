@@ -6,7 +6,7 @@ import math
 from os import path
 import atores
 
-from fase import Fase, EM_ANDAMENTO
+from fase import Fase, EM_ANDAMENTO, VITORIA
 from atores import PassaroVermelho, PassaroAmarelo, Porco, Obstaculo
 
 ALTURA_DA_TELA = 600  # px
@@ -57,10 +57,10 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
         if tempo <= 0:
             tempo = 0
             delta_t /= -multiplicador_rebobinar
-        if fase.status()!=EM_ANDAMENTO:
+        if fase.status() != EM_ANDAMENTO:
             camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
             camada_de_atores.create_image(54, 540, image=MENU, anchor=NW)
-            if 'ganhou' in fase.status():
+            if fase.status() == VITORIA:
                 img = VOCE_GANHOU
             else:
                 img = VOCE_PERDEU
