@@ -18,6 +18,9 @@ class Ponto():
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.caracter == other.caracter
 
+    def __hash__(self):
+        return hash(self.x) ^ hash(self.y)
+
     def __repr__(self, *args, **kwargs):
         return "Ponto(%s,%s,'%s')" % (self.x, self.y, self.caracter)
 
@@ -62,7 +65,7 @@ class Fase():
         self._adicionar_ator(self._passaros, *passaros)
 
     # def acabou(self):
-    #     """
+    # """
     #     Método que retorna verdadeiro se o jogo acabou e falso caso contrário
     #
     #     O jogo pode acabar por dois motivos:
