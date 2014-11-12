@@ -13,9 +13,9 @@ Um vídeo fala mais que 1000 palavras: [Python Birds](https://www.youtube.com/wa
 
 # Contribuidores
 
-[Giovane Liberato](https://github.com/giovaneliberato)
-[Michel Amaral](https://github.com/michelamaral)
-[Renzo Nuccitelli](https://github.com/renzon)
+* [Giovane Liberato](https://github.com/giovaneliberato)
+* [Michel Amaral](https://github.com/michelamaral)
+* [Renzo Nuccitelli](https://github.com/renzon)
 
 # Abordagem
 
