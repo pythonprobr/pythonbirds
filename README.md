@@ -55,12 +55,12 @@ Contém lógica para rodar jogo e exibir no console.
 
 ## script placa_grafica_tkinter.py
 
-Contém lógica para rodar jogo e em uma janela.
+Contém lógica para rodar jogo em uma janela.
 
 # Simplificação do Jogo
 
 1. Atores são pontos no plano cartesiano. 
-2. A velocidade dos pontos e pequena, de tal forma que a cada passo os atores se movam apenas para pontos vizinhos.
+2. A velocidade dos pontos é pequena, de tal forma que a cada passo os atores se movam apenas para pontos vizinhos.
 3. A colisão entre pontos ocorre quando eles estão em ponto vizinho, de acordo com valor de intervalo.
 
 A seguir é apresentada a especificação detalhada do jogo.
@@ -77,12 +77,12 @@ primeiro elemento e posição vertical (y) como segundo.
 ### Método colidir
 
 O método colidir executa a lógica de colisão. A colisão só ocorre com atores ativos e que estejam
-em pontos vizinhos. 
+em pontos vizinhos. Ao colidir, os atores envolvidos devem ter seus status alterado para DESTRUIDO
 
 ## Classe Obstaculo
 
-Classe que representa obstáculos na fase e que podem ser destruidos por pássaros. Herda de ator. Seu caracter de 
-representação é a letra "O" quando Ativo.
+Classe que representa obstáculos na fase e que podem ser destruídos por pássaros. Herda de ator. Seu caracter de 
+representação é a letra "O", quando ATIVO.
 
 ### Status
 
@@ -91,8 +91,13 @@ Assim ele vai "sumir" da tela.
 
 ## Classe Porco
 
-Classe que representa porcos na fase e que podem ser destruidos por pássaros. Herda de ator. Seu caracter de 
+Classe que representa porcos na fase e que podem ser destruídos por pássaros. Herda de ator. Seu caracter de 
 representação é a o caracter "@".
+
+### Status
+
+Um obstáculo ao ter seu status alterado para DESTRUIDO deve ter seu caracter de apresentação alterado para "+" (sinal de mais).
+Assim sua imagem é alterada para a de porco morto.
 
 ## Passaro
 
@@ -102,8 +107,9 @@ gravidade (GRAVIDADE) constante e igual a 10 m/s^2.
 
 ### Método lancar
 
-O método lançar recebe o ângulo, em graus, que será feito o lançamento. Cada pássaro deve armazenar esse valor e o tempo
-de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t = T_final - T_inicial
+O método lançar recebe o ângulo, em graus, que será feito o lançamento. Ele deve ser convertido para radianos.
+Cada pássaro deve armazenar esse valor e o tempo
+de lançamento para cálculo de sua posíção. Lembrar que o tempo das fórmulas é delta_t = T_final - T_inicial.
 
 
 ### Método de colidir_com_chao
@@ -113,13 +119,13 @@ Todo pássaro que colidir com o chão (y<=0) deve ser destruído.
 ### Método foi_lançado
 
 Esse método deve retornar verdadadeiro se o pássaro foi lançado (tempo de lançamento é None).
-Caso contrário deve retornar falso
+Caso contrário deve retornar falso.
 
 ### Lançamento
 
 Se o pássaro ainda não foi lançado, o pássaro deve permanecer na posição inicial.
   
-Caso tenha sido lançado e seu status esteja ativo, sua posição deve ser calculada de acordo com o lançamento oblíquo.
+Caso tenha sido lançado e seu status esteja ATIVO, sua posição deve ser calculada de acordo com o lançamento oblíquo.
 Nesse caso, delta_t vai ser igual ao tempo do jogo menos o tempo do lançamento.
   
 Caso contrário, ele deve retornar a posição onde colidiu.
@@ -143,39 +149,32 @@ Tipo de Pássaro que representa o pássaro amarelo. Possui velocidade de lançam
 
 ## Classe Fase
 
-Classe responsável por organizar atores e transformarem os dados em pontos a serem representados na tela.
+Classe responsável por organizar atores e transformar os dados em pontos a serem representados na tela.
 
 ### Método adicionar_obstaculo
 
-Método que adiciona um ou mais obstáculos na fase
+Método que adiciona um ou mais obstáculos na fase.
 
 ### Método adicionar_porco
 
-Método que adiciona um ou mais porcos na fase
+Método que adiciona um ou mais porcos na fase.
 
 ### Método adicionar_passaro
 
-Método que adiciona um ou mais pássaros na fase
+Método que adiciona um ou mais pássaros na fase.
 
-### Método acabou
-
-Método que recebe o tempo do jogo e retorna verdadeiro (True) se o jogo acabou e (False) caso contrário.
-O jogo pode acabar por duas razôes:
-
-1. Todos porcos foram destruídos
-2. Não há mais pássaros a serem lançados
 
 ### Método status
 
-Recebe o tempo como parâmetro e retorna mensagem com status do jogo.
+Recebe o tempo como parâmetro e retorna status do jogo.
 
-1. Se o jogo está em andamento, retorna mensagem "Jogo em andamento."
-2. Se o jogo acabou e não existem porcos ativos, retorna a mensagem "Jogo em encerrado. Você ganhou!"
-3. Se o jogo acabou e existem porcos ativos, retorna a mensagem "Jogo em encerrado. Você perdeu!"
+1. Se o jogo está em andamento, retorna status "EM_ANDAMENTO";
+2. Se o jogo acabou e não existem porcos ativos, retorna STATUS "VITORIA";
+3. Se o jogo acabou e existem porcos ativos, retorna status "DERROTA".
 
 ### Método lancar
 
-Recebe o ângulo e o tempo do lançamento. Deve delegar o lançamento ao primeiro pássaro ativo da lista de pássaros que 
+Recebe o ângulo e o tempo do lançamento. Deve delegar o lançamento ao primeiro pássaro ATIVO da lista de pássaros que 
 ainda não foi lançado.
 
 ### Método calcular_pontos
@@ -185,7 +184,7 @@ Método que executa a lógica do jogo a cada passo (tempo), retornando pontos a 
 Ele deve:
 
 1. Calcular a posição de cada pássaro, verificando se ele colidiu com algum obstáculo, porco ou chão.
-2. Retornar instâncias da classe Ponto, informando x,y e caracter respectivo a cada ator.
+2. Retornar instâncias da classe Ponto, informando x, y e caracter respectivo a cada ator.
 
 ### Divirta-se!!!!
 
