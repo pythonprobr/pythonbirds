@@ -11,17 +11,23 @@ A versão utilizada para desenvolvimento foi Python 3.4
 
 Um vídeo fala mais que 1000 palavras: [Python Birds](https://www.youtube.com/watch?v=b899h0lNd7U&list=PLA05yVJtRWYTm0sIa6n56UpCjCsR5ekla)
 
+# Contribuidores
+
+[Giovane Liberato](https://github.com/giovaneliberato)
+[Michel Amaral](https://github.com/michelamaral)
+[Renzo Nuccitelli](https://github.com/renzon)
+
 # Abordagem
 
 Instalar [Python 3](https://www.python.org/download/).
 
 Baixar o zip do projeto (botão Download Zip) 
 
-Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmica das classes. Para rodar todos testes, execute
+Os testes se encontram dentro do pacote "testes" e servem para definir a dinâmica das classes. Para rodar todos testes, execute:
 
     python executor_de_testes.py
     
-Explicação detalhada sobre classes e métodos se encontram nos scripts atores.py e fase.py
+Explicação detalhada sobre classes e métodos se encontram nos scripts atores.py e fase.py.
 
 ## Ordem de desenvolvimento
 
@@ -141,11 +147,13 @@ Fórmula Y=Y0+v*sen(teta)delta_t-(G*delta_t^2)/2.
 
 ## Classe Passaro Vermelho
 
-Tipo de Pássaro que representa o pássaro vermelho. Possui velocidade de lançamento igual a 20 m/s. Seu caracter é "D".
+Tipo de Pássaro que representa o pássaro vermelho. Possui velocidade de lançamento igual a 20 m/s. 
+Seu caracter quanto ATIVO é "V". Quando DESTRUIDO é "v".
 
 ## Classe Passaro Amarelo
 
-Tipo de Pássaro que representa o pássaro amarelo. Possui velocidade de lançamento igual a 30 m/s. Seu caracter é ">".
+Tipo de Pássaro que representa o pássaro amarelo. Possui velocidade de lançamento igual a 30 m/s.
+Seu caracter quanto DESTRUIDO é "a".
 
 ## Classe Fase
 
