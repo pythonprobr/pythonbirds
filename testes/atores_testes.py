@@ -11,14 +11,14 @@ class AtorTestes(TestCase):
         self.assertEqual(0, ator.x)
         self.assertEqual(0, ator.y)
         self.assertEqual(ATIVO, ator.status)
-        self.assertEqual('A', ator.caracter)
+        self.assertEqual('A', ator.caracter())
 
     def teste_valores_passados_por_parametro(self):
         ator = Ator(1, 2)
         self.assertEqual(1, ator.x)
         self.assertEqual(2, ator.y)
         self.assertEqual(ATIVO, ator.status)
-        self.assertEqual('A', ator.caracter)
+        self.assertEqual('A', ator.caracter())
 
     def teste_ator_posicao(self):
         'Teste que verifica que o ator comum não deve se mover independente do tempo do jogo'
@@ -85,10 +85,10 @@ class AtorTestes(TestCase):
 
     def test_caracter(self):
         ator = Ator()
-        self.assertEqual('A', ator.caracter)
+        self.assertEqual('A', ator.caracter())
         outro_ator_na_mesma_posicao = Ator()
         ator.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual(' ', ator.caracter)
+        self.assertEqual(' ', ator.caracter())
 
 
     def assert_colisao_atores_ativos(self, ator, ator2, intervalo=1):
@@ -117,19 +117,19 @@ class AtorTestes(TestCase):
 class ObstaculoTestes(TestCase):
     def teste_status(self):
         obstaculo = Obstaculo()
-        self.assertEqual('O', obstaculo.caracter)
+        self.assertEqual('O', obstaculo.caracter())
         outro_ator_na_mesma_posicao = Ator()
         obstaculo.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual(' ', obstaculo.caracter)
+        self.assertEqual(' ', obstaculo.caracter())
 
 
 class PorcoTestes(TestCase):
     def teste_status(self):
         porco = Porco()
-        self.assertEqual('@', porco.caracter)
+        self.assertEqual('@', porco.caracter())
         outro_ator_na_mesma_posicao = Ator()
         porco.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual('+', porco.caracter)
+        self.assertEqual('+', porco.caracter())
 
 
 class PassaroBaseTests(TestCase):
@@ -143,10 +143,10 @@ class PassaroBaseTests(TestCase):
 class PassaroVermelhoTests(PassaroBaseTests):
     def teste_status(self):
         passaro_amarelo = PassaroVermelho(1, 1)
-        self.assertEqual('V', passaro_amarelo.caracter)
+        self.assertEqual('V', passaro_amarelo.caracter())
         outro_ator_na_mesma_posicao = Ator()
         passaro_amarelo.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual('v', passaro_amarelo.caracter)
+        self.assertEqual('v', passaro_amarelo.caracter())
 
 
     def teste_velocidade_escalar(self):
@@ -182,10 +182,10 @@ class PassaroVermelhoTests(PassaroBaseTests):
 class PassaroAmareloTests(PassaroBaseTests):
     def teste_status(self):
         passaro_amarelo = PassaroAmarelo(1, 1)
-        self.assertEqual('A', passaro_amarelo.caracter)
+        self.assertEqual('A', passaro_amarelo.caracter())
         outro_ator_na_mesma_posicao = Ator()
         passaro_amarelo.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual('a', passaro_amarelo.caracter)
+        self.assertEqual('a', passaro_amarelo.caracter())
 
     def teste_velocidade_escalar(self):
         self.assertEqual(30, PassaroAmarelo.velocidade_escalar)

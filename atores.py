@@ -24,8 +24,10 @@ class Ator():
         """
         self.y = y
         self.x = x
-        self.caracter = self._caracter_ativo
         self.status = ATIVO
+
+    def caracter(self):
+        return self._caracter_ativo if self.status == ATIVO else self._caracter_destruido
 
     def calcular_posicao(self, tempo):
         """
@@ -54,8 +56,6 @@ class Ator():
 
         if self.x - intervalo <= outro_ator.x <= self.x + intervalo and self.y - intervalo <= outro_ator.y <= self.y + intervalo:
             self.status = DESTRUIDO
-            self.caracter = self._caracter_destruido
-            outro_ator.caracter = outro_ator._caracter_destruido
             outro_ator.status = DESTRUIDO
 
 
