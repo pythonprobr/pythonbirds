@@ -81,7 +81,8 @@ class FaseTestes(TestCase):
         self.assertEqual(DERROTA, fase.status(), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
 
         fase.adicionar_passaro(PassaroAmarelo())
-        self.assertEqual(EM_ANDAMENTO, fase.status(), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
+        self.assertEqual(EM_ANDAMENTO, fase.status(),
+                         'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
     def teste_status(self):
         fase = Fase()
@@ -160,8 +161,8 @@ class FaseTestes(TestCase):
 
     def teste_calcular_pontos(self):
         fase_exemplo = criar_fase_exemplo()
-        expected = [Ponto(3, 3, 'V'), Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
-                    Ponto(70, 1, '@')]
+        expected = [Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
+                    Ponto(70, 1, '@'), Ponto(3, 3, 'V')]
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(0))
 
         fase_exemplo.lancar(45, 1)
