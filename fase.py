@@ -134,7 +134,7 @@ class Fase():
                 passaro.colidir_com_chao()
             else:
                 break
-         return self._transformar_em_ponto(passaro)
+        return self._transformar_em_ponto(passaro)
 
     def _existe_porco_ativo(self):
         return self._verificar_se_existe_ator_ativo(self._porcos)
