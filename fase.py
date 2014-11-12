@@ -3,6 +3,11 @@ from itertools import chain
 from atores import ATIVO
 
 
+VITORIA = 'VITORIA'
+DERROTA = 'DERROTA'
+EM_ANDAMENTO = 'EM_ANDAMENTO'
+
+
 class Ponto():
     def __init__(self, x, y, caracter):
         self.caracter = caracter
@@ -11,6 +16,9 @@ class Ponto():
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.caracter == other.caracter
+
+    def __hash__(self):
+        return hash(self.x) ^ hash(self.y)
 
     def __repr__(self, *args, **kwargs):
         return "Ponto(%s,%s,'%s')" % (self.x, self.y, self.caracter)
@@ -53,19 +61,6 @@ class Fase():
         """
         pass
 
-    def acabou(self):
-        """
-        Método que retorna verdadeiro se o jogo acabou e falso caso contrário
-
-        O jogo pode acabar por dois motivos:
-
-        1. Não existem mais porcos ativos no jogo
-        2. Não existem mais pássaros ativos no jogo
-
-        :return: booleano
-        """
-        return True
-
     def status(self):
         """
         Método que indica com mensagem o status do jogo
@@ -76,9 +71,9 @@ class Fase():
 
         Se o jogo acabou com vitória (não existe porco ativo), retorna essa mensagem
 
-        :return: Mensagem de status
+        :return:
         """
-        return 'Jogo em encerrado. Você perdeu!'
+        return EM_ANDAMENTO
 
     def lancar(self, angulo, tempo):
         """
@@ -92,6 +87,7 @@ class Fase():
         :param tempo: Tempo de lançamento
         """
         pass
+
 
     def calcular_pontos(self, tempo):
         """
@@ -107,5 +103,5 @@ class Fase():
         return pontos
 
     def _transformar_em_ponto(self, ator):
-        return Ponto(ator.x, ator.y, ator.caracter)
+        return Ponto(ator.x, ator.y, ator.caracter())
 

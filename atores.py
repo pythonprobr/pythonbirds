@@ -24,8 +24,10 @@ class Ator():
         """
         self.y = y
         self.x = x
-        self.caracter = self._caracter_ativo
         self.status = ATIVO
+
+    def caracter(self):
+        return self._caracter_ativo if self.status == ATIVO else self._caracter_destruido
 
     def calcular_posicao(self, tempo):
         """
@@ -47,8 +49,10 @@ class Ator():
 
         :param outro_ator: Ator a ser considerado na colisão
         :param intervalo: Intervalo a ser considerado
+        :return:
         """
         pass
+
 
 
 class Obstaculo(Ator):

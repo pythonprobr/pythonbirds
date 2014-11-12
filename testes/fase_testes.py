@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+from itertools import chain
 
 import os
 from os import path
-import unittest
 from unittest.case import TestCase
 import math
 import sys
@@ -10,13 +10,14 @@ import sys
 project_dir = path.dirname(__file__)
 project_dir = path.join('..')
 sys.path.append(project_dir)
+from placa_grafica_tkinter import rodar_fase
 
 project_dir = os.path.join(os.path.dirname(__file__), '..')
 project_dir = os.path.normpath(project_dir)
 sys.path.append(project_dir)
 
-from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO
-from fase import Fase, Ponto
+from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO, ATIVO
+from fase import Fase, Ponto, EM_ANDAMENTO, VITORIA, DERROTA
 
 
 class FaseTestes(TestCase):
@@ -56,7 +57,7 @@ class FaseTestes(TestCase):
 
     def teste_acabou_sem_porcos(self):
         fase = Fase()
-        self.assertTrue(fase.acabou())
+        self.assertEqual(VITORIA, fase.status())
 
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
@@ -65,22 +66,23 @@ class FaseTestes(TestCase):
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
 
-        self.assertFalse(fase.acabou())
+        self.assertEqual(EM_ANDAMENTO, fase.status())
 
         # colidindo cada passaro com um porco no tempo 3
         for passaro, porco in zip(passaros, porcos):
             passaro.colidir(porco, 3)
 
-        self.assertTrue(fase.acabou())
+        self.assertEqual(VITORIA, fase.status())
 
         fase.adicionar_obstaculo(Obstaculo())
-        self.assertTrue(fase.acabou(), 'Obstáculo não interfere no fim do jogo')
+        self.assertEqual(VITORIA, fase.status(), 'Obstáculo não interfere no fim do jogo')
 
         fase.adicionar_porco(Porco())
-        self.assertTrue(fase.acabou(), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
+        self.assertEqual(DERROTA, fase.status(), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
 
         fase.adicionar_passaro(PassaroAmarelo())
-        self.assertFalse(fase.acabou(), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
+        self.assertEqual(EM_ANDAMENTO, fase.status(),
+                         'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
     def teste_status(self):
         fase = Fase()
@@ -88,29 +90,29 @@ class FaseTestes(TestCase):
         passaros = [PassaroAmarelo(1, 1) for i in range(2)]
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
-        self.assertEqual('Jogo em andamento.', fase.status())
+        self.assertEqual(EM_ANDAMENTO, fase.status())
 
         for passaro, porco in zip(passaros, porcos):
             passaro.colidir(porco, 3)
 
-        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(),
+        self.assertEqual(VITORIA, fase.status(),
                          'Sem porcos ativos o jogo deveria terminar com vitória')
 
         fase.adicionar_obstaculo(Obstaculo())
-        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(),
+        self.assertEqual(VITORIA, fase.status(),
                          'Obstáculo não interfere para definir vitória')
 
         porco = Porco()
         fase.adicionar_porco(porco)
-        self.assertEqual('Jogo em encerrado. Você perdeu!', fase.status(),
+        self.assertEqual(DERROTA, fase.status(),
                          'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar em derrota')
 
         fase.adicionar_passaro(PassaroAmarelo())
-        self.assertEqual('Jogo em andamento.', fase.status(),
+        self.assertEqual(EM_ANDAMENTO, fase.status(),
                          'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
         porco.colidir(porco, 3)
-        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(),
+        self.assertEqual(VITORIA, fase.status(),
                          'Sem porco ativo, o jogo deveria acabar com vitória')
 
     def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
@@ -159,9 +161,9 @@ class FaseTestes(TestCase):
 
     def teste_calcular_pontos(self):
         fase_exemplo = criar_fase_exemplo()
-        expected = [Ponto(3, 3, 'V'), Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
-                    Ponto(70, 1, '@')]
-        self.assertListEqual(expected, fase_exemplo.calcular_pontos(0))
+        expected = set([Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
+                        Ponto(70, 1, '@'), Ponto(3, 3, 'V')])
+        self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(0)))
 
         fase_exemplo.lancar(45, 1)
 
@@ -177,31 +179,32 @@ class FaseTestes(TestCase):
 
         fase_exemplo.lancar(23, 4)
 
-        expected = [Ponto(32, 11, 'v'), Ponto(17, 25, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
-                    Ponto(70, 1, '@')]
+        expected = set([Ponto(32, 11, 'v'), Ponto(17, 25, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+                        Ponto(70, 1, '@')])
 
-        self.assertListEqual(expected, fase_exemplo.calcular_pontos(4))
+        self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(4)))
 
         # i variando de 4 até 6.9
         for i in range(400, 700, 1):
             fase_exemplo.calcular_pontos(i / 100)
 
-        expected = [Ponto(32, 11, 'v'), Ponto(57, 30, 'A'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
-                    Ponto(70, 1, '+')]
+        expected = set(
+            [Ponto(32, 11, 'v'), Ponto(57, 30, 'A'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+             Ponto(70, 1, '+')])
 
-        self.assertListEqual(expected, fase_exemplo.calcular_pontos(7))
+        self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(7)))
 
         # i variando de 7 até 8.49
         for i in range(700, 849, 1):
             fase_exemplo.calcular_pontos(i / 100)
         print(fase_exemplo.calcular_pontos(8.5))
 
-        expected = [Ponto(32, 11, 'v'), Ponto(77, 0, 'a'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
-                    Ponto(70, 1, '+')]
+        expected = set([Ponto(32, 11, 'v'), Ponto(77, 0, 'a'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
+                        Ponto(70, 1, '+')])
 
-        self.assertListEqual(expected, fase_exemplo.calcular_pontos(8.5))
+        self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(8.5)))
 
-        self.assertTrue(fase_exemplo.acabou())
+        self.assertEqual(VITORIA, fase_exemplo.status())
 
 
 def criar_fase_exemplo(multiplicador=1):
@@ -220,4 +223,4 @@ def criar_fase_exemplo(multiplicador=1):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    rodar_fase(criar_fase_exemplo(10))
