@@ -17,7 +17,7 @@ project_dir = os.path.normpath(project_dir)
 sys.path.append(project_dir)
 
 from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO, ATIVO
-from fase import Fase, Ponto
+from fase import Fase, Ponto, EM_ANDAMENTO, VITORIA, DERROTA
 
 
 class FaseTestes(TestCase):
@@ -57,7 +57,7 @@ class FaseTestes(TestCase):
 
     def teste_acabou_sem_porcos(self):
         fase = Fase()
-        self.assertTrue(fase.acabou())
+        self.assertEqual(VITORIA, fase.status())
 
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
@@ -66,22 +66,22 @@ class FaseTestes(TestCase):
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
 
-        self.assertFalse(fase.acabou())
+        self.assertEqual(EM_ANDAMENTO, fase.status())
 
         # colidindo cada passaro com um porco no tempo 3
         for passaro, porco in zip(passaros, porcos):
             passaro.colidir(porco, 3)
 
-        self.assertTrue(fase.acabou())
+        self.assertEqual(VITORIA, fase.status())
 
         fase.adicionar_obstaculo(Obstaculo())
-        self.assertTrue(fase.acabou(), 'Obstáculo não interfere no fim do jogo')
+        self.assertEqual(VITORIA, fase.status(), 'Obstáculo não interfere no fim do jogo')
 
         fase.adicionar_porco(Porco())
-        self.assertTrue(fase.acabou(), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
+        self.assertEqual(DERROTA, fase.status(), 'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar')
 
         fase.adicionar_passaro(PassaroAmarelo())
-        self.assertFalse(fase.acabou(), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
+        self.assertEqual(EM_ANDAMENTO, fase.status(), 'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
     def teste_status(self):
         fase = Fase()
@@ -89,29 +89,29 @@ class FaseTestes(TestCase):
         passaros = [PassaroAmarelo(1, 1) for i in range(2)]
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
-        self.assertEqual('Jogo em andamento.', fase.status())
+        self.assertEqual(EM_ANDAMENTO, fase.status())
 
         for passaro, porco in zip(passaros, porcos):
             passaro.colidir(porco, 3)
 
-        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(),
+        self.assertEqual(VITORIA, fase.status(),
                          'Sem porcos ativos o jogo deveria terminar com vitória')
 
         fase.adicionar_obstaculo(Obstaculo())
-        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(),
+        self.assertEqual(VITORIA, fase.status(),
                          'Obstáculo não interfere para definir vitória')
 
         porco = Porco()
         fase.adicionar_porco(porco)
-        self.assertEqual('Jogo em encerrado. Você perdeu!', fase.status(),
+        self.assertEqual(DERROTA, fase.status(),
                          'Com Porco ativo e sem pássaro para lançar, o jogo deveria acabar em derrota')
 
         fase.adicionar_passaro(PassaroAmarelo())
-        self.assertEqual('Jogo em andamento.', fase.status(),
+        self.assertEqual(EM_ANDAMENTO, fase.status(),
                          'Com Porco ativo e com pássaro para lançar, o jogo não deveria acabar')
 
         porco.colidir(porco, 3)
-        self.assertEqual('Jogo em encerrado. Você ganhou!', fase.status(),
+        self.assertEqual(VITORIA, fase.status(),
                          'Sem porco ativo, o jogo deveria acabar com vitória')
 
     def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
@@ -202,7 +202,7 @@ class FaseTestes(TestCase):
 
         self.assertListEqual(expected, fase_exemplo.calcular_pontos(8.5))
 
-        self.assertTrue(fase_exemplo.acabou())
+        self.assertEqual(VITORIA, fase_exemplo.status())
 
 
 def criar_fase_exemplo(multiplicador=1):

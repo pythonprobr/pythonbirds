@@ -2,6 +2,12 @@
 from itertools import chain
 from atores import ATIVO
 
+# Status possíveis do jogo
+
+VITORIA = 'VITORIA'
+DERROTA = 'DERROTA'
+EM_ANDAMENTO = 'EM_ANDAMENTO'
+
 
 class Ponto():
     def __init__(self, x, y, caracter):
@@ -55,18 +61,18 @@ class Fase():
         """
         self._adicionar_ator(self._passaros, *passaros)
 
-    def acabou(self):
-        """
-        Método que retorna verdadeiro se o jogo acabou e falso caso contrário
-
-        O jogo pode acabar por dois motivos:
-
-        1. Não existem mais porcos ativos no jogo
-        2. Não existem mais pássaros ativos no jogo
-
-        :return: booleano
-        """
-        return not self._existe_porco_ativo() or not self._existe_passaro_ativo()
+    # def acabou(self):
+    #     """
+    #     Método que retorna verdadeiro se o jogo acabou e falso caso contrário
+    #
+    #     O jogo pode acabar por dois motivos:
+    #
+    #     1. Não existem mais porcos ativos no jogo
+    #     2. Não existem mais pássaros ativos no jogo
+    #
+    #     :return: booleano
+    #     """
+    #     return self.status() != EM_ANDAMENTO
 
     def status(self):
         """
@@ -81,10 +87,10 @@ class Fase():
         :return:
         """
         if not self._existe_porco_ativo():
-            return 'Jogo em encerrado. Você ganhou!'
+            return VITORIA
         if self._existe_passaro_ativo():
-            return 'Jogo em andamento.'
-        return 'Jogo em encerrado. Você perdeu!'
+            return EM_ANDAMENTO
+        return DERROTA
 
     def lancar(self, angulo, tempo):
         """
@@ -128,7 +134,7 @@ class Fase():
                 passaro.colidir_com_chao()
             else:
                 break
-        return self._transformar_em_ponto(passaro)
+         return self._transformar_em_ponto(passaro)
 
     def _existe_porco_ativo(self):
         return self._verificar_se_existe_ator_ativo(self._porcos)
