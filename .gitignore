@@ -43,6 +43,10 @@ coverage.xml
 .pydevproject
 .idea
 
+# Floobits
+
+.floorc.json
+
 # Rope
 .ropeproject
 
