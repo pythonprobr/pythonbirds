@@ -13,7 +13,7 @@ class Ponto():
         return self.x == other.x and self.y == other.y and self.caracter == other.caracter
 
     def __repr__(self, *args, **kwargs):
-        return "Ponto(%s,%s,'%s')" % (self.x, self.y, self.caracter)
+        return "Ponto(%s, %s,'%s')" % (self.x, self.y, self.caracter)
 
 
 class Fase():

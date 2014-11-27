@@ -11,7 +11,7 @@ from fase import Fase
 from placa_grafica_tkinter import rodar_fase
 
 if __name__ == '__main__':
-    fase = Fase(intervalo_de_colisao=10)
+    fase = Fase(intervalo_de_colisao=32)
 
 
     deltax_gambi=80
