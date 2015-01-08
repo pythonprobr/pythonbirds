@@ -197,3 +197,13 @@ Ele deve:
 ### Divirta-se!!!!
 
 Powered by [Python Pro](http://adm.python.pro.br)
+
+# Observação Importante
+
+Esse projeto usa somente o interpretador padrão do Python. Para fazer jogos com mais interatividade, existe a biblioteca Pygame. Ela não foi utilizada por motivos de simplicidade, para evitar que o aluno iniciante tenha dificuldades na hora de instalar o projeto.
+
+Contudo o Estevão Fonseca fez um versão com essa biblioteca, confira o projeto:
+
+<https://github.com/estevaofon/angry-birds-python>
+
+Ele também colocou esse [vídeo no Youtube](https://www.youtube.com/watch?v=B7G5JtCFepE). 
