@@ -43,13 +43,15 @@ def plotar(camada_de_atores, ponto):
         camada_de_atores.create_image((x, y), image=image, anchor=NW)
 
 
-def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
+def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.04):
     tempo = 0
     passo = int(1000 * passo)
     angulo = 0
     multiplicador_rebobinar = 20
 
     def _animar():
+        tempo_de_inicio_de_animacao=time.time()
+
         nonlocal tempo
         nonlocal delta_t
         nonlocal angulo
@@ -76,7 +78,9 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.01):
             camada_de_atores.create_text(35, 493, text="%d°" % angulo)
             for ponto in fase.calcular_pontos(tempo):
                 plotar(camada_de_atores, ponto)
-            tela.after(passo, _animar)
+            tempo_gasto_com_animacao= round((time.time() - tempo_de_inicio_de_animacao)*1000) # Trans
+            tempo_proxima_animacao = passo - tempo_gasto_com_animacao if passo>tempo_gasto_com_animacao else 1
+            tela.after(tempo_proxima_animacao, _animar)
 
     def _ouvir_comandos_lancamento(evento):
         nonlocal angulo
