@@ -143,6 +143,9 @@ class AtorTestes(TestCase):
 
 
 class ObstaculoTestes(TestCase):
+    """
+    Esperado '0' como caracter de obstáculo ativo e ' ' como caracter de obstáculo destruído
+    """
     def teste_status(self):
         obstaculo = Obstaculo()
         self.assertEqual('O', obstaculo.caracter())
@@ -152,6 +155,9 @@ class ObstaculoTestes(TestCase):
 
 
 class PorcoTestes(TestCase):
+    """
+    Esperado '@' como caracter de porco ativo e '+' como caracter de porco destruido
+    """
     def teste_status(self):
         porco = Porco()
         self.assertEqual('@', porco.caracter())
@@ -170,8 +176,8 @@ class PassaroBaseTests(TestCase):
 
     def assert_passaro_posicao(self, x_esperado, y_esperado, status_esperado, passaro, tempo):
         """
-        Mètodo que se testa posição do pássaro.
-        Atenção: Esse não é método de teste porque nao se inicia com prefixo "text".
+        Método que se testa posição do pássaro.
+        Atenção: Esse não é um método de teste porque não se inicia com prefixo "test".
         :param x_esperado: posição x esperada do passaro
         :param y_esperado: posição y esperada do passaro
         :param status_esperado: status esperado do passaro
@@ -203,7 +209,7 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
     def teste_foi_lancado(self):
         """
-        Teste de lançamento. Enquanto o método lançar do passaro não for chamado, o méotod foi_lancado deve retornar
+        Teste de lançamento. Enquanto o método lançar do passaro não for chamado, o méotodo foi_lancado deve retornar
         Falso
         :return:
         """
@@ -216,7 +222,7 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
     def teste_colisao_com_chao(self):
         """
-        Testando que o passáro colido quando sua posição y é menor ou igual a 0
+        Testando que o passáro colide quando sua posição y é menor ou igual a 0
         :return:
         """
         passaro = PassaroVermelho(0, 0)
