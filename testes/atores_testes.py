@@ -46,7 +46,7 @@ class AtorTestes(TestCase):
     def teste_colisao_entre_atores_ativos(self):
         """
         Teste de colisão entre dois atores
-        Incialmente atores possuem status ATIVO. Ao se chocarem, ele muda para Destruído
+        Inicialmente atores possuem status ATIVO. Ao se chocarem, ele muda para DESTRUIDO
         A função assert_colisao_atores_ativos testa justamente se dois atore ativos se chocam quando estão em posições
         vizinhas.
         """
