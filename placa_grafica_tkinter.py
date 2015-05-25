@@ -86,8 +86,12 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.04):
         nonlocal angulo
         if evento.keysym == 'Up':
             angulo += 1
+            if angulo > 360:
+                angulo = 1
         elif evento.keysym == 'Down':
             angulo -= 1
+            if angulo < 0:
+                angulo = 359
         elif evento.keysym == 'Return' or evento.keysym == 'space':
             fase.lancar(angulo, tempo)
 
