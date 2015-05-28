@@ -196,11 +196,11 @@ class PassaroVermelhoTests(PassaroBaseTests):
     """
 
     def teste_status(self):
-        passaro_amarelo = PassaroVermelho(1, 1)
-        self.assertEqual('V', passaro_amarelo.caracter())
+        passaro_vermelho = PassaroVermelho(1, 1)
+        self.assertEqual('V', passaro_vermelho.caracter())
         outro_ator_na_mesma_posicao = Ator()
-        passaro_amarelo.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual('v', passaro_amarelo.caracter())
+        passaro_vermelho.colidir(outro_ator_na_mesma_posicao)
+        self.assertEqual('v', passaro_vermelho.caracter())
 
 
     def teste_velocidade_escalar(self):
