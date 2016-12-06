@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from itertools import chain
-from atores import ATIVO
+from atores import ATIVO, DuploLancamentoExcecao
 
 # Status possíveis do jogo
 
@@ -104,11 +104,14 @@ class Fase():
         Se não houver esse tipo de pássaro, não deve fazer nada
 
         :param angulo: ângulo de lançamento
-        :param tempo: Tempo de lançamento
+        :param tempo: tempo de lançamento
         """
         for passaro in self._passaros:
-            if not passaro.foi_lancado():
+            try:
                 passaro.lancar(angulo, tempo)
+            except DuploLancamentoExcecao:
+                continue
+            else:
                 return
 
 

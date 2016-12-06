@@ -2,7 +2,8 @@
 
 from __future__ import unicode_literals
 from unittest.case import TestCase
-from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo, PassaroVermelho
+from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo, PassaroVermelho, \
+    DuploLancamentoExcecao
 
 
 class AtorTestes(TestCase):
@@ -206,6 +207,15 @@ class PassaroVermelhoTests(PassaroBaseTests):
         self.assertTrue(passaro_vermelho.foi_lancado(),
                         'Se o método lançar foi executado, deve retornar verdadeiro')
 
+    def test_excecao_ao_lancar_passaro_pela_segunda_vez(self):
+        """Se certifica que pássaro só pode ser lançado uma vez"""
+        passaro = PassaroVermelho(0,0)
+        passaro.lancar(0,0)
+        with self.assertRaises(DuploLancamentoExcecao):
+            passaro.lancar(1,1)
+        self.assertEqual(passaro._angulo_de_lancamento,0,'Deveria continuar com angulo passado no primeiro lançamento')
+        self.assertEqual(passaro._tempo_de_lancamento,0,'Deveria continuar com tempo passado no primeiro lançamento')
+
     def teste_colisao_com_chao(self):
         """
         Testando que o passáro colido quando sua posição y é menor ou igual a 0
@@ -229,6 +239,7 @@ class PassaroVermelhoTests(PassaroBaseTests):
 
 
 class PassaroAmareloTests(PassaroBaseTests):
+
     """
     Classe de Tests para passaros amarelos
     """
@@ -243,9 +254,10 @@ class PassaroAmareloTests(PassaroBaseTests):
     def teste_velocidade_escalar(self):
         self.assertEqual(30, PassaroAmarelo.velocidade_escalar)
 
+
     def teste_lacamento_vertical(self):
         """
-        Tests de lançamento vertical. Nele, o passaro só se move verticalmente e sua posição y se matém contanstante
+        Testes de lançamento vertical. Nele, o passaro só se move verticalmente e sua posição y se matém contanstante
         :return:
         """
         passaro_amarelo = PassaroAmarelo(1, 1)
