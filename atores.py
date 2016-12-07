@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import math
 
 DESTRUIDO = 'Destruido'
@@ -60,6 +61,10 @@ class Obstaculo(Ator):
 
 
 class Porco(Ator):
+    pass
+
+
+class DuploLancamentoExcecao(Exception):
     pass
 
 
