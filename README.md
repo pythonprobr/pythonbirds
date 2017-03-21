@@ -139,11 +139,11 @@ Caso contrário, ele deve retornar a posição onde colidiu.
 
 #### Método posicao_horizontal
 
-Fórmula X=X0+v*cos(teta)*delta_t.
+Fórmula X=X0+v\*cos(teta)\*delta_t.
 
 #### Método posicao_vertical
 
-Fórmula Y=Y0+v*sen(teta)delta_t-(G*delta_t^2)/2.
+Fórmula Y=Y0+v\*sen(teta)delta_t-(G\*delta_t^2)/2.
     
 
 ## Classe Passaro Vermelho
