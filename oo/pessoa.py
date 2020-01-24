@@ -17,4 +17,12 @@ if __name__ == '__main__':
     print(joao.idade)
     for filho in joao.filhos:
         print(f'filho {filho.nome}')
-   
+
+#Criando atributo em tempo de execução para o objeto específico específico
+    joao.sobrenome = 'Santos'
+    print(joao.__dict__) # O __dict__ mostra os atributos, o sobrenome so tem em João
+    print(joaozinho.__dict__)
+
+#Deletando filhos do objeto João
+    del joao.filhos
+    print(joao.__dict__)
