@@ -1,4 +1,5 @@
 class Pessoa():
+    olhos = 2 #Criando atributo de class
     def __init__(self, *filhos, nome = None, idade=35):
         self.idade = idade
         self.nome = nome
@@ -26,3 +27,8 @@ if __name__ == '__main__':
 #Deletando filhos do objeto João
     del joao.filhos
     print(joao.__dict__)
+
+#Alterando o valor do atributo de class, assim ele vai fazer parte do objeto
+    joao.olhos = 1
+    print(joao.__dict__)
+     
