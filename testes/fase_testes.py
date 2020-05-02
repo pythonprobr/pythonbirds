@@ -179,7 +179,7 @@ class FaseTestes(TestCase):
         self.assertTrue(passaros[0].foi_lancado())
         self.assertTrue(passaros[1].foi_lancado())
 
-    def teste_intervalo_de_colisao_padrão(self):
+    def teste_intervalo_de_colisao_padrao(self):
         '''
         Método que testa se o intervalo de colisão da Fase é repassado aos
         atores. Padrão de intervalo é 1
