@@ -31,12 +31,13 @@ if __name__ == '__main__':
     _jose = Pessoas(nome='José')
     _joao = Pessoas(_jose, nome='João')
     # Opção 1 para imprimir um objeto , sendo esse o mais pratico e usual.
-    print('Outra opção para imprimir o objeto')
-    print(_joao.cumprimentar())
-    print(_joao.nome)
-    print(_joao.idade)
-    for f in _joao.filhos:
-        print(f.nome)
+   # print('Outra opção para imprimir o objeto')
+   # print(_joao.cumprimentar())
+   # print(_joao.nome)
+   # print(_joao.idade)
+    print()
+    for filho in _joao.filhos:
+        print(f'{_joao.cumprimentar()},{_joao.nome} como esta seu filho {filho.nome} ?')
 
  # Opçào 2 para imprimir um objeto
   #  print('Uma opção para imprimir o objeto')
