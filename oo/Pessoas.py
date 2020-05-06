@@ -38,6 +38,10 @@ if __name__ == '__main__':
     print()
     for filho in _joao.filhos:
         print(f'{_joao.cumprimentar()},{_joao.nome} como esta seu filho {filho.nome} ?')
+    _joao.sobrenome = 'Santos' #Atributo dinamico, criado apenas para esse objeto e essa rotina
+    del _joao.filhos # Usando a palavra reservada DEL para apagar o atributo dinamio sobrenome
+    print(_joao.__dict__ )
+    print(_jose.__dict__)
 
  # Opçào 2 para imprimir um objeto
   #  print('Uma opção para imprimir o objeto')
