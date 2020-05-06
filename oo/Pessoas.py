@@ -13,6 +13,7 @@ As classes devem sempre começar com a primeira letra em Maiusculo ,
 """
 
 class Pessoas:
+    olhos = 2 #Atributo de classe , atributo que é vinculado a lasse e não somente ao objeto
     def __init__(self, *filhos, nome=None , idade = 45): #Nome nesssa opção é um parametro da função
         self.idade = idade
         self.nome = nome # Definindo um atriburo com vaor nulo, nesse caso o self.nome é um atributo
@@ -40,8 +41,11 @@ if __name__ == '__main__':
         print(f'{_joao.cumprimentar()},{_joao.nome} como esta seu filho {filho.nome} ?')
     _joao.sobrenome = 'Santos' #Atributo dinamico, criado apenas para esse objeto e essa rotina
     del _joao.filhos # Usando a palavra reservada DEL para apagar o atributo dinamio sobrenome
+    _joao.olhos = 3
+    print(_joao.olhos)
     print(_joao.__dict__ )
     print(_jose.__dict__)
+    print(Pessoas.olhos)
 
  # Opçào 2 para imprimir um objeto
   #  print('Uma opção para imprimir o objeto')
