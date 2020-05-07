@@ -24,6 +24,15 @@ class Pessoas:
     def cumprimentar(self):
         return f'Olá '
     
+    #Metodo de classe
+    @staticmethod # Decoreitos  - São inicados com o @
+    def metodo_statico():
+        return 42 # Usado para fazer algum calculo independente da classe e do objeto
+    
+    @classmethod # Metodo de acesso a cvlasse que esta execultando o metodo
+    def nome_e_atributos_de_classe(cls):
+        return f'{cls} - olhos {cls.olhos}'
+    
     
  
 """
@@ -48,7 +57,8 @@ if __name__ == '__main__':
     print(_joao.__dict__ )
     print(_jose.__dict__)
     print(Pessoas.olhos)
-
+    print(Pessoas.metodo_statico(), _joao.metodo_statico())
+    print(Pessoas.nome_e_atributos_de_classe(), _jose.nome_e_atributos_de_classe())
  # Opçào 2 para imprimir um objeto
   #  print('Uma opção para imprimir o objeto')
   #  print(Pessoas.cumprimentar(p))
