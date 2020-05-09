@@ -18,3 +18,8 @@ if __name__ == "__main__":
 
     for filhos in fabio.filhos:
         print(filhos.nome)
+        
+    fabio.cidade = "Ribeirão Preto"
+    print(fabio.cidade,"\n", fabio.__dict__)
+    del fabio.cidade
+
