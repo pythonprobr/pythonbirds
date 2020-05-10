@@ -1,5 +1,8 @@
+# Trabalhando com atributos default ou de classe
 class Pessoa:
-    # Executado quanto é construída a classe
+    # Atributo default ou classe
+    olhos = 2 # Valor default para o atributo da classe
+    # Executado quanto é construída a classe(Atributos de Instância)
     def __init__(self, *filhos, nome=None, idade=39):
         # Atributos da Classe
         self.idade = idade
@@ -26,6 +29,8 @@ if __name__ == '__main__':
     hernany.sobrenome = 'Santos'
     # Remove atributos dinâmicos ou não
     del hernany.filhos
+    hernany.olhos = 1
+    del hernany.olhos
     '''
      __dict__ Verifica os atributos que compoe o objeto, mostrando os de tempo de execução(Atributos de Instância) ou que estão declarados na classe
      Os atributos de instância nos dá uma licença poética para acrescentar um campo necessário para um determinado momento.
@@ -34,3 +39,8 @@ if __name__ == '__main__':
     '''
     print(hernany.__dict__)
     print(pedro.__dict__)
+    Pessoa.olhos = 3
+    print(Pessoa.olhos)
+    print(hernany.olhos)
+    print(pedro.olhos)
+    print(id(Pessoa.olhos)), id(hernany.olhos), id(pedro.olhos))
