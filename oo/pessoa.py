@@ -21,3 +21,16 @@ if __name__ == '__main__':
     print(hernany.idade)
     for filho in hernany.filhos:
         print(filho.nome)
+    
+    # Atributos Dinâmicos - Criados em tempos de execução
+    hernany.sobrenome = 'Santos'
+    # Remove atributos dinâmicos ou não
+    del hernany.filhos
+    '''
+     __dict__ Verifica os atributos que compoe o objeto, mostrando os de tempo de execução(Atributos de Instância) ou que estão declarados na classe
+     Os atributos de instância nos dá uma licença poética para acrescentar um campo necessário para um determinado momento.
+     Não deve-se usar deste recurso repetidas vezes pois a utilização deste pode causar dificuldade de entendimento do código para terceiros, além
+     de não ser uma boa prática
+    '''
+    print(hernany.__dict__)
+    print(pedro.__dict__)
