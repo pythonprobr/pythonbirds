@@ -23,11 +23,16 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):
         return f'{cls} - olhos {cls.olhos}'
 
+#Herança
+class Homem(Pessoa):
+    pass
+
+class Mutante()
 
 if __name__ == '__main__':
-    pedro = Pessoa(nome='Pedro Soares Santos')
+    pedro = Homem(nome='Pedro')
     # Passo o atributo de filhos e o atributo nomeado
-    hernany = Pessoa(pedro, nome='Hernany Santos')
+    hernany = Homem(pedro, nome='Hernany Santos')
     print(Pessoa.cumprimentar(hernany))
     print(id(hernany))
     print(hernany.cumprimentar())
@@ -57,3 +62,8 @@ if __name__ == '__main__':
     print(id(Pessoa.olhos), id(hernany.olhos), id(pedro.olhos))
     print(Pessoa.metodo_estatico(), hernany.metodo_estatico()) #42
     print(Pessoa.nome_e_atributos_de_classe(), hernany.nome_e_atributos_de_classe())
+    pessoa = Pessoa('Anonimo')
+    print(isinstance(pessoa, Pessoa))
+    print(isinstance(pessoa, Homem))
+    print(isinstance(pedro, Pessoa))
+    print(isinstance(pedro, Homem))
