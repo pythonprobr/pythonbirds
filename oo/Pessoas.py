@@ -32,8 +32,10 @@ class Pessoas:
     @classmethod # Metodo de acesso a cvlasse que esta execultando o metodo
     def nome_e_atributos_de_classe(cls):
         return f'{cls} - olhos {cls.olhos}'
-    
-    
+ 
+#Classe homem erdando da classe Pessoa.
+class Homem(Pessoas):
+    pass
  
 """
 Neste exemplo de filhos esta sendo utilizando os nome ficticios de João
