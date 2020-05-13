@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 class Pessoa:
+    olhos = 2
+
     def __init__(self, *filhos, nome=None,idade=None):
         self.nome = nome
         self.idade = idade
@@ -8,6 +10,18 @@ class Pessoa:
 
     def cumprimentar(self):
         return f'Olá {id(self)}'
+
+    @staticmethod
+    def metodo_estatico():
+        return 42
+
+    @classmethod
+    def nome_e_atributos_de_classe(cls):
+        return 'f{cls} - olhos {olhos}'
+
+class Homem(Pessoa):
+    pass
+
 
 
 if __name__ == "__main__":
