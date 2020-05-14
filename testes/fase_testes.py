@@ -125,7 +125,7 @@ class FaseTestes(TestCase):
         self.assertEqual(DERROTA, fase.status(),
                          'Com Porco ativo e sem pássaro para lançar, o jogo '
                          'deveria acabar')
-
+ 
         fase.adicionar_passaro(PassaroFake())
         self.assertEqual(EM_ANDAMENTO, fase.status(),
                          'Com Porco ativo e com pássaro para lançar, o jogo '
@@ -172,8 +172,7 @@ class FaseTestes(TestCase):
         self.assertFalse(passaros[1].foi_lancado())
         fase.lancar(90, 1)
         fase.lancar(45, 3)
-        fase.lancar(31,
-                    5)  # testando que lançar passaros depios de todos
+        fase.lancar(31, 5)  # testando que lançar passaros depios de todos
         # lançados não causa erro
 
         self.assertTrue(passaros[0].foi_lancado())
