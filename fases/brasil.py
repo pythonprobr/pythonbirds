@@ -3,7 +3,7 @@ from os import path
 import sys
 
 project_dir = path.dirname(__file__)
-project_dir = path.join('..')
+project_dir = path.join('.')
 sys.path.append(project_dir)
 
 from atores import PassaroAmarelo, PassaroVermelho, Obstaculo, Porco
