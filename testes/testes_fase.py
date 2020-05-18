@@ -14,6 +14,11 @@ from atores import Obstaculo, Porco, PassaroVermelho, PassaroAmarelo, DESTRUIDO,
 from fase import Fase, Ponto
 import placa_grafica
 
+VITORIA = 'VITORIA'
+
+class AtorFake(TestCase):
+    def status(self):
+        return VITORIA
 
 class FaseTestes(TestCase):
     def teste_adicionar_obstaculo(self):
