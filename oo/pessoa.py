@@ -11,7 +11,7 @@ class Pessoa:
         self.filhos = list(filhos)
 
     def cumprimentar(self):
-        return f'Olá {id(self)}'
+        return f'Olá, meu nome é: {self.nome}'
     
     # Métodos da Classe.... Utiliza-se decorations
     @staticmethod
@@ -23,13 +23,18 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):
         return f'{cls} - olhos {cls.olhos}'
 
-#Herança
+#Herança - Herda de Pessoa
 class Homem(Pessoa):
-    pass
+    def cumprimentar(self):
+        cumprimentar_da_classe_pai=super().cumprimentar()
+        return f'{cumprimentar_da_classe_pai} Aperto de mão'
 
-class Mutante()
+class Mutante(Pessoa):
+    # Sobrescrita de atributo
+    olhos = 3
 
 if __name__ == '__main__':
+    rosinha = Mutante(nome='Rosilaine')
     pedro = Homem(nome='Pedro')
     # Passo o atributo de filhos e o atributo nomeado
     hernany = Homem(pedro, nome='Hernany Santos')
@@ -63,7 +68,9 @@ if __name__ == '__main__':
     print(Pessoa.metodo_estatico(), hernany.metodo_estatico()) #42
     print(Pessoa.nome_e_atributos_de_classe(), hernany.nome_e_atributos_de_classe())
     pessoa = Pessoa('Anonimo')
+    # Verifica se objeto é de determinada classe
     print(isinstance(pessoa, Pessoa))
     print(isinstance(pessoa, Homem))
     print(isinstance(pedro, Pessoa))
     print(isinstance(pedro, Homem))
+    print(rosinha.olhos)
