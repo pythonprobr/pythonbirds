@@ -13,8 +13,14 @@ class Pessoa:
     def cumprimentar(self):
         return 'Ola, tudo certo contigo bro?'
 
-    @staticmethod # Método estatico que independe o método da classe, não necessitando
-    # depender de objeto algum para ser rodado
+    @staticmethod # Método estatico que independe o método da classe, não necessitando depender de objeto algum para ser rodado
+    def método_estatico():
+        return 42
+
+
+    @classmethod
+    def nome_e_atributos_de_classe(cls): #Outro método de conseguir descobrir e adquirir informações da classe
+        return f'{cls} - olhos {cls.olhos}'
 
 if __name__ == '__main__':
     seiya = Pessoa(nome = 'Seiya')
@@ -34,3 +40,6 @@ if __name__ == '__main__':
     print(tohka.__dict__)#Instância __dict__ para descobrir os parâmetros e caracteristicas das classes
     tohka.sobrenome = 'Kurosaki'
     print(f'--------{tohka.nome} {tohka.sobrenome}--------')
+    print()
+    print(Pessoa.método_estatico(), henrique.método_estatico())
+    print(Pessoa.nome_e_atributos_de_classe(), henrique.nome_e_atributos_de_classe())
