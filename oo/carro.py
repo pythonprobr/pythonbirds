@@ -1,4 +1,3 @@
-from time import sleep
 '''
 
 Você deve criar uma classe carro que via possuir
@@ -93,10 +92,34 @@ oferece os seguintes atributos:
     'Oeste'
 '''
 
+norte = 'Norte'
+leste = 'Leste'
+sul = 'Sul'
+oeste = 'Oeste'
+
 class Carro:
-    def __init__(self):
-        pass
-    pass
+    def __init__(self, direcao, motor):
+        self.motor = motor
+        self.direcao = direcao
+
+    def calcular_velocidade(self):
+        return self.motor.velocidade
+
+    def acelerar(self):
+        self.motor.acelerar()
+
+    def frear(self):
+        self.motor.frear()
+
+    def calcular_direcao(self):
+        return self.direcao.valor
+
+    def girar_a_direita(self):
+        self.direcao.girar_a_direita()
+
+    def girar_a_esquerda(self):
+        self.direcao.girar_a_esquerda()
+
 
 class Motor:
     def __init__(self):
@@ -109,13 +132,7 @@ class Motor:
         self.velocidade -= 2
         self.velocidade=max(0, self.velocidade)
 
-norte = 'Norte'
-leste = 'Leste'
-sul = 'Sul'
-oeste = 'Oeste'
-
-
-class Direção:
+class Direcao:
     direcoes_direita = {norte: leste, leste: sul, sul: oeste, oeste: norte}
     direcoes_esquerda = {norte: oeste, oeste: sul, sul: leste, leste: norte}
 
@@ -131,21 +148,37 @@ class Direção:
 
 
 if __name__ == '__main__':
-    keyc = 0
-    direcao = Direção()
-    print(direcao.valor)
-    for c in range(0,4):
-        direcao.girar_a_direita()
-        print(direcao.valor)
-    for c in range(0,2):
-        direcao.girar_a_esquerda()
-        print(direcao.valor)
-    direcao.girar_a_direita()
-    print(direcao.valor)
+    carro = Carro(norte, 0)
+    print(carro.calcular_direcao())
+    print(carro.calcular_velocidade())
+    carro.acelerar()
+    carro.girar_a_esquerda()
+    print(carro.calcular_direcao())
+    print(carro.calcular_velocidade())
+
+    carro.acelerar()
+    carro.acelerar()
+    carro.girar_a_direita()
+    print(carro.calcular_direcao())
+    print(carro.calcular_velocidade())
+    carro.girar_a_direita()
+    carro.frear()
+    print(carro.calcular_direcao())
+    print(carro.calcular_velocidade())
 
 
 
 
+#  direcao = Direcao()
+  #  print(direcao.valor)
+  #  for c in range(0,4):
+  #      direcao.girar_a_direita()
+  #      print(direcao.valor)
+  #  for c in range(0,2):
+  #      direcao.girar_a_esquerda()
+  #      print(direcao.valor)
+  #  direcao.girar_a_direita()
+  #  print(direcao.valor)
     #motor = Motor()
     #for c in range(0,5):
        # print(motor.velocidade)
