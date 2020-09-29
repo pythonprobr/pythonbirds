@@ -25,6 +25,8 @@ class Pessoa:
 class Homem(Pessoa):
     pass
 
+class Mutante(Pessoa):
+    olhos = 5
 
 class Mulher(Pessoa):
     pass
@@ -34,7 +36,8 @@ if __name__ == '__main__':
     seiya = Homem(nome='Seiya')
     amanda = Mulher(nome='Amanda')
     tohka = Mulher(nome='Tohka')
-    henrique = Homem(seiya, amanda, tohka, nome='Henrique')
+    fred = Mutante(nome='Fred')
+    henrique = Homem(seiya, amanda, tohka, fred, nome='Henrique')
     print(henrique.nome)
     print(f'----Os filhos de {henrique.nome} são:')
     for filhos in henrique.filhos:
@@ -60,3 +63,5 @@ if __name__ == '__main__':
     print(isinstance(amanda, Mulher))
     print(isinstance(tohka, Pessoa))
     print(isinstance(tohka, Mulher))
+    print(fred.olhos)
+
