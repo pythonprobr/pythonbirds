@@ -11,7 +11,7 @@ class Pessoa:
         return f'{self.filhos}'
 
     def cumprimentar(self):
-        return 'Ola, tudo certo contigo bro?'
+        return f'Ola, tudo certo contigo? Meu nome é {self.nome}.'
 
     @staticmethod  # Método estatico que independe o método da classe, não necessitando depender de objeto algum para ser rodado
     def método_estatico():
@@ -23,13 +23,17 @@ class Pessoa:
 
 
 class Homem(Pessoa):
-    pass
+    def cumprimentar(self):
+        cumprimentar_da_origem = super().cumprimentar()  # O "super()" é um  comando que serve para procurar a classe de origem de uma classe herdada, não interessa qual seja a classe
+        return f'{cumprimentar_da_origem} --- Aperto de mão ---'
 
 class Mutante(Pessoa):
     olhos = 5
 
 class Mulher(Pessoa):
-    pass
+    def cumprimentar(self):
+        cumprimentar_da_origem = super().cumprimentar()
+        return f'{cumprimentar_da_origem}" --- Beijo no rosto ---'
 
 
 if __name__ == '__main__':
@@ -64,4 +68,6 @@ if __name__ == '__main__':
     print(isinstance(tohka, Pessoa))
     print(isinstance(tohka, Mulher))
     print(fred.olhos)
-
+    print(henrique.cumprimentar())
+    print(fred.cumprimentar())
+    print(tohka.cumprimentar())
