@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+
+#libraries
 from itertools import chain
 from atores import ATIVO
 
-
+#declarations
 VITORIA = 'VITORIA'
 DERROTA = 'DERROTA'
 EM_ANDAMENTO = 'EM_ANDAMENTO'
 
-
+# defining class Ponto
 class Ponto():
     def __init__(self, x, y, caracter):
         self.caracter = caracter
@@ -23,7 +25,7 @@ class Ponto():
     def __repr__(self, *args, **kwargs):
         return "Ponto(%s,%s,'%s')" % (self.x, self.y, self.caracter)
 
-
+# defining class Fase
 class Fase():
     def __init__(self, intervalo_de_colisao=1):
         """
