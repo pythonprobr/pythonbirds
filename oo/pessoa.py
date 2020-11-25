@@ -1,8 +1,8 @@
 class Pessoa:
 
-    olhos = 2
+    olhos = 2                                               #Utilizado para criar atributos de classe, quando o valor é igual para todos os objetos
 
-    def __init__(self, *filhos, nome=None, idade=35):
+    def __init__(self, *filhos, nome=None, idade=35):       #utilizado para criar atributos de classe
         self.idade = idade
         self.nome = nome
         self.filhos= list(filhos)
@@ -21,7 +21,7 @@ if __name__ == '__main__':       #utilizado para realizar o teste
     print(luciano.idade)
     for filho in luciano.filhos:
         print(filho.nome)
-    luciano.sobrenome = 'Ramalho'   #permite criar atributos
+    luciano.sobrenome = 'Ramalho'   #permite criar atributos dinamicos
     del luciano.filhos              #permite remover um atributo
     luciano.olhos = 1
     del luciano.olhos
