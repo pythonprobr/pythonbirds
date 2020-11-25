@@ -18,7 +18,8 @@ if __name__ == '__main__':       #utilizado para realizar o teste
     print(luciano.idade)
     for filho in luciano.filhos:
         print(filho.nome)
-
-
-
+    luciano.sobrenome = 'Ramalho'   #permite criar atributos
+    del luciano.filhos              #permite remover um atributo
+    print(luciano.__dict__)
+    print(renzo.__dict__)
 
