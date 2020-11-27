@@ -10,6 +10,9 @@ class Pessoa:
     def cumprimentar(self):
         return f'Olá {id(self)}'
 
+
+
+
     @staticmethod                                   #utilizado para acessar um metodo que independe do objeto wue esta sendo executado
     def metodo_estatico():
         return 42
