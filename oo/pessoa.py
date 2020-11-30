@@ -8,7 +8,7 @@ class Pessoa:
         self.filhos= list(filhos)
 
     def cumprimentar(self):
-        return f'Olá {id(self)}'
+        return f'Olá, meu nome é {self.nome}'
 
 
 
@@ -21,10 +21,17 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):            #utilizado para acessar dados da mesma classe
         return f'{cls} - olhos {cls.olhos}'
 
+class Homem(Pessoa):
+    def cumprimentar(self):
+        cumprimentar_da_classe = super().cumprimentar()
+        return f'{cumprimentar_da_classe}. Aperto de mão'
+
+class mutante(Pessoa):
+    olhos = 3
 
 if __name__ == '__main__':       #utilizado para realizar o teste
-    renzo = Pessoa(nome='Renzo')
-    luciano = Pessoa(renzo, nome='luciano')
+    renzo = mutante(nome='Renzo')
+    luciano = Homem(renzo, nome='luciano')
     print(Pessoa.cumprimentar(luciano))
     print(id(luciano))
     print(luciano.cumprimentar())
@@ -38,11 +45,18 @@ if __name__ == '__main__':       #utilizado para realizar o teste
     del luciano.olhos
     print(luciano.__dict__)
     print(renzo.__dict__)
-    Pessoa.olhos = 3
     print(Pessoa.olhos)
     print(luciano.olhos)
     print(renzo.olhos)
     print(id(Pessoa.olhos), id(luciano.olhos), id(renzo.olhos))
     print(Pessoa.metodo_estatico(), luciano.metodo_estatico())
     print(Pessoa.nome_e_atributos_de_classe(), luciano.nome_e_atributos_de_classe())
+    pessoa = Pessoa('Anônimo')
+    print(isinstance(pessoa, Pessoa))
+    print(isinstance(pessoa, Homem))
+    print(isinstance(renzo, Pessoa))
+    print(isinstance(renzo, Homem))
+    print(renzo.olhos)
+    print(luciano.cumprimentar())
+    print(renzo.cumprimentar())
 
