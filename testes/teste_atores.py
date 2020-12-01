@@ -154,7 +154,7 @@ class ObstaculoTestes(TestCase):
         self.assertEqual(' ', obstaculo.caracter())
 
 
-class PorcoTestes(TestCase):
+class PorcoTestes (TestCase):
     """
     Esperado '@' como caracter de porco ativo e '+' como caracter de porco destruido
     """
