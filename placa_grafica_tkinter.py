@@ -103,7 +103,6 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.04):
             delta_t *= -multiplicador_rebobinar
             _animar()
 
-
     def _jogar_novamente(event):
         return
         nonlocal tempo

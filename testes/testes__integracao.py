@@ -141,8 +141,8 @@ class FaseTestes(TestCase):
 
         fase_exemplo.lancar(23, 4)
 
-        expected = set([Ponto(32, 11, 'v'), Ponto(17, 25, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
-                        Ponto(70, 1, '@')])
+        expected = {Ponto(32, 11, 'v'), Ponto(17, 25, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+                    Ponto(70, 1, '@')}
 
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(4)))
 
@@ -150,9 +150,8 @@ class FaseTestes(TestCase):
         for i in range(400, 700, 1):
             fase_exemplo.calcular_pontos(i / 100)
 
-        expected = set(
-            [Ponto(32, 11, 'v'), Ponto(57, 30, 'A'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
-             Ponto(70, 1, '+')])
+        expected = {Ponto(32, 11, 'v'), Ponto(57, 30, 'A'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
+                    Ponto(70, 1, '+')}
 
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(7)))
 
@@ -161,8 +160,8 @@ class FaseTestes(TestCase):
             fase_exemplo.calcular_pontos(i / 100)
         print(fase_exemplo.calcular_pontos(8.5))
 
-        expected = set([Ponto(32, 11, 'v'), Ponto(77, 0, 'a'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
-                        Ponto(70, 1, '+')])
+        expected = {Ponto(32, 11, 'v'), Ponto(77, 0, 'a'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
+                    Ponto(70, 1, '+')}
 
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(8.5)))
 

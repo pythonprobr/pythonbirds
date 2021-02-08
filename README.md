@@ -1,4 +1,5 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/pythonprobr/pythonbirds)
+[![Build Status](https://travis-ci.com/rousuy/pythonbirds.svg?branch=simples)](https://travis-ci.com/rousuy/pythonbirds)
 
 Python Birds
 ===========
