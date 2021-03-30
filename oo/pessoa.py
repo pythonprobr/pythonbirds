@@ -13,6 +13,16 @@ class Pessoa:
     def __str__(self):
         return f"Sr(a) {self.nome}"
 
+    @staticmethod
+    def metodo_estatico():
+        return 'metodo estatico faz algo aqui sem depender da classe'
+
+    @classmethod
+    def metodo_nome_e_atributos_de_classe(cls):
+        return f""" ==================================== ATRIBUTO DE CLASSE ===================================== \n
+        *metodo que retorna atributos da propria classe*  \n Um exemplo A classe com seu nome:{cls}\n Um atributo da classe: olhos {cls.olhos}
+                    \n================================= FIM DE ATRIBUTO DE CLASSE ================================="""
+
 
 if __name__ == '__main__':
     p = Pessoa(nome='Marcos', idade=45, sobrenome='Viana')
@@ -27,5 +37,7 @@ if __name__ == '__main__':
     print(p.__dict__)
     for filho in pessoa_filho:
         print(f" filho de {p}: {filho.nome} {filho.sobrenome}, {filho.idade}")
+    print(Pessoa.metodo_nome_e_atributos_de_classe())
+    print(p.metodo_nome_e_atributos_de_classe())
 
     print(p, p.idade)
