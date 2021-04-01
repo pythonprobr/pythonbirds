@@ -24,8 +24,13 @@ class Pessoa:
                     \n================================= FIM DE ATRIBUTO DE CLASSE ================================="""
 
 
+class Homem(Pessoa):
+    pass
+
+
 if __name__ == '__main__':
     p = Pessoa(nome='Marcos', idade=45, sobrenome='Viana')
+    homi = Homem(nome='Homi Seu Mininu')
     pessoa_filho = [Pessoa(nome='Layla', idade=21, sobrenome=p.sobrenome), Pessoa(nome='Isabel', idade=19, sobrenome=p.sobrenome)]
     print(Pessoa.cumprimentar(p))
     p.filhos = pessoa_filho
@@ -39,5 +44,8 @@ if __name__ == '__main__':
         print(f" filho de {p}: {filho.nome} {filho.sobrenome}, {filho.idade}")
     print(Pessoa.metodo_nome_e_atributos_de_classe())
     print(p.metodo_nome_e_atributos_de_classe())
+    print(isinstance(homi, Pessoa))
+    print(isinstance(homi, Homem))
+    print(isinstance(pessoa_filho, Homem))
 
     print(p, p.idade)
