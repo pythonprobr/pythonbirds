@@ -26,75 +26,46 @@ Método girar_a_esquerda
 
 Exemplo:
     >>> # Testando motor
-    >>> motor = Motor()
-    >>> motor.velocidade
-    0
-    >>> motor.acelerar()
-    >>> motor.velocidade
+    >>> carro = Carro()
+    >>> carro.motor.acelerar()
     1
-    >>> motor.acelerar()
-    >>> motor.velocidade
+    >>> carro.motor.acelerar()
     2
-    >>> motor.acelerar()
-    >>> motor.velocidade
+    >>> carro.motor.acelerar()
     3
-    >>> motor.frear()
-    >>> motor.velocidade
+    >>> carro.motor.frear()
     1
-    >>> motor.frear()
-    >>> motor.velocidade
+    >>> carro.motor.frear()
     0
     >>> # Testando Direcao
-    >>> direcao = Direcao()
-    >>> direcao.valor
-    'Norte'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Leste'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Sul'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Oeste'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Norte'
-    >>> direcao.girar_a_esquerda()
-    >>> direcao.valor
-    'Oeste'
-    >>> direcao.girar_a_esquerda()
-    >>> direcao.valor
-    'Sul'
-    >>> direcao.girar_a_esquerda()
-    >>> direcao.valor
-    'Leste'
-    >>> direcao.girar_a_esquerda()
-    >>> direcao.valor
-    'Norte'
-    >>> carro = Carro(direcao, motor)
-    >>> carro.calcular_velocidade()
-    0
-    >>> carro.acelerar()
-    >>> carro.calcular_velocidade()
+    >>> carro.direcao.girar_a_direita()
+    'LESTE'
+    >>> carro.direcao.girar_a_direita()
+    'SUL'
+    >>> carro.direcao.girar_a_direita()
+    'OESTE'
+    >>> carro.direcao.girar_a_direita()
+    'NORTE'
+    >>> carro.direcao.girar_a_esquerda()
+    'OESTE'
+    >>> carro.direcao.girar_a_esquerda()
+    'SUL'
+    >>> carro.direcao.girar_a_esquerda()
+    'LESTE'
+    >>> carro.direcao.girar_a_esquerda()
+    'NORTE'
+    >>> carro.motor.acelerar()
     1
-    >>> carro.acelerar()
-    >>> carro.calcular_velocidade()
+    >>> carro.motor.acelerar()
     2
-    >>> carro.frear()
-    >>> carro.calcular_velocidade()
+    >>> carro.motor.frear()
     0
-    >>> carro.calcular_direcao()
-    'Norte'
-    >>> carro.girar_a_direita()
-    >>> carro.calcular_direcao()
-    'Leste'
-    >>> carro.girar_a_esquerda()
-    >>> carro.calcular_direcao()
-    'Norte'
-    >>> carro.girar_a_esquerda()
-    >>> carro.calcular_direcao()
-    'Oeste'
+    >>> carro.direcao.girar_a_direita()
+    'LESTE'
+    >>> carro.direcao.girar_a_esquerda()
+    'NORTE'
+    >>> carro.direcao.girar_a_esquerda()
+    'OESTE'
 
 """
 
@@ -103,7 +74,6 @@ class Carro:
     def __init__(self):
         self.direcao = Direcao()
         self.motor = Motor()
-
 
 
 class Direcao:
