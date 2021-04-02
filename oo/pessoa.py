@@ -8,7 +8,7 @@ class Pessoa:
         self.filhos = list(filhos)
 
     def cumprimentar(self):
-        return f"Olá {id(self)}"
+        return f"Olá meu nome é {self.nome}"
 
     def __str__(self):
         return f"Sr(a) {self.nome}"
@@ -25,12 +25,13 @@ class Pessoa:
 
 
 class Homem(Pessoa):
-    pass
+    def cumprimentar(self):
+        return f'{super().cumprimentar()}. Aperto de mão.'
 
 
 if __name__ == '__main__':
     p = Pessoa(nome='Marcos', idade=45, sobrenome='Viana')
-    homi = Homem(nome='Homi Seu Mininu')
+    homi = Homem(nome='Fujimori')
     pessoa_filho = [Pessoa(nome='Layla', idade=21, sobrenome=p.sobrenome), Pessoa(nome='Isabel', idade=19, sobrenome=p.sobrenome)]
     print(Pessoa.cumprimentar(p))
     p.filhos = pessoa_filho
@@ -47,5 +48,5 @@ if __name__ == '__main__':
     print(isinstance(homi, Pessoa))
     print(isinstance(homi, Homem))
     print(isinstance(pessoa_filho, Homem))
-
+    print(homi.cumprimentar())
     print(p, p.idade)
