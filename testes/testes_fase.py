@@ -5,7 +5,7 @@ import sys
 from os import path
 from unittest.case import TestCase
 
-project_dir = path.dirname(__file__)
+# project_dir = path.dirname(__file__)
 project_dir = path.join('..')
 sys.path.append(project_dir)
 from placa_grafica_tkinter import rodar_fase
@@ -44,7 +44,7 @@ class ObstaculoFake(AtorFake):
 
 
 class PorcoFake(AtorFake):
-    pass
+    status = ATIVO
 
 
 class PassaroFake(AtorFake):
@@ -105,7 +105,7 @@ class FaseTestes(TestCase):
         self.assertEqual(VITORIA, fase.status())
 
     def teste_acabou_com_porcos_e_passaros(self):
-        fase = Fase()
+        fase = Fase(1)
         porcos = [PorcoFake(1, 1) for _ in range(2)]  # criando 2 porcos
         passaros = [PassaroFake(1, 1) for _ in range(2)]  # criando 2 pássaros
         fase.adicionar_porco(*porcos)

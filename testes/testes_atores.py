@@ -4,12 +4,12 @@ from __future__ import unicode_literals
 from os import path
 import sys
 
-project_dir = path.dirname(__file__)
+# project_dir = path.dirname(__file__)
 project_dir = path.join('..')
 sys.path.append(project_dir)
 
-import unittest
-from unittest.case import TestCase
+
+from unittest import TestCase
 from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo, PassaroVermelho
 
 
