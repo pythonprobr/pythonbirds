@@ -59,10 +59,9 @@ class Ator():
                 self.status = outro_ator.status = DESTRUIDO
 
 
-
 class Obstaculo(Ator):
     _caracter_ativo = 'O'
-   
+
 
 class Porco(Ator):
     _caracter_ativo = '@'
@@ -99,7 +98,6 @@ class Passaro(Ator):
         :return: booleano
         """
         return not(self._tempo_de_lancamento is None)
-
 
     def colidir_com_chao(self):
         """

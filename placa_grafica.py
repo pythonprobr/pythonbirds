@@ -7,8 +7,8 @@ from templates import FIM
 
 try:
     import msvcrt
-except:
-    pass
+except Exception as err:
+    print(err)
 import select
 
 
