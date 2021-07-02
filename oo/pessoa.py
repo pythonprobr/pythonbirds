@@ -1,2 +1,5 @@
 class Pessoa:
-    pass
+    def __init__(self):
+        self.nome= 'Tiago'
+
+
