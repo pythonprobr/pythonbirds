@@ -19,3 +19,8 @@ if __name__ == '__main__':
     for filho in alefe.filhos:
         print(filho.nome)
     print(alefe.filhos)
+    alefe.sobrenome = 'Gomes'
+    del alefe.filhos
+    print(alefe.__dict__)
+    print(joao.__dict__)
+    
