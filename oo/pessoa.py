@@ -1,3 +1,3 @@
-# Criando a classe pessoa
+# Crianda a classe pessoa
 class Pessoa:
     pass
