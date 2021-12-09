@@ -4,8 +4,16 @@ class Pessoa:
         self.idade = idade
         self.nome = nome
         self.filhos = list(filhos)
+
     def cumprimetar(self):
         return f'Olá {id(self)}'
+
+    @staticmethod
+    def metodo_statico():
+        return 42
+    @classmethod
+    def nome_e_atributo_de_classe(cls):
+        return f'{cls} - olhos {cls.olhos}'
 
 if __name__ == '__main__':
     josevaldo = Pessoa(nome='Josevaldo')
@@ -28,3 +36,5 @@ print(Pessoa.olhos)
 print(joviniano.olhos)
 print(josevaldo.olhos)
 print(id(Pessoa.olhos)),print(id(joviniano.olhos)), print(id(josevaldo.olhos))
+print(Pessoa.metodo_statico(), joviniano.metodo_statico())
+print(Pessoa.nome_e_atributo_de_classe(), joviniano.nome_e_atributo_de_classe())
