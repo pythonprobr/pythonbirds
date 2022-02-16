@@ -118,7 +118,6 @@ class Passaro(Ator):
         """
         return 1, 1
 
-
     def lancar(self, angulo, tempo_de_lancamento):
         """
         Lógica que lança o pássaro. Deve armazenar o ângulo e o tempo de lançamento para posteriores cálculo.
@@ -132,8 +131,10 @@ class Passaro(Ator):
 
 
 class PassaroAmarelo(Passaro):
-    pass
+    _caracter_ativo = 'A'
+    _caracter_destruido = 'a'
 
 
 class PassaroVermelho(Passaro):
-    pass
+    _caracter_ativo = 'V'
+    _caracter_destruido = 'v'
