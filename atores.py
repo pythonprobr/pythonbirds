@@ -55,9 +55,8 @@ class Ator():
         pass
 
 
-
 class Obstaculo(Ator):
-    pass
+    _caracter_ativo = 'O'
 
 
 class Porco(Ator):
