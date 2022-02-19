@@ -24,6 +24,7 @@ if __name__ == '__main__':
     luciano.sobrenome = "Ramalho"
     del luciano.filhos
     luciano.olhos = 1
+    del luciano.olhos
     print(luciano.__dict__)
     print(renzo.__dict__)
     Pessoa.olhos = 3
