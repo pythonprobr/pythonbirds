@@ -5,7 +5,7 @@ class Pessoa:
         self.filhos = list(filhos)
         
     def cumprimetar(self):
-        return f'Ola {id(self)}'
+        return f'Ola {id(self)} = {self.nome}'
 
 
 if __name__ == '__main__':
