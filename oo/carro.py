@@ -12,5 +12,5 @@ Ele oferece os seguintes atributos:
 A direção deve controlar a direção
 1)Valor de direção é Norte, sul, leste e oeste
 2)Metodo girar_a_direita e girar_a_esquerda
-
+3)add
 """
