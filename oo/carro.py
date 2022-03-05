@@ -16,6 +16,8 @@ A direção deve controlar a direção
 
 Exemplo:
 >>> motor = Motor()
+>>> motor.velocidade
+0
 
 
 """
