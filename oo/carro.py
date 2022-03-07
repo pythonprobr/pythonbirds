@@ -76,4 +76,9 @@ O       L
     >>>direcao.girar_a_esquerda()
     >>>direcao.valor
     'Norte'
+    >>> carro = Carro(direcao,motor)
+    >>> carro.calcular_velocidade()
+    0
+    >>>carro.calcular_velocidade()
+    0
 """
