@@ -103,3 +103,7 @@ O       L
 class Motor:
     def __init__(self):
         self.velocidade = 0
+    def __int__(self):
+        self.acelerar +=1
+    def __init__(self):
+        self.frear -=2
