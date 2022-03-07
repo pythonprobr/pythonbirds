@@ -41,5 +41,8 @@ O       L
     >>>motor.acelerar()
     >>>motor.velocidade
     3
+    >>>motor.acelerar()
+    >>>motor.velocidade
+    4
 
 """
