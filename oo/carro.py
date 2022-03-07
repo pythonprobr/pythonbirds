@@ -100,3 +100,6 @@ O       L
     >>>carro.girar_a_esquerda()
     >>>'Oeste'
 """
+class Motor:
+    def __init__(self):
+        self.velocidade = 0
