@@ -29,6 +29,7 @@ O       L
     S
     
     Exemplo:
+    >>> # Testando Motor
     >>> motor.Motor()
     >>> motor.velocidade
     0
@@ -41,8 +42,38 @@ O       L
     >>>motor.acelerar()
     >>>motor.velocidade
     3
-    >>>motor.acelerar()
+    >>>motor.frear()
     >>>motor.velocidade
-    4
-
+    1
+    >>>motor.frear()
+    >>>motor.velocidade
+    0
+    >>> # Testando Direcao
+    >>>direcao = Direcao()
+    >>> direcao.valor
+    'Norte'
+    >>>direcao.girar_a_direita()
+    >>>direcao.valor
+    'Leste'
+    >>>direcao.girar_a_direita()
+    >>>direcao.valor
+    'Sul'
+    >>>direcao.girar_a_direita()
+    >>>direcao.valor
+    'Oeste'
+    >>>direcao.girar_a_direita()
+    >>>direcao.valor
+    'Norte'
+    >>>direcao.girar_a_esquerda()
+    >>>direcao.valor
+    'Oeste'
+    >>>direcao.girar_a_esquerda()
+    >>>direcao.valor
+    'Sul'
+    >>>direcao.girar_a_esquerda()
+    >>>direcao.valor
+    'Leste'
+    >>>direcao.girar_a_esquerda()
+    >>>direcao.valor
+    'Norte'
 """
