@@ -79,6 +79,24 @@ O       L
     >>> carro = Carro(direcao,motor)
     >>> carro.calcular_velocidade()
     0
-    >>>carro.calcular_velocidade()
+    >>>motor.acelerar()
+    >>>motor.velocidade
+    1
+    >>>motor.acelerar()
+    >>>motor.velocidade
+    2
+     >>>motor.frear()
+    >>>motor.calcular_velocidade()
     0
+    >>> carro.calcular_direcao()
+    >>>'Norte'
+    >>>carro.girar_a_direita()
+    >>>carro.calcular_direcao()
+    >>>'Leste'
+    >>>carro.girar_a_esquerda()
+    >>>carro.calcular_diracao()
+    >>>'Norte'
+    >>>carro.girar_a_esquerda()
+    >>>carro.girar_a_esquerda()
+    >>>'Oeste'
 """
