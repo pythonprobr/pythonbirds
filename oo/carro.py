@@ -12,5 +12,34 @@ Ele oferece os seguintes atributos:
 A direção deve controlar a direção
 1)Valor de direção é Norte, sul, leste e oeste
 2)Metodo girar_a_direita e girar_a_esquerda
-3)add this
+3)Método frear que deverá decrementar a velocidade em duas unidades
+A direção terá a responsabilidade de controlar a diração.
+Ela oferece os seguinter atributos:
+
+A direção terá a responsabilidade de controlar a derição. Ela
+oferece os seguintes atributos:
+1) Valor de direção com valores possíveis : Norte, Sul, Leste e Oeste.
+2)Método girar_a_direita
+3)Método girar_a_esquerda
+
+    N
+    
+O       L
+
+    S
+    
+    Exemplo:
+    >>> motor.Motor()
+    >>> motor.velocidade
+    0
+    >>>motor.acelerar()
+    >>>motor.velocidade
+    1
+    >>>motor.acelerar()
+    >>>motor.velocidade
+    2
+    >>>motor.acelerar()
+    >>>motor.velocidade
+    3
+
 """
