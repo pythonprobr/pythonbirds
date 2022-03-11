@@ -120,6 +120,6 @@ class Direcao:
         if self.valor==NORTE:
             self.valor = LESTE
         elif self.valor == LESTE:
-            self.valor = SUL:
-        elif self.valor == SUL
+            self.valor = SUL
+        elif self.valor == SUL:
             self.valor = OESTE
