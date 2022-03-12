@@ -113,14 +113,12 @@ LESTE = 'Leste'
 OESTE = 'Oeste'
 
 class Direcao:
+    rotacao_a_direita_dct =  {
+        NORTE:LESTE, LESTE:SUL, SUL:OESTE, OESTE:NORTE
+    }
     def __init__(self):
         self.valor = NORTE
     def girar_a_direita(self):
-        if self.valor==NORTE:
-            self.valor = LESTE
-        elif self.valor == LESTE:
-            self.valor = SUL
-        elif self.valor == SUL:
-            self.valor = OESTE
+        self.valor = self.rotacao_a_direita_dct[self.valor]
 
 
