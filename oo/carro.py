@@ -122,6 +122,7 @@ class Motor:
     def frear(self):
         self.velocidade -= 2
         self.velocidade = max(0,self.velocidade)
+
 NORTE='Norte'
 SUL='Sul'
 LESTE = 'Leste'
