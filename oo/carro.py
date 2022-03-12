@@ -84,7 +84,7 @@ Exemplo:
 >>> motor.velocidade
 2
 >>> motor.frear()
->>> motor.calcular_velocidade()
+>>> carro.calcular_velocidade()
 0
 >>> carro.calcular_direcao()
 'Norte'
@@ -92,10 +92,10 @@ Exemplo:
 >>> carro.calcular_direcao()
 'Leste'
 >>> carro.girar_a_esquerda()
->>> carro.calcular_diracao()
+>>> carro.calcular_direcao()
 'Norte'
 >>> carro.girar_a_esquerda()
->>> carro.girar_a_esquerda()
+>>> carro.calcular_direcao()
 'Oeste'
 
 """
@@ -113,6 +113,14 @@ class Carro:
 
     def frear(self):
         self.motor.frear()
+    def calcular_direcao(self):
+        return  self.direcao.valor
+
+    def girar_a_direita(self):
+        self.direcao.girar_a_direita()
+
+    def girar_a_esquerda(self):
+        self.direcao.girar_a_esquerda()
 
 class Motor:
     def __init__(self):
@@ -120,10 +128,10 @@ class Motor:
     def acelerar(self):
         self.velocidade += 1
     def frear(self):
-        self.velocidade -= 2
+        self.velocidade  -= 2
         self.velocidade = max(0,self.velocidade)
-    def calcular_direcao(self):
-        return self.direcao.valor
+
+
 
 NORTE='Norte'
 SUL='Sul'
