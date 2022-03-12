@@ -99,13 +99,28 @@ Exemplo:
 >>> 'Oeste'
 
 """
+
+class Carro:
+    def __init__(self,direcao,motor):
+        self.motor = motor
+        self.direcao = direcao
+
+    def calcular_velocidade(self):
+        return self.motor.velocidade
+
+    def acelerar(self):
+        self.motor.acelerar()
+
+    def frear(self):
+        self.motor.frear()
+
 class Motor:
     def __init__(self):
         self.velocidade = 0
     def acelerar(self):
-        self.acelerar +=1
+        self.velocidade += 1
     def frear(self):
-        self.frear -=2
+        self.velocidade -= 2
         self.velocidade = max(0,self.velocidade)
 NORTE='Norte'
 SUL='Sul'
