@@ -15,9 +15,11 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):
         return f'{cls} - olhos {cls.olhos}'
 
+class Homen(Pessoa):
+    pass
 
 if __name__ == '__main__':
-    renzo = Pessoa(nome='Renzo')
+    renzo = Homen(nome='Renzo')
     luciano = Pessoa(renzo,nome='Luciano')
     
     print(Pessoa.cumprimetar(luciano))
