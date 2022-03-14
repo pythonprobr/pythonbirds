@@ -109,7 +109,7 @@ class Carro:
         return self.motor.velocidade
 
     def acelerar(self):
-        self.motor.acelerar()
+        return self.motor.acelerar()
 
     def frear(self):
         self.motor.frear()

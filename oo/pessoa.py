@@ -42,6 +42,8 @@ if __name__ == '__main__':
     print(id(Pessoa.olhos), id(luciano.olhos), id(renzo.olhos))
     print(Pessoa.metodo_estatico(), luciano.metodo_estatico())
     print(Pessoa.nome_e_atributos_de_classe(), luciano.nome_e_atributos_de_classe())
+    pessoa = Pessoa("Anonimo")
+    print(isinstance(luciano,Pessoa))
 
 
 #
