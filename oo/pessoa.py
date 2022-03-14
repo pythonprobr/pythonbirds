@@ -52,6 +52,5 @@ if __name__ == '__main__':
     print(luciano.cumprimentar())
     print(renzo.cumprimentar())
 
-
 #
 #99999
