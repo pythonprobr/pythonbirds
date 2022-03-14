@@ -15,13 +15,13 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):
         return f'{cls} - olhos {cls.olhos}'
 
-class Homen(Pessoa):
-    def cumprimentar(self):
-        cumprimentar_da_classe = super().cumprimentar(self)
-        return f'{cumprimentar_da_classe}, Aperta aqui a minha mão'
 class Mutante(Pessoa):
     olhos = 3
 
+class Homen(Pessoa):
+    def cumprimentar(self):
+        cumprimentar_da_classe = super().cumprimentar()
+        return f'{cumprimentar_da_classe}, Aperta aqui a minha mão'
 
 if __name__ == '__main__':
     renzo = Mutante(nome='Renzo')
