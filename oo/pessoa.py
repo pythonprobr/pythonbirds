@@ -18,4 +18,3 @@ if __name__ == '__main__':
     print(luciano.idade)
     for filho in luciano.filhos:
         print(filho.nome)
-print('vinicius jose')
