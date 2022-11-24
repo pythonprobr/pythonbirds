@@ -8,6 +8,9 @@ from typing import List
 
 
 class Pessoa:
+
+    olhos: int = 2
+
     def __init__(self, *filhos, nome: str) -> None:
         self.nome = nome
         self.filhos: List[Pessoa] = list(filhos)
@@ -18,6 +21,14 @@ class Pessoa:
         """
         return f'Olá, sou {self.nome}'
 
+    @staticmethod
+    def metodo_estatico() -> int:
+        return 42
+
+    @classmethod
+    def metodo_classe(cls) -> str:
+        return f'Número de olhos: {cls.olhos}'
+
 
 if __name__ == '__main__':
     renzo = Pessoa(nome='Renzo')
@@ -25,3 +36,5 @@ if __name__ == '__main__':
     print(luciano.cumprimentar())
     for filho in luciano.filhos:
         print(filho.cumprimentar())
+    print(Pessoa.metodo_estatico())
+    print(Pessoa.metodo_classe())
