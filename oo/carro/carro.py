@@ -1,53 +1,7 @@
 """
-Você deve criar classe que vai possuir
-atributos compostos por duas outras classes:
+Você deve criar classe carro que vai possuir atributos compostos por duas outras classes,
+Motor e Direcao (a especificacao de cada estará nos seus arquivos correspondentes).
 
-1) Motor
-2) Direção
-
-O Motor terá a responsabilidade de controlar a velocidade.
-Ele oferece os seguintes atributos:
-1) Atributo de dado velocidade
-2) Método acelerar, que deverá incrementar a velocidade de uma unidade
-3) Método frear, que deverá decrementar a velocidade de duas unidades
-
-A Direção terá a responsabilidade de controlar a direção. Ela
-oferece os seguintes atributos:
-1) Valor de direção com valores possíveis: Norte, Sul, Leste e Oeste
-2) Método girar_a_direita
-3) Método girar_a_esquerda
-    N
-O       L
-    S
-    Exemplo:
-    >>> # Testando motor
-    >>> motor = Motor()
-    >>> motor.velocidade
-    0
-    >>> motor.acelerar()
-    >>> motor.velocidade
-    1
-    >>> motor.acelerar()
-    >>> motor.velocidade
-    2
-    >>> motor.frear()
-    0
-    >>> # Testando a direção
-    >>> direcao = Direcao()
-    >>> direcao.valor
-    'Norte'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Leste'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Sul'
-    >>> direcao.girar_a_direita()
-    >>> direcao.valor
-    'Oeste'
-    >>> direcao.girar_a_esquerda()
-    >>> direcao.valor
-    'Sul'
     >>> # Testando carro
     >>> carro = Carro(direcao, motor)
     >>> carro.calcular_velocidade()
@@ -71,3 +25,10 @@ O       L
     'Leste'
 """
 from oo.carro.motor import Motor
+from oo.carro.direcao import Direcao
+
+
+class Carro:
+    def __init__(self, direcao: Direcao, motor: Motor) -> None:
+        self._direcao = direcao
+        self._motor = motor
