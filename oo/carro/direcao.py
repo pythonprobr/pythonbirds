@@ -40,7 +40,7 @@ class Direcao:
 
     @property
     def valor(self) -> str:
-        return self._valor.value
+        return str(self._valor.value)
 
     def girar_a_direita(self) -> None:
         """

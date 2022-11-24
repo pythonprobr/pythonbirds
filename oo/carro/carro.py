@@ -3,6 +3,8 @@ Você deve criar classe carro que vai possuir atributos compostos por duas outra
 Motor e Direcao (a especificacao de cada estará nos seus arquivos correspondentes).
 
     >>> # Testando carro
+    >>> direcao = Direcao()
+    >>> motor = Motor()
     >>> carro = Carro(direcao, motor)
     >>> carro.calcular_velocidade()
     0
@@ -22,7 +24,7 @@ Motor e Direcao (a especificacao de cada estará nos seus arquivos correspondent
     'Leste'
     >>> carro.girar_a_esquerda()
     >>> carro.calcular_direcao()
-    'Leste'
+    'Norte'
 """
 from oo.carro.motor import Motor
 from oo.carro.direcao import Direcao
@@ -32,3 +34,21 @@ class Carro:
     def __init__(self, direcao: Direcao, motor: Motor) -> None:
         self._direcao = direcao
         self._motor = motor
+
+    def calcular_velocidade(self) -> int:
+        return self._motor.velocidade
+
+    def acelerar(self) -> None:
+        self._motor.acelerar()
+
+    def frear(self) -> None:
+        self._motor.frear()
+
+    def calcular_direcao(self) -> str:
+        return self._direcao.valor
+
+    def girar_a_direita(self):
+        self._direcao.girar_a_direita()
+
+    def girar_a_esquerda(self):
+        self._direcao.girar_a_esquerda()
