@@ -32,6 +32,16 @@ Exemplo:
 __author__ = "Vinícius Salustiano"
 __version__ = "0.1.0"
 
+from enum import Enum
+
 
 class Direcao:
-    pass
+    def __init__(self):
+        self.valor: str = Sentido.NORTE.value
+
+
+class Sentido(Enum):
+    NORTE = 'Norte'
+    SUL = 'Sul'
+    LESTE = 'Leste'
+    OESTE = 'Oeste'
