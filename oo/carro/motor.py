@@ -27,3 +27,9 @@ __version__ = "0.1.0"
 class Motor:
     def __init__(self) -> None:
         self.velocidade: int = 0
+
+    def acelerar(self) -> None:
+        """
+        Método acelerar, que deverá incrementar a velocidade de uma unidade
+        """
+        self.velocidade += 1
