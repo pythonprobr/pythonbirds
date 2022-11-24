@@ -33,3 +33,9 @@ class Motor:
         Método acelerar, que deverá incrementar a velocidade de uma unidade
         """
         self.velocidade += 1
+
+    def frear(self) -> None:
+        """
+        Método frear, que deverá decrementar a velocidade de duas unidades
+        """
+        self.velocidade -= 2
