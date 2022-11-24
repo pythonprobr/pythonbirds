@@ -42,6 +42,8 @@ class Motor:
     def frear(self) -> None:
         """
         Método frear, que deverá decrementar a velocidade de duas unidades
+
+        Obs: velocidade não pode ficar negativa.
         """
         self._velocidade = max(0, self._velocidade - 2)
 
