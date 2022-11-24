@@ -17,6 +17,11 @@ Ele oferece os seguintes atributos:
     >>> motor.velocidade
     2
     >>> motor.frear()
+    >>> motor.velocidade
+    0
+    >>> motor.acelerar()
+    >>> motor.frear()
+    >>> motor.velocidade
     0
 
 """
@@ -38,4 +43,4 @@ class Motor:
         """
         Método frear, que deverá decrementar a velocidade de duas unidades
         """
-        self.velocidade -= 2
+        self.velocidade = max(0, self.velocidade - 2)

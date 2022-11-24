@@ -32,3 +32,15 @@ def test_motor_deve_possuir_velocidade_decrementada_em_duas_unidades_apos_frear(
 
     # Deve possuir velocidade zero
     assert motor.velocidade == 0
+
+
+def test_motor_nao_pode_apresentar_velocidade_negativa_apos_frear():
+    # Dado um novo motor, que acelerou uma vez e possui velocidade 1
+    motor = Motor()
+    motor.acelerar()
+
+    # Após frear
+    motor.frear()
+
+    # Deve possuir velocidade zero
+    assert motor.velocidade == 0
