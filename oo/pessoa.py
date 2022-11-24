@@ -6,4 +6,13 @@ __version__ = "0.1.0"
 
 
 class Pessoa:
-    pass
+    def cumprimentar(self) -> str:
+        """
+        Retorna uma str com cumprimento a quem invocou a mensagem.
+        """
+        return f'Olá {id(self)}'
+
+
+if __name__ == '__main__':
+    pessoa = Pessoa()
+    print(pessoa.cumprimentar())
