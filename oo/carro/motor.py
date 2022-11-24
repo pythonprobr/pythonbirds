@@ -31,16 +31,20 @@ __version__ = "0.1.0"
 
 class Motor:
     def __init__(self) -> None:
-        self.velocidade: int = 0
+        self._velocidade: int = 0
 
     def acelerar(self) -> None:
         """
         Método acelerar, que deverá incrementar a velocidade de uma unidade
         """
-        self.velocidade += 1
+        self._velocidade += 1
 
     def frear(self) -> None:
         """
         Método frear, que deverá decrementar a velocidade de duas unidades
         """
-        self.velocidade = max(0, self.velocidade - 2)
+        self._velocidade = max(0, self._velocidade - 2)
+
+    @property
+    def velocidade(self) -> int:
+        return self._velocidade

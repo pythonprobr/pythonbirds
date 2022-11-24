@@ -1,3 +1,5 @@
+import pytest
+
 from oo.carro.motor import Motor
 
 
@@ -44,3 +46,12 @@ def test_motor_nao_pode_apresentar_velocidade_negativa_apos_frear():
 
     # Deve possuir velocidade zero
     assert motor.velocidade == 0
+
+
+def test_motor_nao_pode_ter_velocidade_modificada_diretamente():
+    # Dado um novo motor
+    motor = Motor()
+
+    # Código cliente não pode modificar de modo trivial o valor de velocidade
+    with pytest.raises(AttributeError):
+        motor.velocidade = -2
