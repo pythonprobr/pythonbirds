@@ -10,8 +10,6 @@ O       L
 
 Exemplo:
 
-
-
     >>> # Testando a direção
     >>> direcao = Direcao()
     >>> direcao.valor
@@ -36,12 +34,53 @@ from enum import Enum
 
 
 class Direcao:
+
     def __init__(self):
-        self.valor: str = Sentido.NORTE.value
+        self._valor: _Sentido = _Sentido.NORTE
+
+    @property
+    def valor(self) -> str:
+        return self._valor.value
+
+    def girar_a_direita(self) -> None:
+        """
+        2) Método girar_a_direita
+                N
+            O       L
+                S
+        """
+        self._valor = self._valor.obter_proximo_sentido_a_direita()
+
+    def girar_a_esquerda(self) -> None:
+        """
+        Método girar_a_esquerda
+            N
+        O       L
+            S
+        """
+        self._valor = self._valor.obter_proximo_sentido_a_esquerda()
 
 
-class Sentido(Enum):
+class _Sentido(Enum):
     NORTE = 'Norte'
     SUL = 'Sul'
     LESTE = 'Leste'
     OESTE = 'Oeste'
+
+    def obter_proximo_sentido_a_direita(self):
+        mapa = {
+            self.NORTE: self.LESTE,
+            self.LESTE: self.SUL,
+            self.SUL: self.OESTE,
+            self.OESTE: self.NORTE
+        }
+        return mapa.get(self)
+
+    def obter_proximo_sentido_a_esquerda(self):
+        mapa = {
+            self.NORTE: self.OESTE,
+            self.OESTE: self.SUL,
+            self.SUL: self.LESTE,
+            self.LESTE: self.NORTE
+        }
+        return mapa.get(self)
