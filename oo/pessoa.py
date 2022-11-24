@@ -4,10 +4,13 @@ Modelo para aprendizado de orientação a objetos em Python.
 __author__ = "Vinícius Salustiano"
 __version__ = "0.1.0"
 
+from typing import List
+
 
 class Pessoa:
-    def __init__(self, nome: str) -> None:
+    def __init__(self, *filhos, nome: str) -> None:
         self.nome = nome
+        self.filhos: List[Pessoa] = list(filhos)
 
     def cumprimentar(self) -> str:
         """
@@ -17,5 +20,8 @@ class Pessoa:
 
 
 if __name__ == '__main__':
-    pessoa = Pessoa('Renzo')
-    print(pessoa.cumprimentar())
+    renzo = Pessoa(nome='Renzo')
+    luciano = Pessoa(renzo, nome='Luciano')
+    print(luciano.cumprimentar())
+    for filho in luciano.filhos:
+        print(filho.cumprimentar())
