@@ -30,8 +30,12 @@ class Pessoa:
         return f'Número de olhos: {cls.olhos}'
 
 
+class Homem(Pessoa):
+    pass
+
+
 if __name__ == '__main__':
-    renzo = Pessoa(nome='Renzo')
+    renzo = Homem(nome='Renzo')
     luciano = Pessoa(renzo, nome='Luciano')
     print(luciano.cumprimentar())
     for filho in luciano.filhos:
