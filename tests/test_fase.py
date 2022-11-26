@@ -8,15 +8,18 @@ from unittest.case import TestCase
 project_dir = path.dirname(__file__)
 project_dir = path.join('..')
 sys.path.append(project_dir)
-from placa_grafica_tkinter import rodar_fase
 
 project_dir = os.path.join(os.path.dirname(__file__), '..')
 project_dir = os.path.normpath(project_dir)
 sys.path.append(project_dir)
 
-from atores import (Obstaculo, Porco, PassaroVermelho, PassaroAmarelo,
-                    DESTRUIDO, ATIVO, DuploLancamentoExcecao)
-from fase import Fase, Ponto, EM_ANDAMENTO, VITORIA, DERROTA
+from atores import (
+    Obstaculo,
+    DESTRUIDO,
+    ATIVO,
+    DuploLancamentoExcecao
+)
+from fase import Fase, EM_ANDAMENTO, VITORIA, DERROTA
 
 
 class AtorFake:
