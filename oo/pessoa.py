@@ -31,7 +31,8 @@ class Pessoa:
 
 
 class Homem(Pessoa):
-    pass
+    def cumprimentar(self) -> str:
+        return super().cumprimentar() + ". Aperto de mão."
 
 
 if __name__ == '__main__':
