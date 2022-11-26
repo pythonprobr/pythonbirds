@@ -37,6 +37,7 @@ class Direcao:
 
     def __init__(self):
         self._valor: _Sentido = _Sentido.NORTE
+        self._navegador_sentidos: _NavegadorSentido = _NavegadorSentido()
 
     @property
     def valor(self) -> str:
@@ -49,7 +50,7 @@ class Direcao:
             O       L
                 S
         """
-        self._valor = self._valor.obter_proximo_sentido_a_direita()
+        self._valor = self._navegador_sentidos.sentido_direita(self._valor)
 
     def girar_a_esquerda(self) -> None:
         """
@@ -58,7 +59,7 @@ class Direcao:
         O       L
             S
         """
-        self._valor = self._valor.obter_proximo_sentido_a_esquerda()
+        self._valor = self._navegador_sentidos.sentido_esquerda(self._valor)
 
 
 class _Sentido(Enum):
@@ -67,20 +68,24 @@ class _Sentido(Enum):
     LESTE = 'Leste'
     OESTE = 'Oeste'
 
-    def obter_proximo_sentido_a_direita(self):
-        mapa = {
-            self.NORTE: self.LESTE,
-            self.LESTE: self.SUL,
-            self.SUL: self.OESTE,
-            self.OESTE: self.NORTE
-        }
-        return mapa.get(self)
 
-    def obter_proximo_sentido_a_esquerda(self):
-        mapa = {
-            self.NORTE: self.OESTE,
-            self.OESTE: self.SUL,
-            self.SUL: self.LESTE,
-            self.LESTE: self.NORTE
+class _No:
+    def __init__(self, esquerda, direita) -> None:
+        self.esquerda = esquerda
+        self.direita = direita
+
+
+class _NavegadorSentido:
+    def __init__(self) -> None:
+        self._mapa = {
+            _Sentido.NORTE: _No(_Sentido.OESTE, _Sentido.LESTE),
+            _Sentido.LESTE: _No(_Sentido.NORTE, _Sentido.SUL),
+            _Sentido.SUL: _No(_Sentido.LESTE, _Sentido.OESTE),
+            _Sentido.OESTE: _No(_Sentido.SUL, _Sentido.NORTE)
         }
-        return mapa.get(self)
+
+    def sentido_esquerda(self, sentido: _Sentido) -> _Sentido:
+        return self._mapa.get(sentido).esquerda
+
+    def sentido_direita(self, sentido: _Sentido) -> _Sentido:
+        return self._mapa.get(sentido).direita
