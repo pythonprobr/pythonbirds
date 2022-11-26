@@ -2,7 +2,6 @@
 from itertools import chain
 from atores import ATIVO
 
-
 VITORIA = 'VITORIA'
 DERROTA = 'DERROTA'
 EM_ANDAMENTO = 'EM_ANDAMENTO'
@@ -72,8 +71,28 @@ class Fase():
 
         :return:
         """
-        return EM_ANDAMENTO
+        if self._possui_atores_ativos():
+            return EM_ANDAMENTO
+        if self._possui_porcos_ativos():
+            return DERROTA
+        return VITORIA
 
+    def _possui_atores_ativos(self) -> bool:
+        return self._possui_porcos_ativos() and self._possui_passaros_ativos()
+
+    def _possui_porcos_ativos(self) -> bool:
+        return any(
+            porco.status == ATIVO
+            for porco
+            in self._porcos
+        )
+
+    def _possui_passaros_ativos(self) -> bool:
+        return any(
+            passaro.status == ATIVO
+            for passaro
+            in self._passaros
+        )
     def lancar(self, angulo, tempo):
         """
         Método que executa lógica de lançamento.
